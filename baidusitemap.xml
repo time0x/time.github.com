@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+  <url>
+    <loc>https://blog.timeicode.com/2017/03/04/%E9%83%A8%E7%BD%B2Hexo/</loc>
+    <lastmod>2017-03-06T15:22:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>部署Hexo</title>
+        <pubTime>2017-03-04T13:43:56.000Z</pubTime>
+        
+        <tag>hexo </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>https://blog.timeicode.com/2017/03/04/hello-world/</loc>
+    <lastmod>2017-03-04T06:33:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2017-03-04T06:33:14.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+</urlset>
