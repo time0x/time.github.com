@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="mac,ssh,无密码登录,禁止密码登录,通过密钥登录">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Time">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="mac 免密码登录 vps (SSH 公钥认证)"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="mac,ssh,无密码登录,禁止密码登录,通过密钥登录" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Time‘blog"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>mac 免密码登录 vps (SSH 公钥认证) - Time‘blog</title>
+
+
+  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a39f9c987d4e909ba711e315446a3b4d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  首页
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  归档
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  关于我
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            mac 免密码登录 vps (SSH 公钥认证)
+            
+          </h1>
+          <p class="posted-on">
+          2017-03-09
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/ssh/" rel="tag">
+                  ssh
+                </a>
+              
+                <a href="/tags/linux/" rel="tag">
+                  linux
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content">
+          <pre><code>使用root 免密登录，禁止root 的情况又不一样，有机会写出来。
+</code></pre><a id="more"></a>
+<ul>
+<li>昨天刚弄了一个新的 vps ，晚上挂机自动安装 lnmp，一早看就 cpu 异常，果断是机器在暴力破解 root ，登录进去，查看</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tail <span class="_">-f</span> /var/<span class="built_in">log</span>/secure</div></pre></td></tr></table></figure>
+<ul>
+<li>果然有许多: </li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Failed password <span class="keyword">for</span> root from 116.31.116.34 port 41014 ssh2</div></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>远程服务器:centOS，本地macOS，iTerm2</p>
+</blockquote>
+<h2 id="改端口。"><a href="#改端口。" class="headerlink" title="改端口。"></a>改端口。</h2><h3 id="打开-etc-ssh-sshd-config文件"><a href="#打开-etc-ssh-sshd-config文件" class="headerlink" title="打开/etc/ssh/sshd_config文件:"></a>打开/etc/ssh/sshd_config文件:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh root@139.162.109.244 <span class="comment">#输入密码</span></div><div class="line"><span class="built_in">cd</span> /etc/ssh/sshd_config</div></pre></td></tr></table></figure>
+<h3 id="找到：Port-22-SSH端口，修改为非常用的高位端口-1024-65535之间的一个。先不重启-ssh-服务。"><a href="#找到：Port-22-SSH端口，修改为非常用的高位端口-1024-65535之间的一个。先不重启-ssh-服务。" class="headerlink" title="找到：Port 22  #SSH端口，修改为非常用的高位端口:1024-65535之间的一个。先不重启 ssh 服务。"></a>找到：Port 22  #SSH端口，修改为非常用的高位端口:1024-65535之间的一个。先不重启 ssh 服务。</h3><h2 id="配置-SSH-密钥登录远程服务器"><a href="#配置-SSH-密钥登录远程服务器" class="headerlink" title="配置 SSH 密钥登录远程服务器"></a>配置 SSH 密钥登录远程服务器</h2><h3 id="在Mac上生成公钥和私钥，如果没有的话"><a href="#在Mac上生成公钥和私钥，如果没有的话" class="headerlink" title="在Mac上生成公钥和私钥，如果没有的话"></a>在Mac上生成公钥和私钥，如果没有的话</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>生成密钥对，其中 -t 指定密钥类型，默认即 rsa ，可以省略，-C 设置注释文字，比如你的邮箱，且默认为 2048 字节，可改为4098 字节， -p 4098</p>
+<p>可以接受除密码之外的所有内容的默认值，此处的密码是给本地密钥加的密码，如果不要，一路回车下去，</p>
+</blockquote>
+<ul>
+<li>新生成的SSH密钥位于 ~/.ssh/目录中。您将在~/.ssh/id_rsa文件中找到私钥，并在文件中找到公钥~/.ssh/id_rsa.pub。</li>
+</ul>
+<h3 id="将公钥发送到要远程登陆的服务器上"><a href="#将公钥发送到要远程登陆的服务器上" class="headerlink" title="将公钥发送到要远程登陆的服务器上"></a>将公钥发送到要远程登陆的服务器上</h3><ul>
+<li>登录服务器：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~</div><div class="line"></div><div class="line"><span class="comment">#验证您的目录是否存在：</span></div><div class="line"></div><div class="line">ls -al <span class="comment">#显示隐藏文件，若不存在：</span></div><div class="line"></div><div class="line">mkdir .ssh</div></pre></td></tr></table></figure>
+<ul>
+<li><code>本机</code> mac：将公钥复制到远程机器~/.ssh/authorized_keys上的文件中</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp ~/.ssh/id_rsa.pub root@xxx.xxx.xxx.xxx:~/.ssh</div></pre></td></tr></table></figure>
+<blockquote>
+<p>scp 命令是需要输入 服务器 对应账户的密码的。</p>
+</blockquote>
+<ul>
+<li>在服务器建立 authorized_keys 映射，即将密钥复制到 <code>authorized_keys</code> 文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</div></pre></td></tr></table></figure>
+<ul>
+<li>配置：在服务端打开 authorized_keys</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/ssh/sshd_config</div><div class="line"><span class="comment">#修改以下设置：</span></div><div class="line"></div><div class="line"><span class="comment">#禁用密码验证</span></div><div class="line">PasswordAuthentication no</div><div class="line"></div><div class="line"><span class="comment">#启用密钥验证</span></div><div class="line">RSAAuthentication yes</div><div class="line"></div><div class="line">存放该用户可以用来登录的RSA/DSA 公钥</div><div class="line">PubkeyAuthentication yes</div><div class="line"></div><div class="line"><span class="comment">#指定公钥数据库文件</span></div><div class="line">AuthorsizedKeysFile .ssh/authorized_keys</div><div class="line"></div><div class="line"><span class="comment">#是否允许 Public Key</span></div><div class="line">PubkeyAuthentication yes</div><div class="line"></div><div class="line"><span class="comment">#不允许空密码</span></div><div class="line">permiemptypasswords no</div></pre></td></tr></table></figure>
+<ul>
+<li>重启 ssh 服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl restart sshd <span class="comment">#没有任何输出。检查是否重启</span></div><div class="line">systemctl status sshd <span class="comment">#显示 active 时间,是刚才的时间 ok</span></div></pre></td></tr></table></figure>
+<ul>
+<li>避免出错登录不上去，再开一个命令窗口测试登录，此处为：iTerm2 </li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -p端口 root@xxx.xxx.xxx.xxx</div></pre></td></tr></table></figure>
+<h3 id="iTerm2-设置快捷登录"><a href="#iTerm2-设置快捷登录" class="headerlink" title="iTerm2 设置快捷登录"></a>iTerm2 设置快捷登录</h3><ul>
+<li><p>iTerm2中设置: preferences -&gt; profiles -&gt; 左下角,点击 +</p>
+</li>
+<li><p>name： 取个别名</p>
+</li>
+<li><p>command ,command 填写:ssh -p端口 root@xxx.xxx.xxx.xxx</p>
+</li>
+<li><p>直接在iTerm2上方菜单 Profiles 选择服务器快捷登录，非常方便。</p>
+</li>
+</ul>
+<hr>
+<p>参考：</p>
+<p><a href="https://www.linode.com/docs/networking/ssh/use-public-key-authentication-with-ssh" target="_blank" rel="external">win环境下,使用方式</a></p>
+<p><a href="https://carpliyz.com/p/30.html" target="_blank" rel="external">博文</a></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">留言</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2017/03/04/部署Hexo/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          time blog | php | mysql | python | btc | xmr
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">与我联系</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/Time02" class="icon icon-github" target="_blank">github</a>
+            
+              <a href="https://twitter.com/wjhechen" class="icon icon-twitter" target="_blank">twitter</a>
+            
+              <a href="mailto:wjhechen@gmail.com" class="icon icon-mail" target="_blank">mail</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">站内搜索</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Time‘blog &copy; 2017</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+</body>
+
+</html>

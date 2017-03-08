@@ -2,6 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     
+  <url>
+    <loc>//blog.timeicode.com/2017/03/09/mac-%E5%85%8D%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95-vps-SSH-%E5%85%AC%E9%92%A5%E8%AE%A4%E8%AF%81/</loc>
+    <lastmod>2017-03-08T16:16:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>mac 免密码登录 vps (SSH 公钥认证)</title>
+        <pubTime>2017-03-08T16:08:51.000Z</pubTime>
+        
+        <tag>ssh </tag>
+         
+        <tag>linux </tag>
+         
+         
+           
+             
+              <breadCrumb title="ssh" url="//blog.timeicode.com/categories/ssh/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>//blog.timeicode.com/2017/03/04/%E9%83%A8%E7%BD%B2Hexo/</loc>
