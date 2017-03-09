@@ -159,7 +159,7 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>远程服务器:centOS，本地macOS，iTerm2</p>
 </blockquote>
-<h2 id="改端口。"><a href="#改端口。" class="headerlink" title="改端口。"></a>改端口。</h2><h3 id="打开-etc-ssh-sshd-config文件"><a href="#打开-etc-ssh-sshd-config文件" class="headerlink" title="打开/etc/ssh/sshd_config文件:"></a>打开/etc/ssh/sshd_config文件:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh root@139.162.109.244 <span class="comment">#输入密码</span></div><div class="line"><span class="built_in">cd</span> /etc/ssh/sshd_config</div></pre></td></tr></table></figure>
+<h2 id="改端口。"><a href="#改端口。" class="headerlink" title="改端口。"></a>改端口。</h2><h3 id="打开-etc-ssh-sshd-config文件"><a href="#打开-etc-ssh-sshd-config文件" class="headerlink" title="打开/etc/ssh/sshd_config文件:"></a>打开/etc/ssh/sshd_config文件:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh root@xxx.xxx.xxx.xxx <span class="comment">#输入密码</span></div><div class="line"><span class="built_in">cd</span> /etc/ssh/sshd_config</div></pre></td></tr></table></figure>
 <h3 id="找到：Port-22-SSH端口，修改为非常用的高位端口-1024-65535之间的一个。先不重启-ssh-服务。"><a href="#找到：Port-22-SSH端口，修改为非常用的高位端口-1024-65535之间的一个。先不重启-ssh-服务。" class="headerlink" title="找到：Port 22  #SSH端口，修改为非常用的高位端口:1024-65535之间的一个。先不重启 ssh 服务。"></a>找到：Port 22  #SSH端口，修改为非常用的高位端口:1024-65535之间的一个。先不重启 ssh 服务。</h3><h2 id="配置-SSH-密钥登录远程服务器"><a href="#配置-SSH-密钥登录远程服务器" class="headerlink" title="配置 SSH 密钥登录远程服务器"></a>配置 SSH 密钥登录远程服务器</h2><h3 id="在Mac上生成公钥和私钥，如果没有的话"><a href="#在Mac上生成公钥和私钥，如果没有的话" class="headerlink" title="在Mac上生成公钥和私钥，如果没有的话"></a>在Mac上生成公钥和私钥，如果没有的话</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></div></pre></td></tr></table></figure>
 <blockquote>
 <p>生成密钥对，其中 -t 指定密钥类型，默认即 rsa ，可以省略，-C 设置注释文字，比如你的邮箱，且默认为 2048 字节，可改为4098 字节， -p 4098</p>
@@ -196,13 +196,13 @@ var _hmt = _hmt || [];
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -p端口 root@xxx.xxx.xxx.xxx</div></pre></td></tr></table></figure>
 <h3 id="iTerm2-设置快捷登录"><a href="#iTerm2-设置快捷登录" class="headerlink" title="iTerm2 设置快捷登录"></a>iTerm2 设置快捷登录</h3><ul>
-<li><p>iTerm2中设置: preferences -&gt; profiles -&gt; 左下角,点击 +</p>
+<li><p>iTerm2 中设置: preferences -&gt; profiles -&gt; 左下角,点击 +</p>
 </li>
 <li><p>name： 取个别名</p>
 </li>
 <li><p>command ,command 填写:ssh -p端口 root@xxx.xxx.xxx.xxx</p>
 </li>
-<li><p>直接在iTerm2上方菜单 Profiles 选择服务器快捷登录，非常方便。</p>
+<li><p>直接在 iTerm2 上方菜单 Profiles 选择服务器快捷登录，非常方便。</p>
 </li>
 </ul>
 <hr>
@@ -226,6 +226,10 @@ var _hmt = _hmt || [];
     </div>
     <!-- Pre or Next -->
     <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2017/03/09/PHP-开发的实践标准-PSR-1/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> 上一页</a>
+        </div>
       
       
         <div class="nav-next">
