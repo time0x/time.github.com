@@ -3,6 +3,26 @@
 
     
   <url>
+    <loc>//blog.timeicode.com/2017/03/09/%E5%85%B3%E4%BA%8E%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</loc>
+    <lastmod>2017-03-09T14:30:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于持续集成</title>
+        <pubTime>2017-03-09T14:19:09.000Z</pubTime>
+        
+        <tag>php </tag>
+         
+         
+           
+             
+              <breadCrumb title="php" url="//blog.timeicode.com/categories/php/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>//blog.timeicode.com/2017/03/09/mac-%E5%85%8D%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95-vps-SSH-%E5%85%AC%E9%92%A5%E8%AE%A4%E8%AF%81/</loc>
     <lastmod>2017-03-09T14:27:15.000Z</lastmod>
     <data>
@@ -18,28 +38,6 @@
            
              
               <breadCrumb title="ssh" url="//blog.timeicode.com/categories/ssh/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>//blog.timeicode.com/2017/03/09/%E5%85%B3%E4%BA%8E%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/</loc>
-    <lastmod>2017-03-09T14:25:34.000Z</lastmod>
-    <data>
-        <display>
-        <title>关于持续集成</title>
-        <pubTime>2017-03-09T14:19:09.000Z</pubTime>
-        
-        <tag>php </tag>
-         
-        <tag>PHPCI </tag>
-         
-         
-           
-             
-              <breadCrumb title="php" url="//blog.timeicode.com/categories/php/"/>
           
         </display>
     </data>
