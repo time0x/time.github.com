@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="VirtualBox的错误代码 E_FAIL (0x80004005) win 破解主题 mactype">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Time">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="VirtualBox的错误代码：E_FAIL (0x80004005)"/>
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="VirtualBox的错误代码 E_FAIL (0x80004005) win 破解主题 mactype" />
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Time‘blog"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>VirtualBox的错误代码：E_FAIL (0x80004005) - Time‘blog</title>
+
+
+  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a39f9c987d4e909ba711e315446a3b4d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  首页
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  归档
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  关于我
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            VirtualBox的错误代码：E_FAIL (0x80004005)
+            
+          </h1>
+          <p class="posted-on">
+          2017-03-12
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/VirtualBox/" rel="tag">
+                  VirtualBox
+                </a>
+              
+                <a href="/tags/mactype/" rel="tag">
+                  mactype
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content">
+          <p>mactype 对 VirtualBox 的影响</p>
+<a id="more"></a>
+<p>给一台 win 主机装 vbox 的时候，新建主机报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Unable to load R3 module C:\Program Files\Oracle\VirtualBox/VBoxDD.DLL (VBoxDD): GetLastError=1790 (VERR_UNRESOLVED_ERROR).</div><div class="line"></div><div class="line">返回 代码:E_FAIL (0x80004005)</div><div class="line">组件:Console</div><div class="line">界面:IConsole &#123;8ab7c520-2442-4b66-8d74-4ff1e195d2b6&#125;</div></pre></td></tr></table></figure>
+<h2 id="踩过这个坑的前辈给出很多种情况："><a href="#踩过这个坑的前辈给出很多种情况：" class="headerlink" title="踩过这个坑的前辈给出很多种情况："></a>踩过这个坑的前辈给出很多种情况：</h2><h3 id="1-由于经常强行关闭虚拟机"><a href="#1-由于经常强行关闭虚拟机" class="headerlink" title="1,由于经常强行关闭虚拟机"></a>1,由于经常强行关闭虚拟机</h3><p>解决方法是：删除虚拟机，并且重新创建，在选择虚拟磁盘的时候，我们选择“选择使用已有的虚拟硬盘文件”这时候你指定之前损坏的虚拟系统的虚拟磁盘就可以了，只要虚拟硬盘文件不丢失，不损坏，重新建立一个还是非常简单的，当然新建以后你要对虚拟电脑重新设置一下跟之前一样就可以了。我们可以来看看操作图。 </p>
+<h3 id="2-由于使用-ghost-系统或者其他第三方主题，破坏了-win-主题的核心文件：uxtheme-dll"><a href="#2-由于使用-ghost-系统或者其他第三方主题，破坏了-win-主题的核心文件：uxtheme-dll" class="headerlink" title="2,由于使用 ghost 系统或者其他第三方主题，破坏了 win 主题的核心文件：uxtheme.dll"></a>2,由于使用 ghost 系统或者其他第三方主题，破坏了 win 主题的核心文件：uxtheme.dll</h3><p>解决方法：</p>
+<ol>
+<li><p>下载未破解的 win7 主题核心文件<code>themeui.dll</code>，<code>themeservice.dll</code>，<code>uxtheme.dll</code>三个文件，覆盖到 C:\windows\system32\ 文件夹下即可。</p>
+</li>
+<li><p>可以使用以下软件做测试，显示破解的，点击还原久可以：<a href="http://pan.baidu.com/s/1nu7TIBn" target="_blank" rel="external">百度盘</a>。</p>
+</li>
+</ol>
+<h3 id="3-坑爹的是，依旧出现这个错误-，检查了之前的操作，并重启，还是无效。"><a href="#3-坑爹的是，依旧出现这个错误-，检查了之前的操作，并重启，还是无效。" class="headerlink" title="3,坑爹的是，依旧出现这个错误 ，检查了之前的操作，并重启，还是无效。"></a>3,坑爹的是，依旧出现这个错误 ，检查了之前的操作，并重启，还是无效。</h3><p>最后看到这台电脑的字体也是使用的自定义的，使用了 mactype 设置的，但是刚才已经把主题文件还原了，但还是试一试，打开 mactype 设置把 vobox 排除在外。世界清净了，这种改字体的软件和自定义主题有同一杀伤力啊！</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">留言</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2017/03/09/关于持续集成/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          time blog | php | mysql | python | btc | xmr
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">与我联系</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/Time02" class="icon icon-github" target="_blank">github</a>
+            
+              <a href="https://twitter.com/wjhechen" class="icon icon-twitter" target="_blank">twitter</a>
+            
+              <a href="mailto:wjhechen@gmail.com" class="icon icon-mail" target="_blank">mail</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">站内搜索</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Time‘blog &copy; 2017</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+
+
+</body>
+
+</html>
