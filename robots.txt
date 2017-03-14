@@ -1,0 +1,13 @@
+#hexo robots.txt
+User-agent: *
+Allow: /
+Allow: /archives/
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+Sitemap: http://blog.timeicode.com/search.xml
+Sitemap: http://blog.timeicode.com/sitemap.xml
+Sitemap: http://blog.timeicode.com/baidusitemap.xml

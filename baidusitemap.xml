@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+
     
   <url>
     <loc>//blog.timeicode.com/2017/03/12/VirtualBox%E7%9A%84%E9%94%99%E8%AF%AF%E4%BB%A3%E7%A0%81%EF%BC%9AE-FAIL-0x80004005/</loc>
@@ -10,9 +11,9 @@
         <title>VirtualBox的错误代码：E_FAIL (0x80004005)</title>
         <pubTime>2017-03-12T13:55:58.000Z</pubTime>
         
-        <tag>VirtualBox </tag>
+        <tag>VirtualBox</tag>
          
-        <tag>mactype </tag>
+        <tag>mactype</tag>
          
          
            
@@ -32,7 +33,7 @@
         <title>关于持续集成</title>
         <pubTime>2017-03-09T14:19:09.000Z</pubTime>
         
-        <tag>php </tag>
+        <tag>php</tag>
          
          
            
@@ -52,9 +53,9 @@
         <title>mac 免密码登录 vps (SSH 公钥认证)</title>
         <pubTime>2017-03-08T16:08:51.000Z</pubTime>
         
-        <tag>ssh </tag>
+        <tag>ssh</tag>
          
-        <tag>linux </tag>
+        <tag>linux</tag>
          
          
            
@@ -74,7 +75,7 @@
         <title>PHP 开发的实践标准:PSR-1</title>
         <pubTime>2017-03-09T13:59:03.000Z</pubTime>
         
-        <tag>php </tag>
+        <tag>php</tag>
          
          
            
@@ -94,7 +95,7 @@
         <title>PHP 开发的实践标准:PSR-4</title>
         <pubTime>2017-03-09T14:17:58.000Z</pubTime>
         
-        <tag>php </tag>
+        <tag>php</tag>
          
          
            
@@ -114,7 +115,7 @@
         <title>PHP 开发的实践标准:PSR-2</title>
         <pubTime>2017-03-09T14:14:07.000Z</pubTime>
         
-        <tag>php </tag>
+        <tag>php</tag>
          
          
            
@@ -134,7 +135,7 @@
         <title>PHP 开发的实践标准:PSR-3</title>
         <pubTime>2017-03-09T14:15:30.000Z</pubTime>
         
-        <tag>php </tag>
+        <tag>php</tag>
          
          
            
@@ -155,7 +156,7 @@
         <title>部署Hexo</title>
         <pubTime>2017-03-04T13:43:56.000Z</pubTime>
         
-        <tag>hexo </tag>
+        <tag>hexo</tag>
          
          
            
