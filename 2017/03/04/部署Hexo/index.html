@@ -18,17 +18,17 @@
 
   <!--Open Graph Title-->
   
-      <meta property="og:title" content="部署Hexo"/>
+      <meta property="og:title" content="部署Hexo">
   
   <!--Open Graph Description-->
   
-      <meta property="og:description" content="mac环境部署hexo,搭配github自定义域名" />
+      <meta property="og:description" content="mac环境部署hexo,搭配github自定义域名">
   
   <!--Open Graph Site Name-->
-  <meta property="og:site_name" content="Time‘blog"/>
+  <meta property="og:site_name" content="Time‘blog">
   <!--Type page-->
   
-      <meta property="og:type" content="article" />
+      <meta property="og:type" content="article">
   
   <!--Page Cover-->
   
@@ -173,7 +173,7 @@ var _hmt = _hmt || [];
 <li>本地启动：</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure>
-<p>查看：<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a></p>
+<p>查看：<a href="http://localhost:4000" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:4000</a></p>
 <ul>
 <li><p>配置 _config.yml ：略。</p>
 </li>
@@ -219,7 +219,7 @@ var _hmt = _hmt || [];
 </li>
 <li><p>打开 github.com -&gt; setting -&gt; ssh and GPG keys 粘贴保存。</p>
 </li>
-<li><p>测试：ssh -T <a href="mailto:git@github.com" target="_blank" rel="external">git@github.com</a></p>
+<li><p>测试：ssh -T <a href="mailto:git@github.com" rel="external nofollow noopener noreferrer" target="_blank">git@github.com</a></p>
 </li>
 </ul>
 <h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy -g</div></pre></td></tr></table></figure>
@@ -230,7 +230,7 @@ var _hmt = _hmt || [];
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
 <ul>
-<li><p>打开 <a href="https://time02.github.io" target="_blank" rel="external">https://time02.github.io</a> ,即你的 hexo blog</p>
+<li><p>打开 <a href="https://time02.github.io" rel="external nofollow noopener noreferrer" target="_blank">https://time02.github.io</a> ,即你的 hexo blog</p>
 </li>
 <li><p>部署成功后，查看 console 报错 404</p>
 </li>
@@ -267,12 +267,12 @@ var _hmt = _hmt || [];
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-sitemap --save</div></pre></td></tr></table></figure>
 <ul>
-<li>后来发现不匹配百度，用这个<a href="https://github.com/coneycode/hexo-generator-baidu-sitemap" target="_blank" rel="external">hexo-generator-baidu-sitemap</a></li>
+<li>后来发现不匹配百度，用这个<a href="https://github.com/coneycode/hexo-generator-baidu-sitemap" rel="external nofollow noopener noreferrer" target="_blank">hexo-generator-baidu-sitemap</a></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-sitemap --save</div></pre></td></tr></table></figure>
 <p>在 _config.yml 文件中添加：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">baidusitemap:</div><div class="line">path: baidusitemap.xml</div></pre></td></tr></table></figure>
-<p>本文参考：<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">不如的博客</a></p>
+<p>本文参考：<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" rel="external nofollow noopener noreferrer" target="_blank">不如的博客</a></p>
 <p>每个人情况不一样，以上只是我的操作和遇到的坑。</p>
 
         </div>
@@ -326,11 +326,11 @@ var _hmt = _hmt || [];
         <div class="widget-text">
           
             
-              <a href="https://github.com/Time02" class="icon icon-github" target="_blank">github</a>
+              <a href="https://github.com/Time02" class="icon icon-github" target="_blank" rel="external nofollow noopener noreferrer">github</a>
             
-              <a href="https://twitter.com/wjhechen" class="icon icon-twitter" target="_blank">twitter</a>
+              <a href="https://twitter.com/wjhechen" class="icon icon-twitter" target="_blank" rel="external nofollow noopener noreferrer">twitter</a>
             
-              <a href="mailto:wjhechen@gmail.com" class="icon icon-mail" target="_blank">mail</a>
+              <a href="mailto:wjhechen@gmail.com" class="icon icon-mail" target="_blank" rel="external nofollow noopener noreferrer">mail</a>
             
           
         </div>
@@ -340,7 +340,7 @@ var _hmt = _hmt || [];
       <aside>
         <h1 class="widget-title">站内搜索</h1>
         <div class="widget-text">
-          <form onSubmit="return appDaily.submitSearch('')">
+          <form onsubmit="return appDaily.submitSearch('')">
             <p>
               <input type="text" placeholder="search..." id="homeSearchInput">
             </p>
@@ -357,7 +357,7 @@ var _hmt = _hmt || [];
     <span>Time‘blog &copy; 2017</span>
     
       <span class="split">|</span>
-      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
     
   </p>
 </footer>
