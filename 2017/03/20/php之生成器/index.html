@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="php,生成器,yield,协程,range函数，xrange函数">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Time">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="php之生成器">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="php,生成器,yield,协程,range函数，xrange函数">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Time‘blog">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>php之生成器 - Time‘blog</title>
+
+
+  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a39f9c987d4e909ba711e315446a3b4d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  首页
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  归档
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  关于我
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            php之生成器
+            
+          </h1>
+          <p class="posted-on">
+          2017-03-20
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/php/" rel="tag">
+                  php
+                </a>
+              
+                <a href="/tags/生成器/" rel="tag">
+                  生成器
+                </a>
+              
+                <a href="/tags/yield/" rel="tag">
+                  yield
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content">
+          <p>作为协程的基础资料<br><a id="more"></a></p>
+<h1 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h1><p>​&emsp;&emsp;一个生成器函数看起来像一个普通的<code>函数</code>，不同的是普通函数返回一个值，而一个生成器可以 yield 生成许多它所需要的值。</p>
+<p>​&emsp;&emsp;生成器被调用的时候，返回的是一个可被遍历的<code>generator</code>对象，当你遍历这个对象时，PHP 会按需调用生成器函数，并在产生一个值后保存生成器的状态，这样它就可以在需要产生下一个值的时候恢复调用状态。</p>
+<h1 id="yield-关键字"><a href="#yield-关键字" class="headerlink" title="yield 关键字"></a>yield 关键字</h1><p>​&emsp;&emsp;生成器的核心是 yield 关键字。它最简单的调用形式看起来像一个return申明，不同之处在于普通return会返回值并终止函数的执行，而yield会返回一个值给循环调用此生成器的代码并且只是暂停执行生成器函数。</p>
+<ul>
+<li>表达式中使用：</li>
+</ul>
+<p>​&emsp;&emsp;php 7 以下是必须加括号的：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$data = (<span class="keyword">yield</span> $value);</div></pre></td></tr></table></figure>
+<ul>
+<li>生成的时候使用键名：</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">yield</span> $id =&gt; $fields;</div><div class="line">$data = (<span class="keyword">yield</span> $key =&gt; $value);</div></pre></td></tr></table></figure>
+<ul>
+<li><p>生成 null 值：</p>
+<p>yield可以在没有参数传入的情况下被调用来生成一个 <strong>NULL</strong> 值并配对一个自动的键名。</p>
+</li>
+<li><p>使用引用来生成值：</p>
+</li>
+<li><p>PHP 7 中 generator 允许嵌套：</p>
+<p>允许您通过使用 yield from 关键字从另一个生成器，Traversable对象或数组生成值。</p>
+</li>
+</ul>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>验证官方文档中关于range(0,100000)的优化:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">"../common/common.php"</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">xrange</span><span class="params">(start,limit,$step)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>($start &lt; $limit) &#123;</div><div class="line">        <span class="keyword">if</span>($step &lt;= <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"step must be +ev"</span>,<span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> ($i = $start; $i &lt;= $limit; $i += $step) &#123;</div><div class="line">            <span class="keyword">yield</span> $i;</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span>($step &gt;= <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"step must be -ev"</span>, <span class="number">1</span>);<span class="comment">//正值</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> ($i = $start; $i &gt;= $limit; $i += $step) &#123;</div><div class="line">            <span class="keyword">yield</span> $i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>测试：range 函数本机使用900万会使内存分配用尽，所以 range 使用800万测试，xrange 使用1000 万测试</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">echo</span> <span class="string">'使用xrange函数：'</span>;</div><div class="line">memory_change();</div><div class="line">xrange(<span class="number">1</span>,<span class="number">10000000</span>);</div><div class="line">$res = memory_change(<span class="number">1</span>);</div><div class="line">$t1 = $res[<span class="string">'t'</span>];$m1 = $res[<span class="string">'m'</span>];$p1 = $res[<span class="string">'p'</span>];</div><div class="line"><span class="keyword">echo</span> <span class="string">"耗时：&#123;$t1&#125;,内存峰值：&#123;$p1&#125;&lt;br&gt;"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">'使用range函数：'</span>;</div><div class="line">memory_change();</div><div class="line">range(<span class="number">1</span>,<span class="number">8000000</span>);</div><div class="line">$res = memory_change(<span class="number">1</span>);</div><div class="line">$t2 = $res[<span class="string">'t'</span>];$m2 = $res[<span class="string">'m'</span>];$p2 = $res[<span class="string">'p'</span>];</div><div class="line"><span class="keyword">echo</span> <span class="string">"耗时：&#123;$t2&#125;,内存峰值：&#123;$p2&#125;&lt;br&gt;"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"时间提升："</span>.@round(($t2-$t1)/$t2*<span class="number">100</span>,<span class="number">2</span>).<span class="string">"%;内存消耗减少："</span>.@round(($p2-$p1)/$p2*<span class="number">100</span>,<span class="number">2</span>).<span class="string">"%&lt;br&gt;"</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">使用xrange函数：耗时：0.000007，内存峰值：2 mb</div><div class="line">使用range函数： 耗时：0.139639，内存峰值：258 mb</div><div class="line">时间提升：99.99%；内存消耗减少：99.22%</div></pre></td></tr></table></figure>
+<blockquote>
+<p>生成器从不返回值，只是产出值，所以这个结果是必然的，因为 xrange 内的函数并没有运行，知识返回了一个迭代器，你只有在遍历它的时候才回生成，节省了内存消耗。</p>
+</blockquote>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>但是不同配置和不同的 php 版本出现的 结果又不一样：</p>
+<p><a href="https://gist.github.com/nikic/2975796" rel="external nofollow noopener noreferrer" target="_blank">https://gist.github.com/nikic/2975796</a></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>生成器的用法目前是可以替代需要消耗大量内存的地方，通过 github 上的测试来看，时间并不占优势，但是内存的占用是一大亮点。</p>
+<p>参考：php.net</p>
+<blockquote>
+<p>相关代码可以在git中有。</p>
+</blockquote>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">留言</h1> -->
+
+  
+  <div id="disqus_thread">
+    <script type="text/javascript">
+    var disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = 'post-php之生成器';
+          this.page.title = 'php之生成器';
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2017/03/19/基于websocket的聊天demo/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          time blog | php | mysql | python | btc | xmr
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">与我联系</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/Time02" class="icon icon-github" target="_blank" rel="external nofollow noopener noreferrer">github</a>
+            
+              <a href="https://twitter.com/wjhechen" class="icon icon-twitter" target="_blank" rel="external nofollow noopener noreferrer">twitter</a>
+            
+              <a href="mailto:wjhechen@gmail.com" class="icon icon-mail" target="_blank" rel="external nofollow noopener noreferrer">mail</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">站内搜索</h1>
+        <div class="widget-text">
+          <form onsubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Time‘blog &copy; 2017</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+<script>
+  var disqus_shortname = 'blog-timeicode-com';
+
+  
+  var disqus_url = '//blog.timeicode.com/2017/03/20/php之生成器/';
+  
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+</body>
+
+</html>
