@@ -4,6 +4,56 @@
 
     
   <url>
+    <loc>//blog.timeicode.com/2017/03/25/%E5%9C%A8PHP%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8D%8F%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%A4%9A%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/</loc>
+    <lastmod>2017-03-25T14:14:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>在PHP中使用协程实现多任务调度</title>
+        <pubTime>2017-03-25T13:21:18.000Z</pubTime>
+        
+        <tag>php</tag>
+         
+        <tag>yield</tag>
+         
+        <tag>async</tag>
+         
+        <tag>协程</tag>
+         
+        <tag>多任务</tag>
+         
+        <tag>异步</tag>
+         
+         
+           
+             
+              <breadCrumb title="php" url="//blog.timeicode.com/categories/php/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>//blog.timeicode.com/2017/03/09/PHP-%E5%BC%80%E5%8F%91%E7%9A%84%E5%AE%9E%E8%B7%B5%E6%A0%87%E5%87%86-PSR-1/</loc>
+    <lastmod>2017-03-25T08:04:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>PHP 开发的实践标准:PSR-1</title>
+        <pubTime>2017-03-09T13:59:03.000Z</pubTime>
+        
+        <tag>php</tag>
+         
+         
+           
+             
+              <breadCrumb title="php-fig" url="//blog.timeicode.com/categories/php-fig/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>//blog.timeicode.com/2017/03/12/VirtualBox%E7%9A%84%E9%94%99%E8%AF%AF%E4%BB%A3%E7%A0%81%EF%BC%9AE-FAIL-0x80004005/</loc>
     <lastmod>2017-03-20T15:12:52.000Z</lastmod>
     <data>
@@ -107,26 +157,6 @@
            
              
               <breadCrumb title="ssh" url="//blog.timeicode.com/categories/ssh/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>//blog.timeicode.com/2017/03/09/PHP-%E5%BC%80%E5%8F%91%E7%9A%84%E5%AE%9E%E8%B7%B5%E6%A0%87%E5%87%86-PSR-1/</loc>
-    <lastmod>2017-03-09T14:21:31.000Z</lastmod>
-    <data>
-        <display>
-        <title>PHP 开发的实践标准:PSR-1</title>
-        <pubTime>2017-03-09T13:59:03.000Z</pubTime>
-        
-        <tag>php</tag>
-         
-         
-           
-             
-              <breadCrumb title="php-fig" url="//blog.timeicode.com/categories/php-fig/"/>
           
         </display>
     </data>

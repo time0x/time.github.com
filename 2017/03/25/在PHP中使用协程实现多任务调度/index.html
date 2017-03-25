@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="PHP5.5 加入了对迭代生成器和协程的支持.协程受到的关注很少,因为协程虽然有很强大的功能但相对比较复杂, 也比较难被理解,解释起来也比较困难. 这篇文章将尝试通过介绍如何使用协程来实施任务调度, 来解释在PHP中的协程。">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Time">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="在PHP中使用协程实现多任务调度">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="PHP5.5 加入了对迭代生成器和协程的支持.协程受到的关注很少,因为协程虽然有很强大的功能但相对比较复杂, 也比较难被理解,解释起来也比较困难. 这篇文章将尝试通过介绍如何使用协程来实施任务调度, 来解释在PHP中的协程。">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Time‘blog">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>在PHP中使用协程实现多任务调度 - Time‘blog</title>
+
+
+  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?a39f9c987d4e909ba711e315446a3b4d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  首页
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  归档
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  关于我
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            在PHP中使用协程实现多任务调度
+            
+          </h1>
+          <p class="posted-on">
+          2017-03-25
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/php/" rel="tag">
+                  php
+                </a>
+              
+                <a href="/tags/yield/" rel="tag">
+                  yield
+                </a>
+              
+                <a href="/tags/async/" rel="tag">
+                  async
+                </a>
+              
+                <a href="/tags/协程/" rel="tag">
+                  协程
+                </a>
+              
+                <a href="/tags/多任务/" rel="tag">
+                  多任务
+                </a>
+              
+                <a href="/tags/异步/" rel="tag">
+                  异步
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content">
+          <p>这篇文章是根据<a href="http://www.laruence.com/2015/05/28/3038.html" rel="external nofollow noopener noreferrer" target="_blank">鸟叔的博文- 在PHP中使用协程实现多任务调度</a>，做了一些易于理解的注释，修改了其中的一处错误。</p>
+<a id="more"></a>
+<h1 id="生成器为可中断的函数"><a href="#生成器为可中断的函数" class="headerlink" title="生成器为可中断的函数"></a>生成器为可中断的函数</h1><p>​&emsp;&emsp;要从生成器认识协程，理解它内部是如何工作是非常重要的：生成器是一种可中断的函数，在它里面的yield构成了中断点。</p>
+<p>​&emsp;&emsp;以前一篇文章的为例，调用 xrange(1，1000000) 的时候，xrange() 函数里代码其实并没有真正地运行。 它只是返回了一个迭代器，而这个迭代器实现了 Iterator 接口：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$range = xrange(<span class="number">0</span>，<span class="number">100000000</span>);</div><div class="line">var_dump($range); <span class="comment">//object(Generator)[1]</span></div><div class="line">var_dump($range <span class="keyword">instanceof</span> Iterator); <span class="comment">//boolean(true) ，</span></div><div class="line"><span class="comment">// note : instanceof 用于确定一个 PHP 变量是否属于某一类 class 的实例</span></div></pre></td></tr></table></figure>
+<p>Generator 类的主要方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Generator::current — 返回当前产生的值</div><div class="line">Generator::key — 返回当前产生的键</div><div class="line">Generator::next — 生成器继续执行</div><div class="line">Generator::rewind — 重置迭代器</div><div class="line">Generator::send — 向生成器中传入一个值，并且当做 <span class="keyword">yield</span> 表达式的结果，然后继续执行生成器。</div><div class="line">Generator::throw — 向生成器中抛入一个异常</div><div class="line">Generator::valid — 检查迭代器是否被关闭</div><div class="line">Generator::__wakeup — 序列化回调</div></pre></td></tr></table></figure>
+<p>​&emsp;&emsp;调用迭代器的方法一次，其中的代码运行一次。例如，如果你调用<code>$range-&gt;rewind()</code>，那么 xrange() 里的代码就会运行到控制流第一次出现 yield 的地方。而函数内传递给 yield 语句的返回值可以通过<code>$range-&gt;current()</code>获取。</p>
+<p>​&emsp;&emsp;为了继续执行生成器中 yield 后的代码，你就需要调<code>$range-&gt;next()</code>方法。这将再次启动生成器，直到下一次 yield 语句出现。 因此，连续调用 next() 和 current() 方法，你就能从生成器里获得所有的值，直到再没有 yield 语句出现。</p>
+<p>​&emsp;&emsp;对 xrange() 来说，这种情形出现在<code>$i</code> 超过<code>$end</code>时。在这中情况下， 控制流将到达函数的终点，因此将不执行任何代码。一旦这种情况发生，vaild() 方法将返回假，这时迭代结束。</p>
+<h1 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h1><p>&emsp;&emsp;协程的支持是在迭代生成器的基础上，增加了可以回送数据给生成器的功能(调用者发送数据给被调用的生成器函数)。这就把生成器到调用者的单向通信转变为两者之间的双向通信。<br>&emsp;&emsp;传递数据的功能是通过迭代器的send()方法实现的。下面的 logger() 协程是这种通信如何运行的例子：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">logger</span><span class="params">($fileName)</span></span>&#123;</div><div class="line"></div><div class="line">  fileHandle = fopen(fileName，<span class="string">'a'</span>); <span class="comment">//'a' 写入方式打开，将文件指针指向文件末尾。</span></div><div class="line"></div><div class="line">  <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">    fwrite($fileHandle， <span class="keyword">yield</span> 。 <span class="string">"\n"</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$logger = logger(DIR。<span class="string">'/log。txt'</span>);</div><div class="line"></div><div class="line">$logger -&gt; send(<span class="string">'Foo'</span>);</div><div class="line"></div><div class="line">$logger -&gt; send(<span class="string">'Bar'</span>);</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;正如你能看到，这儿 yield 没有作为一个语句来使用，而是用作一个表达式，即它能被演化成一个值。这个值就是调用者传递给 send() 方法的值。在这个例子里，yield 表达式将首先被 ”Foo” 替代写入 Log，然后被 ”Bar” 替代写入 Log。</p>
+<blockquote>
+<p>传入生成器的值。这个值将会被作为生成器当前所在的 yield 的返回值</p>
+</blockquote>
+<p>&emsp;&emsp;上面的例子里演示了yield作为接受者， 接下来我们看如何同时进行接收和发送的例子：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">gen</span><span class="params">()</span></span>&#123;</div><div class="line"></div><div class="line">  $ret = (<span class="keyword">yield</span> <span class="string">'yield_1'</span>);</div><div class="line"></div><div class="line">  var_dump($ret);</div><div class="line"></div><div class="line">  $ret = (<span class="keyword">yield</span> <span class="string">'yield_2'</span>);</div><div class="line"></div><div class="line">  var_dump($ret);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">var_dump($gen-&gt;current()); <span class="comment">// 当前 yield 指向 "yield1"</span></div><div class="line"></div><div class="line">var_dump($gen-&gt;send(<span class="string">'ret1'</span>)); <span class="comment">// "ret1" gen 方法中的 var_dump 返回</span></div><div class="line">      <span class="comment">// "yield2" $gen-&gt;return() 返回</span></div><div class="line">var_dump($gen-&gt;send(<span class="string">'ret2'</span>)); <span class="comment">// "ret2" gen 方法中的 var_dump 返回</span></div><div class="line">      <span class="comment">// NULL $gen-&gt;return() 返回</span></div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;要很快的理解输出的精确顺序可能稍微有点困难，但你确定要搞清楚为什按照这种方式输出，以便后续继续阅读。</p>
+<p>另外，我要特别指出的有两点：</p>
+<ul>
+<li>yield表达式两边的括号在PHP7以前不是可选的，也就是说在 PHP5.5 和 PHP5.6 中圆括号是必须的。</li>
+<li>你可能已经注意到调用 current() 之前没有调用 rewind()。这是因为生成迭代对象的时候已经隐含地执行了 rewind 操作.</li>
+</ul>
+<blockquote>
+<p><strong>这个是错的</strong>，文档中这么写的：send：如果当这个方法被调用时，生成器不在 yield 表达式，那么在传入值之前，它会先运行到第一个 yield 表达式</p>
+<p>send 方法返回的值都指向下一个 yield。</p>
+</blockquote>
+<h1 id="多任务协作"><a href="#多任务协作" class="headerlink" title="多任务协作"></a>多任务协作</h1><p>&emsp;&emsp;如果阅读了上面的 logger() 例子, 你也许会疑惑“为了双向通信我为什么要使用协程呢？我完全可以使用其他非协程方法实现同样的功能啊?”， 是的，你是对的，但上面的例子只是为了演示了基本用法，这个例子其实并没有真正的展示出使用协程的优点。</p>
+<p>&emsp;&emsp;正如上面介绍里提到的，协程是非常强大的概念，不过却应用的很稀少而且常常十分复杂。要给出一些简单而真实的例子很难。</p>
+<p>&emsp;&emsp;在这篇文章里，我决定去做的是使用协程实现多任务协作。我们要解决的问题是你想并发地运行多任务(或者“程序”。不过我们都知道 CPU 在一个时刻只能运行一个任务（不考虑多核的情况）。因此处理器需要在不同的任务之间进行切换,而且总是让每个任务运行 “一小会儿”。</p>
+<p>&emsp;&emsp;多任务协作这个术语中的“协作”很好的说明了如何进行这种切换的：它要求当前正在运行的任务自动把控制传回给调度器，这样就可以运行其他任务了。这与“抢占”多任务相反，抢占多任务是这样的：调度器可以中断运行了一段时间的任务，不管它喜欢还是不喜欢。协作多任务在 Windows 的早期版本 windows95 和 Mac OS 中有使用, 不过它们后来都切换到使用抢先多任务了. 理由相当明确：如果你依靠程序自动交出控制的话，那么一些恶意的程序将很容易占用整个 CPU，不与其他任务共享。</p>
+<p>&emsp;&emsp;现在你应当明白协程和任务调度之间的关系：yield 指令提供了任务中断自身的一种方法，然后把控制交回给任务调度器，因此协程可以运行多个其他任务。更进一步来说，yield 还可以用来在任务和调度器之间进行通信。</p>
+<p>&emsp;&emsp;为了实现我们的多任务调度，首先实现“任务” — 一个用轻量级的包装的协程函数:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Task</span> </span>&#123;</div><div class="line">  <span class="keyword">protected</span> $taskId;</div><div class="line">  <span class="keyword">protected</span> $coroutine;<span class="comment">//协同</span></div><div class="line">  <span class="keyword">protected</span> $sendValue = <span class="keyword">null</span>;</div><div class="line">  <span class="comment">//protected $beforeFirstYield = true;</span></div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($taskId, Generator $coroutine)</span></span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">$this</span>-&gt;taskId = $taskId;</div><div class="line">    <span class="keyword">$this</span>-&gt;coroutine = $coroutine;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getTaskId</span><span class="params">()</span></span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;taskId;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setSendValue</span><span class="params">($sendValue)</span></span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">$this</span>-&gt;sendValue = $sendValue;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span></div><div class="line">  &#123;</div><div class="line">    $retval = <span class="keyword">$this</span>-&gt;coroutine-&gt;send(<span class="keyword">$this</span>-&gt;sendValue);<span class="comment">//向生成器中传入一个值</span></div><div class="line">    <span class="keyword">$this</span>-&gt;sendValue = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">return</span> $retval;</div><div class="line">  &#125;</div><div class="line">  <span class="comment">// 这是原文的 run，因为不需要 beforeFirstYield</span></div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">old_run</span><span class="params">()</span></span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;beforeFirstYield) &#123;</div><div class="line">      <span class="keyword">$this</span>-&gt;beforeFirstYield = <span class="keyword">false</span>;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;coroutine-&gt;current();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      $retval = <span class="keyword">$this</span>-&gt;coroutine-&gt;send(<span class="keyword">$this</span>-&gt;sendValue);</div><div class="line">      <span class="keyword">$this</span>-&gt;sendValue = <span class="keyword">null</span>;</div><div class="line">      <span class="keyword">return</span> $retval;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">isFinished</span><span class="params">()</span></span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">return</span> !<span class="keyword">$this</span>-&gt;coroutine-&gt;valid(); <span class="comment">//检查迭代器是否被关闭</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;如代码，一个任务就是用任务 ID 标记的一个协程(函数)。使用 setSendValue() 方法，你可以指定哪些值将被发送到下次的恢复(在之后你会了解到我们需要这个)，run() 函数确实没有做什么，除了调用 send() 方法的协同程序，要理解为什么添加了一个 beforeFirstYieldflag 变量，需要考虑下面的代码片段：</p>
+<blockquote>
+<p>由于上文提到的那个错误，这里的代码不展示，有需要可以去原文查看，这里去掉 beforeFirstYieldflag 这个变量，它的作用是，确定第一个yield的值能被正确返回。</p>
+</blockquote>
+<p>&emsp;&emsp;调度器现在不得不比多任务循环要做稍微多点了，然后才运行多任务：</p>
+<blockquote>
+<p>这里实在突兀，下面是一个调度程序</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Scheduler</span> </span>&#123;</div><div class="line">  <span class="keyword">protected</span> $maxTaskId = <span class="number">0</span>;</div><div class="line">  <span class="keyword">protected</span> $taskMap = []; <span class="comment">// taskId =&gt; task</span></div><div class="line">  <span class="keyword">protected</span> $taskQueue; <span class="comment">//任务队列</span></div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">$this</span>-&gt;taskQueue = <span class="keyword">new</span> SplQueue(); <span class="comment">//SplQueue类提供使用双向链表实现的队列的主要功能。</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">newTask</span><span class="params">(Generator $coroutine)</span></span></div><div class="line">  &#123; </div><div class="line">    <span class="comment">//协同</span></div><div class="line">    $tid = ++<span class="keyword">$this</span>-&gt;maxTaskId;</div><div class="line">    $task = <span class="keyword">new</span> Task($tid, $coroutine);</div><div class="line">    <span class="keyword">$this</span>-&gt;taskMap[$tid] = $task;</div><div class="line">    <span class="keyword">$this</span>-&gt;schedule($task);</div><div class="line">    <span class="keyword">return</span> $tid;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">schedule</span><span class="params">(Task $task)</span></span></div><div class="line">  &#123; </div><div class="line">    <span class="keyword">$this</span>-&gt;taskQueue-&gt;enqueue($task); <span class="comment">//加入到队列队尾</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">while</span> (!<span class="keyword">$this</span>-&gt;taskQueue-&gt;isEmpty()) &#123;</div><div class="line">      $task = <span class="keyword">$this</span>-&gt;taskQueue-&gt;dequeue();</div><div class="line">      $task-&gt;run();</div><div class="line"></div><div class="line">      <span class="keyword">if</span> ($task-&gt;isFinished()) &#123;</div><div class="line">        <span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;taskMap[$task-&gt;getTaskId()]);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">$this</span>-&gt;schedule($task);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="http://php.net/manual/zh/book.spl.php#book.spl" rel="external nofollow noopener noreferrer" target="_blank">SplQueue</a> 类提供使用双向链表实现的队列的主要功能。主要方法：</p>
+<ul>
+<li>dequeue：从队列中删除节点</li>
+<li>enqueue：向队列中添加一个元素。</li>
+<li>setIteratorMode：设置迭代的模式</li>
+<li>isEmpty：检查双向链表是否为空。</li>
+</ul>
+</blockquote>
+<p>&emsp;&emsp;newTask() 方法（使用下一个空闲的任务 id）创建一个新任务，然后把这个任务放入任务 map 数组里。 接着它通过把任务放入任务队列里来实现对任务的调度。接着 run() 方法扫描任务队列，运行任务。如果一个任务结束了，那么它将从队列里删除， 否则它将在队列的末尾再次被调度。</p>
+<p>&emsp;&emsp;让我们看看下面具有两个简单（没有什么意义）任务的调度器：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">task1</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">for</span> ($i = <span class="number">1</span>; $i &lt;= <span class="number">10</span>; ++$i) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"This is task 1 iteration $i.\n"</span>;</div><div class="line">    <span class="keyword">yield</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">task2</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">for</span> ($i = <span class="number">1</span>; $i &lt;= <span class="number">5</span>; ++$i) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"This is task 2 iteration $i.\n"</span>;</div><div class="line">    <span class="keyword">yield</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$scheduler = <span class="keyword">new</span> Scheduler;</div><div class="line">$scheduler-&gt;newTask(task1());</div><div class="line">$scheduler-&gt;newTask(task2());</div><div class="line">$scheduler-&gt;run();</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;两个任务都仅仅回显一条信息，然后使用yield把控制回传给调度器。输出结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">This is task 1 iteration 1</div><div class="line">This is task 1 iteration 2</div><div class="line">This is task 2 iteration 1</div><div class="line">This is task 2 iteration 2</div><div class="line">This is task 1 iteration 3</div><div class="line">This is task 2 iteration 3</div><div class="line">This is task 1 iteration 4</div><div class="line">This is task 2 iteration 4</div><div class="line">This is task 1 iteration 5</div><div class="line">This is task 2 iteration 5</div><div class="line">This is task 1 iteration 6</div><div class="line">This is task 1 iteration 7</div><div class="line">This is task 1 iteration 8</div><div class="line">This is task 1 iteration 9</div><div class="line">This is task 1 iteration 10</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;对前五个迭代来说，两个任务是交替运行的，而在第二个任务结束后，只有第一个任务继续运行。</p>
+<h1 id="与调度器之间通信"><a href="#与调度器之间通信" class="headerlink" title="与调度器之间通信"></a>与调度器之间通信</h1><p>&emsp;&emsp;既然调度器已经运行了, 那么我们来看下一个问题：任务和调度器之间的通信。</p>
+<p>&emsp;&emsp;我们将使用进程用来和操作系统会话的同样的方式来通信：系统调用。</p>
+<p>&emsp;&emsp;我们需要系统调用的理由是操作系统与进程相比它处在不同的权限级别上。因此为了执行特权级别的操作（如杀死另一个进程)，就不得不以某种方式把控制传回给内核，这样内核就可以执行所说的操作了。再说一遍，这种行为在内部是通过使用中断指令来实现的。过去使用的是通用的int指令，如今使用的是更特殊并且更快速的 syscall/sysenter 指令。</p>
+<p>&emsp;&emsp;我们的任务调度系统将反映这种设计：不是简单地把调度器传递给任务（这样就允许它做它想做的任何事)，我们将通过给yield表达式传递信息来与系统调用通信。这儿yield即是中断，也是传递信息给调度器（和从调度器传递出信息）的方法。</p>
+<p>&emsp;&emsp;为了说明系统调用, 我们对可调用的系统调用做一个小小的封装：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SystemCall</span> </span>&#123;</div><div class="line"></div><div class="line">  <span class="keyword">protected</span> $callback;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(callable $callback)</span></span></div><div class="line">  &#123;</div><div class="line">    <span class="keyword">$this</span>-&gt;callback = $callback;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span><span class="params">(Task $task, Scheduler $scheduler)</span></span></div><div class="line">  &#123;</div><div class="line">    $callback = <span class="keyword">$this</span>-&gt;callback;</div><div class="line">    <span class="keyword">return</span> $callback($task, $scheduler);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">callback</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">echo</span> <span class="string">'test'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$fun_call = <span class="string">'callback'</span>;</div><div class="line">$syscall = <span class="keyword">new</span> SystemCall($fun_call);</div><div class="line">var_dump(is_callable($syscall)); <span class="comment">//检测参数是否为合法的可调用结构 true</span></div><div class="line">var_dump($syscall); <span class="comment">//object(SystemCall)</span></div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;它和其他任何可调用的对象(使用 _invoke )一样的运行, 不过它要求调度器把正在调用的任务和自身传递给这个函数.</p>
+<p>&emsp;&emsp;为了解决这个问题我们不得不微微的修改调度器的run方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">while</span> (!<span class="keyword">$this</span>-&gt;taskQueue-&gt;isEmpty()) &#123;</div><div class="line">    $task = <span class="keyword">$this</span>-&gt;taskQueue-&gt;dequeue();</div><div class="line">    $retval = $task-&gt;run();</div><div class="line"></div><div class="line">    <span class="keyword">if</span> ($retval <span class="keyword">instanceof</span> SystemCall) &#123; <span class="comment">// instanceof 用于确定一个 php 变量是会否属于某个类</span></div><div class="line">    $retval($task, <span class="keyword">$this</span>);</div><div class="line">    <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> ($task-&gt;isFinished()) &#123;</div><div class="line">      <span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;taskMap[$task-&gt;getTaskId()]);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">$this</span>-&gt;schedule($task);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;第一个系统调用除了返回任务ID外什么都没有做：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getTaskId</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> SystemCall(<span class="function"><span class="keyword">function</span><span class="params">(Task $task, Scheduler $scheduler)</span> </span>&#123;</div><div class="line">    $task-&gt;setSendValue($task-&gt;getTaskId());</div><div class="line">    $scheduler-&gt;schedule($task);</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这个函数设置任务 id 为下一次发送的值，并再次调度了这个任务。由于使用了系统调用，所以调度器不能自动调用任务，我们需要手工调度任务（稍后你将明白为什么这么做)。要使用这个新的系统调用的话，我们要重新编写以前的例子：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">task</span><span class="params">($max)</span></span></div><div class="line">&#123;</div><div class="line">  $tid = (<span class="keyword">yield</span> getTaskId()); <span class="comment">// &lt;-- here's the syscall!</span></div><div class="line"></div><div class="line">  <span class="keyword">for</span> ($i = <span class="number">1</span>; $i &lt;= $max; ++$i) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"This is task $tid iteration $i.\n"</span>;</div><div class="line">    <span class="keyword">yield</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$scheduler = <span class="keyword">new</span> Scheduler;</div><div class="line"></div><div class="line">$scheduler-&gt;newTask(task(<span class="number">10</span>));</div><div class="line">$scheduler-&gt;newTask(task(<span class="number">5</span>));</div><div class="line"></div><div class="line">$scheduler-&gt;run();</div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这段代码将给出与前一个例子相同的输出，请注意系统调用如何同其他任何调用一样正常地运行，只不过预先增加了yield。</p>
+<p>&emsp;&emsp;要创建新的任务，然后再杀死它们的话，需要两个以上的系统调用：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">newTask</span><span class="params">(Generator $coroutine)</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> SystemCall(</div><div class="line">    <span class="function"><span class="keyword">function</span><span class="params">(Task $task, Scheduler $scheduler)</span> <span class="title">use</span> <span class="params">($coroutine)</span> </span>&#123;</div><div class="line">      $task-&gt;setSendValue($scheduler-&gt;newTask($coroutine));</div><div class="line">      $scheduler-&gt;schedule($task);</div><div class="line">    &#125;</div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">killTask</span><span class="params">($tid)</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> SystemCall(</div><div class="line">    <span class="function"><span class="keyword">function</span><span class="params">(Task $task, Scheduler $scheduler)</span> <span class="title">use</span> <span class="params">($tid)</span> </span>&#123;</div><div class="line">      $task-&gt;setSendValue($scheduler-&gt;killTask($tid));</div><div class="line">      $scheduler-&gt;schedule($task);</div><div class="line">    &#125;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;killTask函数需要在调度器里增加一个方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">killTask</span><span class="params">($tid)</span> </span>&#123;</div><div class="line">  <span class="keyword">if</span> (!<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;taskMap[$tid])) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;taskMap[$tid]);</div><div class="line"></div><div class="line">  <span class="comment">// This is a bit ugly and could be optimized so it does not have to walk the queue,</span></div><div class="line">  <span class="comment">// but assuming that killing tasks is rather rare I won't bother with it now</span></div><div class="line">  <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;taskQueue <span class="keyword">as</span> $i =&gt; $task) &#123;</div><div class="line">    <span class="keyword">if</span> ($task-&gt;getTaskId() === $tid) &#123;</div><div class="line">      <span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;taskQueue[$i]);</div><div class="line">      <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;用来测试新功能的微脚本：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">childTask</span><span class="params">()</span> </span>&#123;</div><div class="line">  $tid = (<span class="keyword">yield</span> getTaskId());</div><div class="line">  <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"Child task $tid still alive!\n"</span>;</div><div class="line">    <span class="keyword">yield</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">task</span><span class="params">()</span> </span>&#123;</div><div class="line">  $tid = (<span class="keyword">yield</span> getTaskId());</div><div class="line">  $childTid = (<span class="keyword">yield</span> newTask(childTask()));</div><div class="line"></div><div class="line">  <span class="keyword">for</span> ($i = <span class="number">1</span>; $i &lt;= <span class="number">6</span>; ++$i) &#123;</div><div class="line">    <span class="keyword">echo</span> <span class="string">"Parent task $tid iteration $i.\n"</span>;</div><div class="line">    <span class="keyword">yield</span>;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> ($i == <span class="number">3</span>) <span class="keyword">yield</span> killTask($childTid);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">$scheduler = <span class="keyword">new</span> Scheduler;</div><div class="line">$scheduler-&gt;newTask(task());</div><div class="line">$scheduler-&gt;run();</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这段代码将打印以下信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Parent task 1 iteration 1.</div><div class="line">Child task 2 still alive!</div><div class="line">Parent task 1 iteration 2.</div><div class="line">Child task 2 still alive!</div><div class="line">Parent task 1 iteration 3.</div><div class="line">Child task 2 still alive!</div><div class="line">Parent task 1 iteration 4.</div><div class="line">Parent task 1 iteration 5.</div><div class="line">Parent task 1 iteration 6.</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;经过三次迭代以后子任务将被杀死，因此这就是”Child is still alive”消息结束的时候。不过你要明白这还不是真正的父子关系。因为在父任务结束后子任务仍然可以运行，子任务甚至可以杀死父任务。可以修改调度器使它具有更层级化的任务结构，不过这个不是我们这个文章要继续讨论的范围了。</p>
+<p>现在你可以实现许多进程管理调用。例如 wait（它一直等待到任务结束运行时)，exec（它替代当前任务)和 fork（它创建一个当前任务的克隆)。fork非常酷，而且你可以使用PHP的协程真正地实现它，因为它们都支持克隆。</p>
+<p>让我们把这些留给有兴趣的读者吧,我们来看下一个议题。</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">留言</h1> -->
+
+  
+  <div id="disqus_thread">
+    <script type="text/javascript">
+    var disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = 'post-在PHP中使用协程实现多任务调度';
+          this.page.title = '在PHP中使用协程实现多任务调度';
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2017/03/20/php之生成器/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          time blog | php | mysql | python | btc | xmr
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">与我联系</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/Time02" class="icon icon-github" target="_blank" rel="external nofollow noopener noreferrer">github</a>
+            
+              <a href="https://twitter.com/wjhechen" class="icon icon-twitter" target="_blank" rel="external nofollow noopener noreferrer">twitter</a>
+            
+              <a href="mailto:wjhechen@gmail.com" class="icon icon-mail" target="_blank" rel="external nofollow noopener noreferrer">mail</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">站内搜索</h1>
+        <div class="widget-text">
+          <form onsubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Time‘blog &copy; 2017</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+<script>
+  var disqus_shortname = 'blog-timeicode-com';
+
+  
+  var disqus_url = '//blog.timeicode.com/2017/03/25/在PHP中使用协程实现多任务调度/';
+  
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+</body>
+
+</html>
