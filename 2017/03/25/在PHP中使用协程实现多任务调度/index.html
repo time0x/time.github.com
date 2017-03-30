@@ -244,7 +244,10 @@ var _hmt = _hmt || [];
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Parent task 1 iteration 1.</div><div class="line">Child task 2 still alive!</div><div class="line">Parent task 1 iteration 2.</div><div class="line">Child task 2 still alive!</div><div class="line">Parent task 1 iteration 3.</div><div class="line">Child task 2 still alive!</div><div class="line">Parent task 1 iteration 4.</div><div class="line">Parent task 1 iteration 5.</div><div class="line">Parent task 1 iteration 6.</div></pre></td></tr></table></figure>
 <p>&emsp;&emsp;经过三次迭代以后子任务将被杀死，因此这就是”Child is still alive”消息结束的时候。不过你要明白这还不是真正的父子关系。因为在父任务结束后子任务仍然可以运行，子任务甚至可以杀死父任务。可以修改调度器使它具有更层级化的任务结构，不过这个不是我们这个文章要继续讨论的范围了。</p>
 <p>现在你可以实现许多进程管理调用。例如 wait（它一直等待到任务结束运行时)，exec（它替代当前任务)和 fork（它创建一个当前任务的克隆)。fork非常酷，而且你可以使用PHP的协程真正地实现它，因为它们都支持克隆。</p>
-<p>让我们把这些留给有兴趣的读者吧,我们来看下一个议题。</p>
+<p>让我们把这些留给有兴趣的读者吧，我们来看下一个议题。</p>
+<blockquote>
+<p>下面的内容还没有搞特别清楚，弄好了再补充。</p>
+</blockquote>
 
         </div>
       </article>
