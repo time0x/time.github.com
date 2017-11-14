@@ -8,6 +8,6 @@ Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
-Sitemap: http://blog.time0x.com/search.xml
-Sitemap: http://blog.time0x.com/sitemap.xml
-Sitemap: http://blog.time0x.com/baidusitemap.xml
+Sitemap: http://blog.timeicode.com/search.xml
+Sitemap: http://blog.timeicode.com/sitemap.xml
+Sitemap: http://blog.timeicode.com/baidusitemap.xml
