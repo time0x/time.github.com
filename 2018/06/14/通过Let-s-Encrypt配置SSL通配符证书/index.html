@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="配置通配符证书,SSL,https,Let&#39;s Encrypt">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Time">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="通过Let&#39;s Encrypt配置SSL通配符证书">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="配置通配符证书,SSL,https,Let&#39;s Encrypt">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Time‘blog">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>通过Let&#39;s Encrypt配置SSL通配符证书 - Time‘blog</title>
+
+
+  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+
+  <!-- Custom CSS/Sass -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2303c4ad84419f1a5738e7873cd89874";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  首页
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  归档
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  关于我
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            通过Let's Encrypt配置SSL通配符证书
+            
+          </h1>
+          <p class="posted-on">
+          2018-06-14
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/https/" rel="tag">
+                  https
+                </a>
+              
+                <a href="/tags/SSL/" rel="tag">
+                  SSL
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content">
+          <p>具体配置过程<br><a id="more"></a></p>
+<h3 id="安装-Certbot"><a href="#安装-Certbot" class="headerlink" title="安装 Certbot"></a>安装 Certbot</h3><ul>
+<li>安装 Certbot，官网提供了简单详细的教程：<a href="https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx" rel="external nofollow noopener noreferrer" target="_blank">certbot</a></li>
+</ul>
+<p>比如我是 Nginx 和 Ubuntu16.04</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install software-properties-common</div><div class="line">$ sudo add-apt-repository ppa:certbot/certbot</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install python-certbot-nginx</div></pre></td></tr></table></figure>
+<h3 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ certbot --version</div></pre></td></tr></table></figure>
+<blockquote>
+<p>certbot 0.22.2</p>
+</blockquote>
+<h3 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h3><h4 id="申请证书-1"><a href="#申请证书-1" class="headerlink" title="申请证书"></a>申请证书</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo certbot certonly  <span class="_">-d</span> <span class="string">"*.time0x.com"</span> --manual --preferred-challenges dns-01  --server https://acme-v02.api.letsencrypt.org/directory</div></pre></td></tr></table></figure>
+<blockquote>
+<p>提示：先不要按回车，去配置解析，并且检查是否解析成功</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">-------------------------------------------------------------------------------</div><div class="line">Please deploy a DNS TXT record under the name</div><div class="line">_acme-challenge.time0x.com with the following value:</div><div class="line"></div><div class="line">N3mxDaoHs6j_xybQf2FImy3oALBKbjq1xbKi0rWbhxY</div><div class="line"></div><div class="line">Before continuing, verify the record is deployed.</div><div class="line">-------------------------------------------------------------------------------</div><div class="line">Press Enter to Continue</div></pre></td></tr></table></figure>
+<h4 id="添加解析"><a href="#添加解析" class="headerlink" title="添加解析"></a>添加解析</h4><p>在服务商域名解析处添加一条 TXT 记录</p>
+<h4 id="检查解析"><a href="#检查解析" class="headerlink" title="检查解析"></a>检查解析</h4><p>检查是否配置成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dig  -t txt _acme-challenge.time0x.com @8.8.8.8</div></pre></td></tr></table></figure>
+<h4 id="按回车"><a href="#按回车" class="headerlink" title="按回车"></a>按回车</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">IMPORTANT NOTES:</div><div class="line"> - Congratulations! Your certificate and chain have been saved at:</div><div class="line">   /etc/letsencrypt/live/time0x.com/fullchain.pem</div><div class="line">   Your key file has been saved at:</div><div class="line">   /etc/letsencrypt/live/time0x.com/privkey.pem</div><div class="line">   Your cert will expire on 2018-09-13. To obtain a new or tweaked</div><div class="line">   version of this certificate <span class="keyword">in</span> the future, simply run certbot</div><div class="line">   again. To non-interactively renew *all* of your certificates, run</div><div class="line">   <span class="string">"certbot renew"</span></div><div class="line"> - If you like Certbot, please consider supporting our work by:</div><div class="line"></div><div class="line">   Donating to ISRG / Let<span class="string">'s Encrypt:   https://letsencrypt.org/donate</span></div><div class="line">   Donating to EFF:                    https://eff.org/donate-le</div></pre></td></tr></table></figure>
+<h4 id="查看位置"><a href="#查看位置" class="headerlink" title="查看位置"></a>查看位置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo tree /etc/letsencrypt/live/time0x.com/</div></pre></td></tr></table></figure>
+<blockquote>
+<p>安装tree: apt-get install tree</p>
+</blockquote>
+<h4 id="配置对应的-nginx-配置文件"><a href="#配置对应的-nginx-配置文件" class="headerlink" title="配置对应的 nginx 配置文件"></a>配置对应的 nginx 配置文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">listen 443 http2 ssl;</div><div class="line">ssl_certificate /etc/letsencrypt/live/time0x.com/fullchain.pem;</div><div class="line">ssl_certificate_key /etc/letsencrypt/live/time0x.com/privkey.pem;</div><div class="line">ssl_trusted_certificate  /etc/letsencrypt/live/time0x.com/chain.pem;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="variable">$scheme</span> != <span class="string">"https"</span>) &#123;</div><div class="line">    <span class="built_in">return</span> 301 https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="证书续期"><a href="#证书续期" class="headerlink" title="证书续期"></a>证书续期</h3><p>Let’s encrypt 的免费证书默认有效期为 90 天，到期后如果要续期可以执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">certbot renew</div></pre></td></tr></table></figure>
+<h3 id="letsencrypt官网链接"><a href="#letsencrypt官网链接" class="headerlink" title="letsencrypt官网链接"></a><a href="https://letsencrypt.org/" rel="external nofollow noopener noreferrer" target="_blank">letsencrypt官网链接</a></h3>
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">留言</h1> -->
+
+  
+  <div id="disqus_thread">
+    <script type="text/javascript">
+    var disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = 'post-通过Let-s-Encrypt配置SSL通配符证书';
+          this.page.title = '通过Let&#39;s Encrypt配置SSL通配符证书';
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2017/11/24/比特币冷知识/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          time blog | php | mysql | python | btc | xmr
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">与我联系</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/time02" class="icon icon-github" target="_blank" rel="external nofollow noopener noreferrer">github</a>
+            
+              <a href="mailto:wjhechen@gmail.com" class="icon icon-mail" target="_blank" rel="external nofollow noopener noreferrer">mail</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">站内搜索</h1>
+        <div class="widget-text">
+          <form onsubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Time‘blog &copy; 2018</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+<script src="/js/app.js"></script>
+
+<script>
+  var disqus_shortname = 'blog-timeicode-com';
+
+  
+  var disqus_url = '//blog.time0x.com/2018/06/14/通过Let-s-Encrypt配置SSL通配符证书/';
+  
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+</body>
+
+</html>
