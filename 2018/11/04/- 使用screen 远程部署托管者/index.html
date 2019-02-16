@@ -8,7 +8,7 @@
 
   <!--Description-->
   
-  <meta name="description" content="VirtualBox的错误代码 E_FAIL (0x80004005) win 破解主题 mactype">
+  <meta name="description" content="time blog | php | mysql | go | bitcoin">
   
 
   <!--Author-->
@@ -18,17 +18,17 @@
 
   <!--Open Graph Title-->
   
-      <meta property="og:title" content="VirtualBox的错误代码：E_FAIL (0x80004005)">
+      <meta property="og:title" content="Time‘blog">
   
   <!--Open Graph Description-->
   
-      <meta property="og:description" content="VirtualBox的错误代码 E_FAIL (0x80004005) win 破解主题 mactype">
+      <meta property="og:description" content="time blog | php | mysql | go | bitcoin">
   
   <!--Open Graph Site Name-->
   <meta property="og:site_name" content="Time‘blog">
   <!--Type page-->
   
-      <meta property="og:type" content="article">
+      <meta property="og:type" content="website">
   
   <!--Page Cover-->
   
@@ -37,7 +37,7 @@
 
   <!-- Title -->
   
-  <title>VirtualBox的错误代码：E_FAIL (0x80004005) - Time‘blog</title>
+  <title>Time‘blog</title>
 
 
   <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
@@ -123,41 +123,28 @@ var _hmt = _hmt || [];
         <!-- Title date & tags -->
         <div class="post-header">
           <h1 class="entry-title">
-            VirtualBox的错误代码：E_FAIL (0x80004005)
+            Untitled
             
           </h1>
           <p class="posted-on">
-          2017-03-12
+          2018-11-04
           </p>
           <div class="tags-links">
             
-              
-                <a href="/tags/VirtualBox/" rel="tag">
-                  VirtualBox
-                </a>
-              
-                <a href="/tags/mactype/" rel="tag">
-                  mactype
-                </a>
               
             
           </div>
         </div>
         <!-- Post Main Content -->
         <div class="entry-content">
-          <p>mactype 对 VirtualBox 的影响</p>
-<a id="more"></a>
-<p>给一台 win 主机装 vbox 的时候，新建主机报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Unable to load R3 module C:\Program Files\Oracle\VirtualBox/VBoxDD.DLL (VBoxDD): GetLastError=1790 (VERR_UNRESOLVED_ERROR).</div><div class="line"></div><div class="line">返回 代码:E_FAIL (0x80004005)</div><div class="line">组件:Console</div><div class="line">界面:IConsole &#123;8ab7c520-2442-4b66-8d74-4ff1e195d2b6&#125;</div></pre></td></tr></table></figure>
-<h2 id="踩过这个坑的前辈给出很多种情况："><a href="#踩过这个坑的前辈给出很多种情况：" class="headerlink" title="踩过这个坑的前辈给出很多种情况："></a>踩过这个坑的前辈给出很多种情况：</h2><h3 id="1-由于经常强行关闭虚拟机"><a href="#1-由于经常强行关闭虚拟机" class="headerlink" title="1,由于经常强行关闭虚拟机"></a>1,由于经常强行关闭虚拟机</h3><p>解决方法是：删除虚拟机，并且重新创建，在选择虚拟磁盘的时候，我们选择“选择使用已有的虚拟硬盘文件”这时候你指定之前损坏的虚拟系统的虚拟磁盘就可以了，只要虚拟硬盘文件不丢失，不损坏，重新建立一个还是非常简单的，当然新建以后你要对虚拟电脑重新设置一下跟之前一样就可以了。我们可以来看看操作图。 </p>
-<h3 id="2-由于使用-ghost-系统或者其他第三方主题，破坏了-win-主题的核心文件：uxtheme-dll"><a href="#2-由于使用-ghost-系统或者其他第三方主题，破坏了-win-主题的核心文件：uxtheme-dll" class="headerlink" title="2,由于使用 ghost 系统或者其他第三方主题，破坏了 win 主题的核心文件：uxtheme.dll"></a>2,由于使用 ghost 系统或者其他第三方主题，破坏了 win 主题的核心文件：uxtheme.dll</h3><p>解决方法：</p>
-<ol>
-<li><p>下载未破解的 win7 主题核心文件<code>themeui.dll</code>，<code>themeservice.dll</code>，<code>uxtheme.dll</code>三个文件，覆盖到 C:\windows\system32\ 文件夹下即可。</p>
-</li>
-<li><p>可以使用以下软件做测试，显示破解的，点击还原久可以：<a href="http://pan.baidu.com/s/1nu7TIBn" rel="external nofollow noopener noreferrer" target="_blank">百度盘</a>。</p>
-</li>
-</ol>
-<h3 id="3-坑爹的是，依旧出现这个错误-，检查了之前的操作，并重启，还是无效。"><a href="#3-坑爹的是，依旧出现这个错误-，检查了之前的操作，并重启，还是无效。" class="headerlink" title="3,坑爹的是，依旧出现这个错误 ，检查了之前的操作，并重启，还是无效。"></a>3,坑爹的是，依旧出现这个错误 ，检查了之前的操作，并重启，还是无效。</h3><p>最后看到这台电脑的字体也是使用的自定义的，使用了 <strong>mactype</strong> 设置的，但是刚才已经把主题文件还原了，但还是试一试，打开 <strong>mactype</strong> 设置把 vobox 排除在外。世界清净了，这种改字体的软件和自定义主题有同一杀伤力啊！</p>
+          <h4 id="使用screen-远程部署托管者"><a href="#使用screen-远程部署托管者" class="headerlink" title="- 使用screen 远程部署托管者"></a>- 使用screen 远程部署托管者</h4><blockquote>
+<p>screen 是为了，退出远程服务器之后，程序仍然执行</p>
+</blockquote>
+<p>创建新的screen：screen -S robot1 ./robot -s rpcs@a.botvs.com:9902/5139064</p>
+<p>成功之后，分离 control +A+D</p>
+<p>检查当前运行的screen： screen -ls</p>
+<h4 id="模拟回测中时间选项是K线的精细度"><a href="#模拟回测中时间选项是K线的精细度" class="headerlink" title="- 模拟回测中时间选项是K线的精细度"></a>- 模拟回测中时间选项是K线的精细度</h4><h4 id="exchange-是交易所对象，是在面板配置的-exchange-exchanges-0"><a href="#exchange-是交易所对象，是在面板配置的-exchange-exchanges-0" class="headerlink" title="- exchange 是交易所对象，是在面板配置的,exchange = exchanges[0]"></a>- exchange 是交易所对象，是在面板配置的,exchange = exchanges[0]</h4><h4 id="同一个交易所，要交易很多交易对时，逐个添加比较繁琐，使用-exchange-IO"><a href="#同一个交易所，要交易很多交易对时，逐个添加比较繁琐，使用-exchange-IO" class="headerlink" title="- 同一个交易所，要交易很多交易对时，逐个添加比较繁琐，使用 exchange.IO()"></a>- 同一个交易所，要交易很多交易对时，逐个添加比较繁琐，使用 exchange.IO()</h4><h4 id="访问接口时候要注意错误信息，超时等等，错误会返回空值"><a href="#访问接口时候要注意错误信息，超时等等，错误会返回空值" class="headerlink" title="- 访问接口时候要注意错误信息，超时等等，错误会返回空值"></a>- 访问接口时候要注意错误信息，超时等等，错误会返回空值</h4><h4 id="例如深度数据要判断买单价格小于卖单价格"><a href="#例如深度数据要判断买单价格小于卖单价格" class="headerlink" title="- 例如深度数据要判断买单价格小于卖单价格"></a>- 例如深度数据要判断买单价格小于卖单价格</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!depth || depth.length == <span class="number">0</span> || depth.Asks.length == <span class="number">0</span> || depth.Asks[<span class="number">0</span>].Price &lt; depth.Bids[<span class="number">0</span>].Price)&#123;</div><div class="line">	<span class="comment">//</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Math-min-2-1-33-下单时候取余额和最小下单的最小值"><a href="#Math-min-2-1-33-下单时候取余额和最小下单的最小值" class="headerlink" title="- Math.min(2,-1,33) 下单时候取余额和最小下单的最小值"></a>- Math.min(2,-1,33) 下单时候取余额和最小下单的最小值</h4><h4 id="K线指标函数，周期参数指的是多少k线柱为一个周期"><a href="#K线指标函数，周期参数指的是多少k线柱为一个周期" class="headerlink" title="- K线指标函数，周期参数指的是多少k线柱为一个周期"></a>- K线指标函数，周期参数指的是多少k线柱为一个周期</h4><h4 id="均线金叉：周期小的均线上穿了周期大的均线，MA-5-上穿了-MA-10"><a href="#均线金叉：周期小的均线上穿了周期大的均线，MA-5-上穿了-MA-10" class="headerlink" title="- 均线金叉：周期小的均线上穿了周期大的均线，MA(5) 上穿了 MA(10)"></a>- 均线金叉：周期小的均线上穿了周期大的均线，MA(5) 上穿了 MA(10)</h4><h4 id="均线死叉："><a href="#均线死叉：" class="headerlink" title="- 均线死叉："></a>- 均线死叉：</h4><p>周期小的均线下穿了周期大的均线，MA(5) 下穿了 MA(10) </p>
 
         </div>
       </article>
@@ -173,8 +160,8 @@ var _hmt = _hmt || [];
     <script type="text/javascript">
     var disqus_config = function () {
           this.page.url = window.location.href;
-          this.page.identifier = 'post-VirtualBox的错误代码：E-FAIL-0x80004005';
-          this.page.title = 'VirtualBox的错误代码：E_FAIL (0x80004005)';
+          this.page.identifier = 'post-- 使用screen 远程部署托管者';
+          this.page.title = '';
       };
     </script>
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
@@ -187,13 +174,9 @@ var _hmt = _hmt || [];
     <!-- Pre or Next -->
     <div class="nav-links">
       
-        <div class="nav-previous">
-          <a href="/2017/03/19/基于websocket的聊天demo/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> 上一页</a>
-        </div>
-      
       
         <div class="nav-next">
-          <a href="/2017/03/09/关于持续集成/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
+          <a href="/2018/06/18/php-简洁之道/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
         </div>
       
     </div>
@@ -264,7 +247,7 @@ var _hmt = _hmt || [];
   var disqus_shortname = 'blog-timeicode-com';
 
   
-  var disqus_url = '//blog.time0x.com/2017/03/12/VirtualBox的错误代码：E-FAIL-0x80004005/';
+  var disqus_url = '//blog.time0x.com/2018/11/04/- 使用screen 远程部署托管者/';
   
 
   (function(){

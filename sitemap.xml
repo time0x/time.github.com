@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>//blog.time0x.com/about/index.html</loc>
+    
+    <lastmod>2019-02-15T15:19:33.499Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>//blog.time0x.com/2018/11/04/-%20%E4%BD%BF%E7%94%A8screen%20%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E6%89%98%E7%AE%A1%E8%80%85/</loc>
+    
+    <lastmod>2018-12-04T09:42:10.315Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>//blog.time0x.com/2018/06/18/php-%E7%AE%80%E6%B4%81%E4%B9%8B%E9%81%93/</loc>
     
     <lastmod>2018-06-18T09:56:05.101Z</lastmod>
@@ -33,13 +47,6 @@
     <loc>//blog.time0x.com/2017/03/25/%E5%9C%A8PHP%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%8D%8F%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%A4%9A%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6/</loc>
     
     <lastmod>2017-03-30T13:22:55.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>//blog.time0x.com/about/index.html</loc>
-    
-    <lastmod>2017-03-25T14:23:14.000Z</lastmod>
     
   </url>
   
