@@ -8,7 +8,7 @@
 
   <!--Description-->
   
-  <meta name="description" content="time blog | php | mysql | go | bitcoin">
+  <meta name="description" content="message,Unauthenticated,laravel,passport">
   
 
   <!--Author-->
@@ -18,17 +18,17 @@
 
   <!--Open Graph Title-->
   
-      <meta property="og:title" content="Time‘blog">
+      <meta property="og:title" content="laravel的 message:Unauthenticated 错误">
   
   <!--Open Graph Description-->
   
-      <meta property="og:description" content="time blog | php | mysql | go | bitcoin">
+      <meta property="og:description" content="message,Unauthenticated,laravel,passport">
   
   <!--Open Graph Site Name-->
   <meta property="og:site_name" content="Time‘blog">
   <!--Type page-->
   
-      <meta property="og:type" content="website">
+      <meta property="og:type" content="article">
   
   <!--Page Cover-->
   
@@ -37,7 +37,7 @@
 
   <!-- Title -->
   
-  <title>php - Time‘blog</title>
+  <title>laravel的 message:Unauthenticated 错误 - Time‘blog</title>
 
 
   <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
@@ -115,143 +115,86 @@ var _hmt = _hmt || [];
 
 
   <!-- Main Content -->
-  
-
-<!-- Main Content -->
-<div class="archive content-area">
-  <div class="container">
-    <h1 class="entry-title">#php</h1>
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <!-- Use lodash to classify posts. See https://lodash.com/docs#groupBy -->
-        
-        
-          <h2 class="year">2019</h2>
-          <ul class="list">
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            laravel的 message:Unauthenticated 错误
             
-  <li>
-    <span class="date">
-      2019-07-10
-    </span>
-    <a href="/2019/07/10/laravel的-message-Unauthenticated-错误/" class="title">
-      laravel的 message:Unauthenticated 错误
-    </a>
-  </li>
-
-  <li>
-    <span class="date">
-      2019-05-15
-    </span>
-    <a href="/2019/05/15/关于laravel的日志权限/" class="title">
-      关于laravel的日志权限
-    </a>
-  </li>
-
-
-          </ul>
-        
-          <h2 class="year">2018</h2>
-          <ul class="list">
+          </h1>
+          <p class="posted-on">
+          2019-07-10
+          </p>
+          <div class="tags-links">
             
-  <li>
-    <span class="date">
-      2018-06-18
-    </span>
-    <a href="/2018/06/18/php-简洁之道/" class="title">
-      php 简洁之道
-    </a>
-  </li>
-
-
-          </ul>
-        
-          <h2 class="year">2017</h2>
-          <ul class="list">
+              
+                <a href="/tags/php/" rel="tag">
+                  php
+                </a>
+              
+                <a href="/tags/laravel/" rel="tag">
+                  laravel
+                </a>
+              
             
-  <li>
-    <span class="date">
-      2017-03-25
-    </span>
-    <a href="/2017/03/25/在PHP中使用协程实现多任务调度/" class="title">
-      在PHP中使用协程实现多任务调度
-    </a>
-  </li>
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content">
+          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>api 报错 “message”: “Unauthenticated.”。经过检查，api设置没有问题。</p>
+<h3 id="报错版本"><a href="#报错版本" class="headerlink" title="报错版本"></a>报错版本</h3><p>laravle 5.6.3 </p>
+<p>passport 6.0.7 </p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>根本原因是：由于 composer update 时候，把 laravel 从 5.6.0 升级到了 5.6.3</p>
+<blockquote>
+<p>这个坑中文的文档中没有，只有在英文原始文档中描述：<a href="https://laravel.com/docs/5.6/upgrade#upgrade-5.6.30" rel="external nofollow noopener noreferrer" target="_blank">https://laravel.com/docs/5.6/upgrade#upgrade-5.6.30</a></p>
+</blockquote>
+<p>新版本 Laravel 5.6.30 考虑到安全性，禁用 cookie 值的所有序列化/反序列化。会导致之前所有的 cookie 无效。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>由于 passport 使用了 cookie 的序列化，所以启用 cookie 序列化：在 App\Http\Middleware\EncryptCookies 添加：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="keyword">static</span> $serialize = <span class="keyword">true</span>;</div></pre></td></tr></table></figure>
+<p>刷新网页，提示：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unserialize(): Error at offset <span class="number">0</span> of <span class="number">40</span> bytes</div></pre></td></tr></table></figure>
+<p>清除浏览器中的 cookie。</p>
 
-  <li>
-    <span class="date">
-      2017-03-20
-    </span>
-    <a href="/2017/03/20/php之生成器/" class="title">
-      php之生成器
-    </a>
-  </li>
-
-  <li>
-    <span class="date">
-      2017-03-19
-    </span>
-    <a href="/2017/03/19/基于websocket的聊天demo/" class="title">
-      基于websocket的聊天demo
-    </a>
-  </li>
-
-  <li>
-    <span class="date">
-      2017-03-09
-    </span>
-    <a href="/2017/03/09/关于持续集成/" class="title">
-      关于持续集成
-    </a>
-  </li>
-
-  <li>
-    <span class="date">
-      2017-03-09
-    </span>
-    <a href="/2017/03/09/PHP-开发的实践标准-PSR-4/" class="title">
-      PHP 开发的实践标准:PSR-4
-    </a>
-  </li>
-
-  <li>
-    <span class="date">
-      2017-03-09
-    </span>
-    <a href="/2017/03/09/PHP-开发的实践标准-PSR-3/" class="title">
-      PHP 开发的实践标准:PSR-3
-    </a>
-  </li>
-
-  <li>
-    <span class="date">
-      2017-03-09
-    </span>
-    <a href="/2017/03/09/PHP-开发的实践标准-PSR-2/" class="title">
-      PHP 开发的实践标准:PSR-2
-    </a>
-  </li>
-
-
-          </ul>
-        
-      </div>
+        </div>
+      </article>
     </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">留言</h1> -->
+
+  
+  <div id="disqus_thread">
+    <script type="text/javascript">
+    var disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = 'post-laravel的-message-Unauthenticated-错误';
+          this.page.title = 'laravel的 message:Unauthenticated 错误';
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
   
-<div class="container">
-  <ul class="pager">
-    
-    
-      <li class="next">
-        <a href="/tags/php/page/2/">
-          <span class="meta-arraw meta-arraw-left"> </span>上一页
-        </a>
-      </li>
-    
-  </ul>
-</div>
+</section>
 
 
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2019/05/15/关于laravel的日志权限/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
 </div>
 
 
@@ -317,12 +260,14 @@ var _hmt = _hmt || [];
   var disqus_shortname = 'blog-timeicode-com';
 
   
+  var disqus_url = '//blog.time0x.com/2019/07/10/laravel的-message-Unauthenticated-错误/';
+  
 
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>

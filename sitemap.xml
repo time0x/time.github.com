@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>//blog.time0x.com/2019/07/10/laravel%E7%9A%84-message-Unauthenticated-%E9%94%99%E8%AF%AF/</loc>
+    
+    <lastmod>2019-07-29T02:48:40.061Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>//blog.time0x.com/2019/05/15/%E5%85%B3%E4%BA%8Elaravel%E7%9A%84%E6%97%A5%E5%BF%97%E6%9D%83%E9%99%90/</loc>
     
     <lastmod>2019-05-15T01:42:56.103Z</lastmod>
