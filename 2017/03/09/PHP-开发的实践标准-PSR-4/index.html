@@ -40,10 +40,12 @@
   <title>PHP 开发的实践标准:PSR-4 - Time‘blog</title>
 
 
-  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
 
   <!-- Custom CSS/Sass -->
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="css/style.css">
+
 
   
 <script type="text/javascript">
@@ -57,7 +59,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -68,7 +70,7 @@ var _hmt = _hmt || [];
     <div class="logo">
       <a href="/" rel="home">
         
-        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
         
       </a>
     </div>
@@ -80,7 +82,7 @@ var _hmt = _hmt || [];
           
           
             <li>
-              <a href="/.">
+              <a href=".">
                 
                   首页
                 
@@ -88,7 +90,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/archives">
+              <a href="archives">
                 
                   归档
                 
@@ -96,7 +98,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/about">
+              <a href="about">
                 
                   关于我
                 
@@ -152,12 +154,13 @@ var _hmt = _hmt || [];
 <li>PSR-4 把命名空间的前缀和文件系统中的目录对应起来，依赖 PHP 命名空间和文件系统目录结构查找并加载 PHP 类，接口，性状。</li>
 </ul>
 <p>例子：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 一个项目专用的自动加载器</div><div class="line"> * 使用</div><div class="line"></div><div class="line"> */</div><div class="line">spl_autoload_register(<span class="function"><span class="keyword">function</span> <span class="params">($class)</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="comment">//这个项目的命名空间前缀</span></div><div class="line">	$prefix = <span class="string">'Foo\\Bar\\'</span>;</div><div class="line"></div><div class="line">	<span class="comment">//这个命名空间前缀对应的基目录</span></div><div class="line">	$base_dir = <span class="keyword">__DIR__</span> . <span class="string">'/src/'</span>;</div><div class="line"></div><div class="line">	<span class="comment">//参数传入的类使用这个命名空间前缀么？</span></div><div class="line">	$len = strlen($prefix);</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(strncmp($prefix, $class, $len) !== <span class="number">0</span>)&#123;</div><div class="line">		<span class="comment">//不一样就不使用，交给注册的下一个自动加载器处理</span></div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//获取去掉前缀后的类名</span></div><div class="line">	$relative_class = substr($class, $len);</div><div class="line"></div><div class="line">	<span class="comment">//把命名空间前缀替换成基目录，</span></div><div class="line">	<span class="comment">//在去掉前缀的类名中，把命名空间分隔符替换成目录分隔符</span></div><div class="line">	<span class="comment">//在后面加上 .php</span></div><div class="line">	$file = $baser_dir . str_replace(<span class="string">'\\'</span>, <span class="string">'/'</span>, $relative_class) . <span class="string">'.php'</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">if</span>(file_exits($file))&#123;</div><div class="line">	    <span class="keyword">require</span> $file;</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 一个项目专用的自动加载器</span></span><br><span class="line"><span class="comment"> * 使用</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">spl_autoload_register(<span class="function"><span class="keyword">function</span> <span class="params">($class)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//这个项目的命名空间前缀</span></span><br><span class="line">	$prefix = <span class="string">'Foo\\Bar\\'</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//这个命名空间前缀对应的基目录</span></span><br><span class="line">	$base_dir = <span class="keyword">__DIR__</span> . <span class="string">'/src/'</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//参数传入的类使用这个命名空间前缀么？</span></span><br><span class="line">	$len = strlen($prefix);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(strncmp($prefix, $class, $len) !== <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="comment">//不一样就不使用，交给注册的下一个自动加载器处理</span></span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//获取去掉前缀后的类名</span></span><br><span class="line">	$relative_class = substr($class, $len);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//把命名空间前缀替换成基目录，</span></span><br><span class="line">	<span class="comment">//在去掉前缀的类名中，把命名空间分隔符替换成目录分隔符</span></span><br><span class="line">	<span class="comment">//在后面加上 .php</span></span><br><span class="line">	$file = $baser_dir . str_replace(<span class="string">'\\'</span>, <span class="string">'/'</span>, $relative_class) . <span class="string">'.php'</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(file_exits($file))&#123;</span><br><span class="line">	    <span class="keyword">require</span> $file;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>当然我们可以使用 Composer 自动生成的 PSR-4 自动加载器。</li>
 </ul>
 <ul>
-<li>参考自：<a href="https://github.com/codeguy/modern-php" rel="external nofollow noopener noreferrer" target="_blank">《Modern PHP》</a>和 <a href="http://www.php-fig.org/" rel="external nofollow noopener noreferrer" target="_blank">php-fig.org</a></li>
+<li>参考自：<a href="https://github.com/codeguy/modern-php" target="_blank" rel="external nofollow noopener noreferrer">《Modern PHP》</a>和 <a href="http://www.php-fig.org/" target="_blank" rel="external nofollow noopener noreferrer">php-fig.org</a></li>
 </ul>
 
         </div>
@@ -178,7 +181,7 @@ var _hmt = _hmt || [];
           this.page.title = 'PHP 开发的实践标准:PSR-4';
       };
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
   </div>
   
 </section>
@@ -248,7 +251,7 @@ var _hmt = _hmt || [];
 <!-- Footer -->
 <footer class="site-info">
   <p>
-    <span>Time‘blog &copy; 2019</span>
+    <span>Time‘blog &copy; 2020</span>
     
       <span class="split">|</span>
       <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
@@ -259,13 +262,15 @@ var _hmt = _hmt || [];
 
   <!-- After footer scripts -->
   <!-- scripts -->
-<script src="/js/app.js"></script>
+
+<script src="js/app.js"></script>
+
 
 <script>
-  var disqus_shortname = 'blog-timeicode-com';
+  var disqus_shortname = 'blog-time0x-com';
 
   
-  var disqus_url = '//blog.time0x.com/2017/03/09/PHP-开发的实践标准-PSR-4/';
+  var disqus_url = '2017/03/09/PHP-开发的实践标准-PSR-4/';
   
 
   (function(){

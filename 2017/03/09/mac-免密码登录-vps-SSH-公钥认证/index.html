@@ -40,10 +40,12 @@
   <title>mac 免密码登录 vps (SSH 公钥认证) - Time‘blog</title>
 
 
-  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
 
   <!-- Custom CSS/Sass -->
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="css/style.css">
+
 
   
 <script type="text/javascript">
@@ -57,7 +59,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -68,7 +70,7 @@ var _hmt = _hmt || [];
     <div class="logo">
       <a href="/" rel="home">
         
-        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
         
       </a>
     </div>
@@ -80,7 +82,7 @@ var _hmt = _hmt || [];
           
           
             <li>
-              <a href="/.">
+              <a href=".">
                 
                   首页
                 
@@ -88,7 +90,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/archives">
+              <a href="archives">
                 
                   归档
                 
@@ -96,7 +98,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/about">
+              <a href="about">
                 
                   关于我
                 
@@ -145,70 +147,83 @@ var _hmt = _hmt || [];
         </div>
         <!-- Post Main Content -->
         <div class="entry-content">
-          <pre><code>使用root 免密登录，禁止root 的情况又不一样，有机会写出来。
-</code></pre><a id="more"></a>
+          <pre><code>使用root 免密登录，禁止root 的情况又不一样，有机会写出来。</code></pre><a id="more"></a>
+
 <ul>
 <li>昨天刚弄了一个新的 vps ，晚上挂机自动安装 lnmp，一早看就 cpu 异常，果断是机器在暴力破解 root ，登录进去，查看</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tail <span class="_">-f</span> /var/<span class="built_in">log</span>/secure</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f /var/<span class="built_in">log</span>/secure</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>果然有许多: </li>
+<li>果然有许多:</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Failed password <span class="keyword">for</span> root from 116.31.116.34 port 41014 ssh2</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed password <span class="keyword">for</span> root from 116.31.116.34 port 41014 ssh2</span><br></pre></td></tr></table></figure>
+
+
 <hr>
 <blockquote>
 <p>远程服务器:centOS，本地macOS，iTerm2</p>
 </blockquote>
-<h2 id="改端口。"><a href="#改端口。" class="headerlink" title="改端口。"></a>改端口。</h2><h3 id="打开-etc-ssh-sshd-config文件"><a href="#打开-etc-ssh-sshd-config文件" class="headerlink" title="打开/etc/ssh/sshd_config文件:"></a>打开/etc/ssh/sshd_config文件:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh root@xxx.xxx.xxx.xxx <span class="comment">#输入密码</span></div><div class="line"><span class="built_in">cd</span> /etc/ssh/sshd_config</div></pre></td></tr></table></figure>
-<h3 id="找到：Port-22-SSH端口，修改为非常用的高位端口-1024-65535之间的一个。先不重启-ssh-服务。"><a href="#找到：Port-22-SSH端口，修改为非常用的高位端口-1024-65535之间的一个。先不重启-ssh-服务。" class="headerlink" title="找到：Port 22  #SSH端口，修改为非常用的高位端口:1024-65535之间的一个。先不重启 ssh 服务。"></a>找到：Port 22  #SSH端口，修改为非常用的高位端口:1024-65535之间的一个。先不重启 ssh 服务。</h3><h2 id="配置-SSH-密钥登录远程服务器"><a href="#配置-SSH-密钥登录远程服务器" class="headerlink" title="配置 SSH 密钥登录远程服务器"></a>配置 SSH 密钥登录远程服务器</h2><h3 id="在Mac上生成公钥和私钥，如果没有的话"><a href="#在Mac上生成公钥和私钥，如果没有的话" class="headerlink" title="在Mac上生成公钥和私钥，如果没有的话"></a>在Mac上生成公钥和私钥，如果没有的话</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></div></pre></td></tr></table></figure>
+<h2 id="改端口。"><a href="#改端口。" class="headerlink" title="改端口。"></a>改端口。</h2><h3 id="打开-etc-ssh-sshd-config文件"><a href="#打开-etc-ssh-sshd-config文件" class="headerlink" title="打开/etc/ssh/sshd_config文件:"></a>打开/etc/ssh/sshd_config文件:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh root@xxx.xxx.xxx.xxx <span class="comment">#输入密码</span></span><br><span class="line"><span class="built_in">cd</span> /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<h3 id="找到：Port-22-SSH端口，修改为非常用的高位端口-1024-65535之间的一个。先不重启-ssh-服务。"><a href="#找到：Port-22-SSH端口，修改为非常用的高位端口-1024-65535之间的一个。先不重启-ssh-服务。" class="headerlink" title="找到：Port 22  #SSH端口，修改为非常用的高位端口:1024-65535之间的一个。先不重启 ssh 服务。"></a>找到：Port 22  #SSH端口，修改为非常用的高位端口:1024-65535之间的一个。先不重启 ssh 服务。</h3><h2 id="配置-SSH-密钥登录远程服务器"><a href="#配置-SSH-密钥登录远程服务器" class="headerlink" title="配置 SSH 密钥登录远程服务器"></a>配置 SSH 密钥登录远程服务器</h2><h3 id="在Mac上生成公钥和私钥，如果没有的话"><a href="#在Mac上生成公钥和私钥，如果没有的话" class="headerlink" title="在Mac上生成公钥和私钥，如果没有的话"></a>在Mac上生成公钥和私钥，如果没有的话</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>生成密钥对，其中 -t 指定密钥类型，默认即 rsa ，可以省略，-C 设置注释文字，比如你的邮箱，且默认为 2048 字节，可改为4098 字节， -p 4098</p>
 <p>可以接受除密码之外的所有内容的默认值，此处的密码是给本地密钥加的密码，如果不要，一路回车下去，</p>
 </blockquote>
 <ul>
-<li>新生成的SSH密钥位于 ~/.ssh/目录中。您将在~/.ssh/id_rsa文件中找到私钥，并在文件中找到公钥~/.ssh/id_rsa.pub。</li>
+<li>新生成的SSH密钥位于 <del>/.ssh/目录中。您将在</del>/.ssh/id_rsa文件中找到私钥，并在文件中找到公钥~/.ssh/id_rsa.pub。</li>
 </ul>
 <h3 id="将公钥发送到要远程登陆的服务器上"><a href="#将公钥发送到要远程登陆的服务器上" class="headerlink" title="将公钥发送到要远程登陆的服务器上"></a>将公钥发送到要远程登陆的服务器上</h3><ul>
 <li>登录服务器：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~</div><div class="line"></div><div class="line"><span class="comment">#验证您的目录是否存在：</span></div><div class="line"></div><div class="line">ls -al <span class="comment">#显示隐藏文件，若不存在：</span></div><div class="line"></div><div class="line">mkdir .ssh</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"></span><br><span class="line"><span class="comment">#验证您的目录是否存在：</span></span><br><span class="line"></span><br><span class="line">ls -al <span class="comment">#显示隐藏文件，若不存在：</span></span><br><span class="line"></span><br><span class="line">mkdir .ssh</span><br></pre></td></tr></table></figure>
+
+
 <ul>
 <li><code>本机</code> mac：将公钥复制到远程机器~/.ssh/authorized_keys上的文件中</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp ~/.ssh/id_rsa.pub root@xxx.xxx.xxx.xxx:~/.ssh</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp ~/.ssh/id_rsa.pub root@xxx.xxx.xxx.xxx:~/.ssh</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>scp 命令是需要输入 服务器 对应账户的密码的。</p>
 </blockquote>
 <ul>
 <li>在服务器建立 authorized_keys 映射，即将密钥复制到 <code>authorized_keys</code> 文件</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+
 <ul>
 <li>配置：在服务端打开 authorized_keys</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/ssh/sshd_config</div><div class="line"><span class="comment">#修改以下设置：</span></div><div class="line"></div><div class="line"><span class="comment">#禁用密码验证</span></div><div class="line">PasswordAuthentication no</div><div class="line"></div><div class="line"><span class="comment">#启用密钥验证</span></div><div class="line">RSAAuthentication yes</div><div class="line"></div><div class="line">存放该用户可以用来登录的RSA/DSA 公钥</div><div class="line">PubkeyAuthentication yes</div><div class="line"></div><div class="line"><span class="comment">#指定公钥数据库文件</span></div><div class="line">AuthorsizedKeysFile .ssh/authorized_keys</div><div class="line"></div><div class="line"><span class="comment">#是否允许 Public Key</span></div><div class="line">PubkeyAuthentication yes</div><div class="line"></div><div class="line"><span class="comment">#不允许空密码</span></div><div class="line">permiemptypasswords no</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/ssh/sshd_config</span><br><span class="line"><span class="comment">#修改以下设置：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#禁用密码验证</span></span><br><span class="line">PasswordAuthentication no</span><br><span class="line"></span><br><span class="line"><span class="comment">#启用密钥验证</span></span><br><span class="line">RSAAuthentication yes</span><br><span class="line"></span><br><span class="line">存放该用户可以用来登录的RSA/DSA 公钥</span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line"></span><br><span class="line"><span class="comment">#指定公钥数据库文件</span></span><br><span class="line">AuthorsizedKeysFile .ssh/authorized_keys</span><br><span class="line"></span><br><span class="line"><span class="comment">#是否允许 Public Key</span></span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line"></span><br><span class="line"><span class="comment">#不允许空密码</span></span><br><span class="line">permiemptypasswords no</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>重启 ssh 服务</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">systemctl restart sshd <span class="comment">#没有任何输出。检查是否重启</span></div><div class="line">systemctl status sshd <span class="comment">#显示 active 时间,是刚才的时间 ok</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sshd <span class="comment">#没有任何输出。检查是否重启</span></span><br><span class="line">systemctl status sshd <span class="comment">#显示 active 时间,是刚才的时间 ok</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>避免出错登录不上去，再开一个命令窗口测试登录，此处为：iTerm2 </li>
+<li>避免出错登录不上去，再开一个命令窗口测试登录，此处为：iTerm2</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -p端口 root@xxx.xxx.xxx.xxx</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p端口 root@xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+
 <h3 id="iTerm2-设置快捷登录"><a href="#iTerm2-设置快捷登录" class="headerlink" title="iTerm2 设置快捷登录"></a>iTerm2 设置快捷登录</h3><ul>
 <li><p>iTerm2 中设置: preferences -&gt; profiles -&gt; 左下角,点击 +</p>
 </li>
 <li><p>name： 取个别名</p>
 </li>
-<li><p>command ,command 填写:ssh -p端口 root@xxx.xxx.xxx.xxx</p>
+<li><p>command ,command 填写:ssh -p端口 <a href="mailto:root@xxx.xxx.xxx.xxx" rel="external nofollow noopener noreferrer" target="_blank">root@xxx.xxx.xxx.xxx</a></p>
 </li>
 <li><p>直接在 iTerm2 上方菜单 Profiles 选择服务器快捷登录，非常方便。</p>
 </li>
 </ul>
 <hr>
 <p>参考：</p>
-<p><a href="https://www.linode.com/docs/networking/ssh/use-public-key-authentication-with-ssh" rel="external nofollow noopener noreferrer" target="_blank">win环境下,使用方式</a></p>
-<p><a href="https://carpliyz.com/p/30.html" rel="external nofollow noopener noreferrer" target="_blank">博文</a></p>
+<p><a href="https://www.linode.com/docs/networking/ssh/use-public-key-authentication-with-ssh" target="_blank" rel="external nofollow noopener noreferrer">win环境下,使用方式</a></p>
+<p><a href="https://carpliyz.com/p/30.html" target="_blank" rel="external nofollow noopener noreferrer">博文</a></p>
 
         </div>
       </article>
@@ -228,7 +243,7 @@ var _hmt = _hmt || [];
           this.page.title = 'mac 免密码登录 vps (SSH 公钥认证)';
       };
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
   </div>
   
 </section>
@@ -298,7 +313,7 @@ var _hmt = _hmt || [];
 <!-- Footer -->
 <footer class="site-info">
   <p>
-    <span>Time‘blog &copy; 2019</span>
+    <span>Time‘blog &copy; 2020</span>
     
       <span class="split">|</span>
       <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
@@ -309,13 +324,15 @@ var _hmt = _hmt || [];
 
   <!-- After footer scripts -->
   <!-- scripts -->
-<script src="/js/app.js"></script>
+
+<script src="js/app.js"></script>
+
 
 <script>
-  var disqus_shortname = 'blog-timeicode-com';
+  var disqus_shortname = 'blog-time0x-com';
 
   
-  var disqus_url = '//blog.time0x.com/2017/03/09/mac-免密码登录-vps-SSH-公钥认证/';
+  var disqus_url = '2017/03/09/mac-免密码登录-vps-SSH-公钥认证/';
   
 
   (function(){

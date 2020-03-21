@@ -40,10 +40,12 @@
   <title>php之生成器 - Time‘blog</title>
 
 
-  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
 
   <!-- Custom CSS/Sass -->
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="css/style.css">
+
 
   
 <script type="text/javascript">
@@ -57,7 +59,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -68,7 +70,7 @@ var _hmt = _hmt || [];
     <div class="logo">
       <a href="/" rel="home">
         
-        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
         
       </a>
     </div>
@@ -80,7 +82,7 @@ var _hmt = _hmt || [];
           
           
             <li>
-              <a href="/.">
+              <a href=".">
                 
                   首页
                 
@@ -88,7 +90,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/archives">
+              <a href="archives">
                 
                   归档
                 
@@ -96,7 +98,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/about">
+              <a href="about">
                 
                   关于我
                 
@@ -149,7 +151,8 @@ var _hmt = _hmt || [];
         </div>
         <!-- Post Main Content -->
         <div class="entry-content">
-          <p>作为协程的基础资料<br><a id="more"></a></p>
+          <p>作为协程的基础资料</p>
+<a id="more"></a>
 <h1 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h1><p>​&emsp;&emsp;一个生成器函数看起来像一个普通的<code>函数</code>，不同的是普通函数返回一个值，而一个生成器可以 yield 生成许多它所需要的值。</p>
 <p>​&emsp;&emsp;生成器被调用的时候，返回的是一个可被遍历的<code>generator</code>对象，当你遍历这个对象时，PHP 会按需调用生成器函数，并在产生一个值后保存生成器的状态，这样它就可以在需要产生下一个值的时候恢复调用状态。</p>
 <h1 id="yield-关键字"><a href="#yield-关键字" class="headerlink" title="yield 关键字"></a>yield 关键字</h1><p>​&emsp;&emsp;生成器的核心是 yield 关键字。它最简单的调用形式看起来像一个return申明，不同之处在于普通return会返回值并终止函数的执行，而yield会返回一个值给循环调用此生成器的代码并且只是暂停执行生成器函数。</p>
@@ -157,11 +160,13 @@ var _hmt = _hmt || [];
 <li>表达式中使用：</li>
 </ul>
 <p>​&emsp;&emsp;php 7 以下是必须加括号的：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$data = (<span class="keyword">yield</span> $value);</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$data = (<span class="keyword">yield</span> $value);</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>生成的时候使用键名：</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">yield</span> $id =&gt; $fields;</div><div class="line">$data = (<span class="keyword">yield</span> $key =&gt; $value);</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">yield</span> $id =&gt; $fields;</span><br><span class="line">$data = (<span class="keyword">yield</span> $key =&gt; $value);</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>生成 null 值：</p>
 <p>yield可以在没有参数传入的情况下被调用来生成一个 <strong>NULL</strong> 值并配对一个自动的键名。</p>
@@ -173,15 +178,17 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>验证官方文档中关于range(0,100000)的优化:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">require</span> <span class="string">"../common/common.php"</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">xrange</span><span class="params">(start,limit,$step)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>($start &lt; $limit) &#123;</div><div class="line">        <span class="keyword">if</span>($step &lt;= <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"step must be +ev"</span>,<span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">for</span> ($i = $start; $i &lt;= $limit; $i += $step) &#123;</div><div class="line">            <span class="keyword">yield</span> $i;</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span>($step &gt;= <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"step must be -ev"</span>, <span class="number">1</span>);<span class="comment">//正值</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> ($i = $start; $i &gt;= $limit; $i += $step) &#123;</div><div class="line">            <span class="keyword">yield</span> $i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require</span> <span class="string">"../common/common.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">xrange</span><span class="params">(start,limit,$step)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>($start &lt; $limit) &#123;</span><br><span class="line">        <span class="keyword">if</span>($step &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"step must be +ev"</span>,<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> ($i = $start; $i &lt;= $limit; $i += $step) &#123;</span><br><span class="line">            <span class="keyword">yield</span> $i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>($step &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="keyword">Exception</span>(<span class="string">"step must be -ev"</span>, <span class="number">1</span>);<span class="comment">//正值</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> ($i = $start; $i &gt;= $limit; $i += $step) &#123;</span><br><span class="line">            <span class="keyword">yield</span> $i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>测试：range 函数本机使用900万会使内存分配用尽，所以 range 使用800万测试，xrange 使用1000 万测试</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">echo</span> <span class="string">'使用xrange函数：'</span>;</div><div class="line">memory_change();</div><div class="line">xrange(<span class="number">1</span>,<span class="number">10000000</span>);</div><div class="line">$res = memory_change(<span class="number">1</span>);</div><div class="line">$t1 = $res[<span class="string">'t'</span>];$m1 = $res[<span class="string">'m'</span>];$p1 = $res[<span class="string">'p'</span>];</div><div class="line"><span class="keyword">echo</span> <span class="string">"耗时：&#123;$t1&#125;,内存峰值：&#123;$p1&#125;&lt;br&gt;"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">'使用range函数：'</span>;</div><div class="line">memory_change();</div><div class="line">range(<span class="number">1</span>,<span class="number">8000000</span>);</div><div class="line">$res = memory_change(<span class="number">1</span>);</div><div class="line">$t2 = $res[<span class="string">'t'</span>];$m2 = $res[<span class="string">'m'</span>];$p2 = $res[<span class="string">'p'</span>];</div><div class="line"><span class="keyword">echo</span> <span class="string">"耗时：&#123;$t2&#125;,内存峰值：&#123;$p2&#125;&lt;br&gt;"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"时间提升："</span>.@round(($t2-$t1)/$t2*<span class="number">100</span>,<span class="number">2</span>).<span class="string">"%;内存消耗减少："</span>.@round(($p2-$p1)/$p2*<span class="number">100</span>,<span class="number">2</span>).<span class="string">"%&lt;br&gt;"</span>;</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">使用xrange函数：耗时：0.000007，内存峰值：2 mb</div><div class="line">使用range函数： 耗时：0.139639，内存峰值：258 mb</div><div class="line">时间提升：99.99%；内存消耗减少：99.22%</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">'使用xrange函数：'</span>;</span><br><span class="line">memory_change();</span><br><span class="line">xrange(<span class="number">1</span>,<span class="number">10000000</span>);</span><br><span class="line">$res = memory_change(<span class="number">1</span>);</span><br><span class="line">$t1 = $res[<span class="string">'t'</span>];$m1 = $res[<span class="string">'m'</span>];$p1 = $res[<span class="string">'p'</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"耗时：&#123;$t1&#125;,内存峰值：&#123;$p1&#125;&lt;br&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'使用range函数：'</span>;</span><br><span class="line">memory_change();</span><br><span class="line">range(<span class="number">1</span>,<span class="number">8000000</span>);</span><br><span class="line">$res = memory_change(<span class="number">1</span>);</span><br><span class="line">$t2 = $res[<span class="string">'t'</span>];$m2 = $res[<span class="string">'m'</span>];$p2 = $res[<span class="string">'p'</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"耗时：&#123;$t2&#125;,内存峰值：&#123;$p2&#125;&lt;br&gt;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"时间提升："</span>.@round(($t2-$t1)/$t2*<span class="number">100</span>,<span class="number">2</span>).<span class="string">"%;内存消耗减少："</span>.@round(($p2-$p1)/$p2*<span class="number">100</span>,<span class="number">2</span>).<span class="string">"%&lt;br&gt;"</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">使用xrange函数：耗时：0.000007，内存峰值：2 mb</span><br><span class="line">使用range函数： 耗时：0.139639，内存峰值：258 mb</span><br><span class="line">时间提升：99.99%；内存消耗减少：99.22%</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>生成器从不返回值，只是产出值，所以这个结果是必然的，因为 xrange 内的函数并没有运行，知识返回了一个迭代器，你只有在遍历它的时候才回生成，节省了内存消耗。</p>
 </blockquote>
 <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>但是不同配置和不同的 php 版本出现的 结果又不一样：</p>
-<p><a href="https://gist.github.com/nikic/2975796" rel="external nofollow noopener noreferrer" target="_blank">https://gist.github.com/nikic/2975796</a></p>
+<p><a href="https://gist.github.com/nikic/2975796" target="_blank" rel="external nofollow noopener noreferrer">https://gist.github.com/nikic/2975796</a></p>
 <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>生成器的用法目前是可以替代需要消耗大量内存的地方，通过 github 上的测试来看，时间并不占优势，但是内存的占用是一大亮点。</p>
 <p>参考：php.net</p>
 <blockquote>
@@ -206,7 +213,7 @@ var _hmt = _hmt || [];
           this.page.title = 'php之生成器';
       };
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
   </div>
   
 </section>
@@ -276,7 +283,7 @@ var _hmt = _hmt || [];
 <!-- Footer -->
 <footer class="site-info">
   <p>
-    <span>Time‘blog &copy; 2019</span>
+    <span>Time‘blog &copy; 2020</span>
     
       <span class="split">|</span>
       <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
@@ -287,13 +294,15 @@ var _hmt = _hmt || [];
 
   <!-- After footer scripts -->
   <!-- scripts -->
-<script src="/js/app.js"></script>
+
+<script src="js/app.js"></script>
+
 
 <script>
-  var disqus_shortname = 'blog-timeicode-com';
+  var disqus_shortname = 'blog-time0x-com';
 
   
-  var disqus_url = '//blog.time0x.com/2017/03/20/php之生成器/';
+  var disqus_url = '2017/03/20/php之生成器/';
   
 
   (function(){

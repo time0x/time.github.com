@@ -40,10 +40,12 @@
   <title>部署Hexo - Time‘blog</title>
 
 
-  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
 
   <!-- Custom CSS/Sass -->
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="css/style.css">
+
 
   
 <script type="text/javascript">
@@ -57,7 +59,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -68,7 +70,7 @@ var _hmt = _hmt || [];
     <div class="logo">
       <a href="/" rel="home">
         
-        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
         
       </a>
     </div>
@@ -80,7 +82,7 @@ var _hmt = _hmt || [];
           
           
             <li>
-              <a href="/.">
+              <a href=".">
                 
                   首页
                 
@@ -88,7 +90,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/archives">
+              <a href="archives">
                 
                   归档
                 
@@ -96,7 +98,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/about">
+              <a href="about">
                 
                   关于我
                 
@@ -141,46 +143,55 @@ var _hmt = _hmt || [];
         </div>
         <!-- Post Main Content -->
         <div class="entry-content">
-          <p>macOS 环境下部署 Hexo<br><a id="more"></a></p>
+          <p>macOS 环境下部署 Hexo</p>
+<a id="more"></a>
+
 <h3 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h3><ul>
 <li>安装 node ，查看版本：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew install node</div><div class="line">node -v</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install node</span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>需要安装 npm，检查并查看版本：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm -v</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>安装 hexo：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>完成后查看版本：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo version</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo version</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>初始化：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /Users/time/code</div><div class="line">mkdir hexo_blog</div><div class="line"><span class="built_in">cd</span> hexo_blog</div><div class="line">hexo init</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/time/code</span><br><span class="line">mkdir hexo_blog</span><br><span class="line"><span class="built_in">cd</span> hexo_blog</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>这是我的安装路径，可自行更改</p>
 </blockquote>
 <ul>
 <li>生成静态页面：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>本地启动：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure>
-<p>查看：<a href="http://localhost:4000" rel="external nofollow noopener noreferrer" target="_blank">http://localhost:4000</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>查看：<a href="http://localhost:4000" target="_blank" rel="external nofollow noopener noreferrer">http://localhost:4000</a></p>
 <ul>
 <li><p>配置 _config.yml ：略。</p>
 </li>
 <li><p>选择主题安装：</p>
 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/GallenHu/hexo-theme-Daily.git themes/daily</div><div class="line">npm install --save hexo-renderer-sass 渲染器安装</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/GallenHu/hexo-theme-Daily.git themes/daily</span><br><span class="line">npm install --save hexo-renderer-sass 渲染器安装</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>有的主题安装还需要：npm install hexo-renderer-jade –save 具体看各个主题的说明。</p>
 </blockquote>
@@ -190,7 +201,8 @@ var _hmt = _hmt || [];
 <li><p>写新文章</p>
 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new <span class="string">'my test'</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">'my test'</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>会生成文章 md 文件：~/code/hexo_blog/source/_posts/my-test.md</p>
 </blockquote>
@@ -203,14 +215,16 @@ var _hmt = _hmt || [];
 <ul>
 <li>配置 git</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global user.email <span class="string">"3480652@qq.com"</span></div><div class="line">git config --global user.name <span class="string">"Time02"</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email <span class="string">"3480652@qq.com"</span></span><br><span class="line">git config --global user.name <span class="string">"Time02"</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>此处填写你的 github 邮箱和用户名</p>
 </blockquote>
 <ul>
 <li>生成 sshkey</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C <span class="string">"3480652@qq.com"</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"3480652@qq.com"</span></span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>默认位置：/Users/time/.ssh/id_rsa</p>
 </blockquote>
@@ -222,31 +236,36 @@ var _hmt = _hmt || [];
 <li><p>测试：ssh -T <a href="mailto:git@github.com" rel="external nofollow noopener noreferrer" target="_blank">git@github.com</a></p>
 </li>
 </ul>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy -g</div></pre></td></tr></table></figure>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy -g</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>报错：ERROR Deployer not found: git</p>
 <p>解决办法：</p>
 </li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><p>打开 <a href="https://time02.github.io" rel="external nofollow noopener noreferrer" target="_blank">https://time02.github.io</a> ,即你的 hexo blog</p>
+<li><p>打开 <a href="https://time02.github.io" target="_blank" rel="external nofollow noopener noreferrer">https://time02.github.io</a> ,即你的 hexo blog</p>
 </li>
 <li><p>部署成功后，查看 console 报错 404</p>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https:<span class="comment">//time02.github.io/css/variables    404</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//time02.github.io/css/variables    404</span></span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>解决：可以在source目录里加入 .nojekyll 文件，然后更改 hexo的 _config.yml 加入以下配置：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">include:</div><div class="line">  - .nojekyll</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">include:</span><br><span class="line">  - .nojekyll</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>这样在 hexo -g 的时候就会包含 .nojekyll 文件了</p>
 </blockquote>
 <ul>
 <li>twitter.svg 报错</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">net::ERR_BLOCKED_BY_CLIENT</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net::ERR_BLOCKED_BY_CLIENT</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>经过排查是 Adblock 给屏蔽了…</p>
 </blockquote>
@@ -265,14 +284,16 @@ var _hmt = _hmt || [];
 <h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><ul>
 <li>hexo-generator-sitemap 生成网站地图</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-sitemap --save</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>后来发现不匹配百度，用这个<a href="https://github.com/coneycode/hexo-generator-baidu-sitemap" rel="external nofollow noopener noreferrer" target="_blank">hexo-generator-baidu-sitemap</a></li>
+<li>后来发现不匹配百度，用这个<a href="https://github.com/coneycode/hexo-generator-baidu-sitemap" target="_blank" rel="external nofollow noopener noreferrer">hexo-generator-baidu-sitemap</a></li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-generator-sitemap --save</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br></pre></td></tr></table></figure>
 <p>在 _config.yml 文件中添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">baidusitemap:</div><div class="line">path: baidusitemap.xml</div></pre></td></tr></table></figure>
-<p>本文参考：<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" rel="external nofollow noopener noreferrer" target="_blank">不如的博客</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">baidusitemap:</span><br><span class="line">path: baidusitemap.xml</span><br></pre></td></tr></table></figure>
+
+<p>本文参考：<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external nofollow noopener noreferrer">不如的博客</a></p>
 <p>每个人情况不一样，以上只是我的操作和遇到的坑。</p>
 
         </div>
@@ -293,7 +314,7 @@ var _hmt = _hmt || [];
           this.page.title = '部署Hexo';
       };
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
   </div>
   
 </section>
@@ -363,7 +384,7 @@ var _hmt = _hmt || [];
 <!-- Footer -->
 <footer class="site-info">
   <p>
-    <span>Time‘blog &copy; 2019</span>
+    <span>Time‘blog &copy; 2020</span>
     
       <span class="split">|</span>
       <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
@@ -374,13 +395,15 @@ var _hmt = _hmt || [];
 
   <!-- After footer scripts -->
   <!-- scripts -->
-<script src="/js/app.js"></script>
+
+<script src="js/app.js"></script>
+
 
 <script>
-  var disqus_shortname = 'blog-timeicode-com';
+  var disqus_shortname = 'blog-time0x-com';
 
   
-  var disqus_url = '//blog.time0x.com/2017/03/04/部署Hexo/';
+  var disqus_url = '2017/03/04/部署Hexo/';
   
 
   (function(){

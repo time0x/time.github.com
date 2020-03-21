@@ -40,10 +40,12 @@
   <title>关于laravel的日志权限 - Time‘blog</title>
 
 
-  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
 
   <!-- Custom CSS/Sass -->
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="css/style.css">
+
 
   
 <script type="text/javascript">
@@ -57,7 +59,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -68,7 +70,7 @@ var _hmt = _hmt || [];
     <div class="logo">
       <a href="/" rel="home">
         
-        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
         
       </a>
     </div>
@@ -80,7 +82,7 @@ var _hmt = _hmt || [];
           
           
             <li>
-              <a href="/.">
+              <a href=".">
                 
                   首页
                 
@@ -88,7 +90,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/archives">
+              <a href="archives">
                 
                   归档
                 
@@ -96,7 +98,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/about">
+              <a href="about">
                 
                   关于我
                 
@@ -142,19 +144,23 @@ var _hmt = _hmt || [];
         <!-- Post Main Content -->
         <div class="entry-content">
           <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>系统在凌晨通过定时任务自动生成当天的日志文件，之后系统在写入日志时候，提示没有权限。</p>
-<h3 id="查看日志的权限"><a href="#查看日志的权限" class="headerlink" title="查看日志的权限"></a>查看日志的权限</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ ls</div><div class="line">total 1596</div><div class="line">-rw-rw-r-- 1 root     root        635 May 11 03:00 laravel-2019-05-11.log</div><div class="line">-rw-rw-r-- 1 root     root        635 May 12 03:00 laravel-2019-05-12.log</div><div class="line">-rw-rw-r-- 1 root     root        635 May 13 03:00 laravel-2019-05-13.log</div><div class="line">...</div></pre></td></tr></table></figure>
+<h3 id="查看日志的权限"><a href="#查看日志的权限" class="headerlink" title="查看日志的权限"></a>查看日志的权限</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ls</span><br><span class="line">total 1596</span><br><span class="line">-rw-rw-r-- 1 root     root        635 May 11 03:00 laravel-2019-05-11.log</span><br><span class="line">-rw-rw-r-- 1 root     root        635 May 12 03:00 laravel-2019-05-12.log</span><br><span class="line">-rw-rw-r-- 1 root     root        635 May 13 03:00 laravel-2019-05-13.log</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>使用 crontab 执行定时任务时，默认用户是 root。而 laravel 的用户是 www-data ，是没有权限修改日志的。</p>
 <h3 id="解决一"><a href="#解决一" class="headerlink" title="解决一"></a>解决一</h3><p>使用 crontab 编辑定时任务列表的时候，是可以指定用户的，默认是编辑 root 用户的任务列表。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo crontab -u root <span class="_">-l</span></div><div class="line">* * * * * /usr/bin/php /var/www/bitcoinsv/artisan schedule:run &gt;&gt; /dev/null 2&gt;&amp;1</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo crontab -u root -l</span><br><span class="line">* * * * * /usr/bin/php /var/www/bitcoinsv/artisan schedule:run &gt;&gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>可以看见这是之前默认添加的定时任务，和 crontab -l 的执行结果一样</p>
 </blockquote>
 <p>执行 crontab -e 的时候添加 -u 选项，并追加相应的用户名，就可以为指定的用户编辑定时任务列表。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo crontab -u www-data <span class="_">-e</span></div><div class="line"></div><div class="line">//写入定时任务</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo crontab -u www-data -e</span><br><span class="line"></span><br><span class="line">//写入定时任务</span><br></pre></td></tr></table></figure>
+
 <p>写入之后查看</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo crontab -u www-data <span class="_">-l</span></div><div class="line">* * * * * /usr/bin/php /var/www/bitcoinsv/artisan schedule:run &gt;&gt; /dev/null 2&gt;&amp;1</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo crontab -u www-data -l</span><br><span class="line">* * * * * /usr/bin/php /var/www/bitcoinsv/artisan schedule:run &gt;&gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
 <h3 id="解决二"><a href="#解决二" class="headerlink" title="解决二"></a>解决二</h3><p>更改 storage 文件夹拥有者与 php-fpm.conf 运行用户一致，如 php-fpm.conf 配置为</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">; Unix user/group of processes</div><div class="line">; Note: The user is mandatory. If the group is not <span class="built_in">set</span>, the default user<span class="string">'s group</span></div><div class="line">;       will be used.</div><div class="line">user = www-data</div><div class="line">group = www-data</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">; Unix user/group of processes</span><br><span class="line">; Note: The user is mandatory. If the group is not <span class="built_in">set</span>, the default user<span class="string">'s group</span></span><br><span class="line"><span class="string">;       will be used.</span></span><br><span class="line"><span class="string">user = www-data</span></span><br><span class="line"><span class="string">group = www-data</span></span><br></pre></td></tr></table></figure>
         </div>
       </article>
     </div>
@@ -173,7 +179,7 @@ var _hmt = _hmt || [];
           this.page.title = '关于laravel的日志权限';
       };
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
   </div>
   
 </section>
@@ -243,7 +249,7 @@ var _hmt = _hmt || [];
 <!-- Footer -->
 <footer class="site-info">
   <p>
-    <span>Time‘blog &copy; 2019</span>
+    <span>Time‘blog &copy; 2020</span>
     
       <span class="split">|</span>
       <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
@@ -254,13 +260,15 @@ var _hmt = _hmt || [];
 
   <!-- After footer scripts -->
   <!-- scripts -->
-<script src="/js/app.js"></script>
+
+<script src="js/app.js"></script>
+
 
 <script>
-  var disqus_shortname = 'blog-timeicode-com';
+  var disqus_shortname = 'blog-time0x-com';
 
   
-  var disqus_url = '//blog.time0x.com/2019/05/15/关于laravel的日志权限/';
+  var disqus_url = '2019/05/15/关于laravel的日志权限/';
   
 
   (function(){

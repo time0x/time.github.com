@@ -40,10 +40,12 @@
   <title>基于websocket的聊天demo - Time‘blog</title>
 
 
-  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
 
   <!-- Custom CSS/Sass -->
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="css/style.css">
+
 
   
 <script type="text/javascript">
@@ -57,7 +59,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -68,7 +70,7 @@ var _hmt = _hmt || [];
     <div class="logo">
       <a href="/" rel="home">
         
-        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
         
       </a>
     </div>
@@ -80,7 +82,7 @@ var _hmt = _hmt || [];
           
           
             <li>
-              <a href="/.">
+              <a href=".">
                 
                   首页
                 
@@ -88,7 +90,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/archives">
+              <a href="archives">
                 
                   归档
                 
@@ -96,7 +98,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/about">
+              <a href="about">
                 
                   关于我
                 
@@ -145,7 +147,9 @@ var _hmt = _hmt || [];
         </div>
         <!-- Post Main Content -->
         <div class="entry-content">
-          <p>初步探究 websocket。<br><a id="more"></a></p>
+          <p>初步探究 websocket。</p>
+<a id="more"></a>
+
 <p>&emsp;&emsp;现在有很多网站都有推送服务，比如在线聊天，拍卖，在线游戏，体育结果发布，终端监视，以及高级网络监控等。这种持久通讯在不刷新页面的情况下进行，消耗一定的内在资源常驻后台，并且对于用户不可见。体验非常友好。</p>
 <p>&emsp;&emsp;为了实现这种技术：所用的技术都是轮询。</p>
 <p>&emsp;&emsp;以前的技术去做轮询的效果是Comet： 能使服务器实时地将更新的信息传送到客户端，实现方式，长轮询，短轮询和iframe流。</p>
@@ -169,11 +173,11 @@ var _hmt = _hmt || [];
 <p>iframe 流方式的优点是浏览器兼容好，Google 公司在一些产品中使用了 iframe 流，如Google Talk。</p>
 </blockquote>
 <p>&emsp;&emsp;现在：HTML5 定义了 WebSocket 协议，能更好的节省服务器资源和带宽，并且能够更实时地进行通讯。 由于 WebSocket 本身是基于 TCP 协议的，所以在服务器端我们可以采用构建 TCP Socket 服务器的方式来构建 WebSocket 服务器。</p>
-<p>&emsp;&emsp;一个简单的聊天程序，直接运行即可： <a href="https://github.com/Time02/Exercise/tree/master/websocket" rel="external nofollow noopener noreferrer" target="_blank">git地址</a></p>
+<p>&emsp;&emsp;一个简单的聊天程序，直接运行即可： <a href="https://github.com/Time02/Exercise/tree/master/websocket" target="_blank" rel="external nofollow noopener noreferrer">git地址</a></p>
 <p>参考：</p>
 <ul>
-<li><a href="https://zh.wikipedia.org/wiki/WebSocket" rel="external nofollow noopener noreferrer" target="_blank">https://zh.wikipedia.org/wiki/WebSocket</a></li>
-<li><a href="http://php.net/manual/zh/ref.sockets.php" rel="external nofollow noopener noreferrer" target="_blank">http://php.net/manual/zh/ref.sockets.php</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/WebSocket" target="_blank" rel="external nofollow noopener noreferrer">https://zh.wikipedia.org/wiki/WebSocket</a></li>
+<li><a href="http://php.net/manual/zh/ref.sockets.php" target="_blank" rel="external nofollow noopener noreferrer">http://php.net/manual/zh/ref.sockets.php</a></li>
 </ul>
 
         </div>
@@ -194,7 +198,7 @@ var _hmt = _hmt || [];
           this.page.title = '基于websocket的聊天demo';
       };
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
   </div>
   
 </section>
@@ -264,7 +268,7 @@ var _hmt = _hmt || [];
 <!-- Footer -->
 <footer class="site-info">
   <p>
-    <span>Time‘blog &copy; 2019</span>
+    <span>Time‘blog &copy; 2020</span>
     
       <span class="split">|</span>
       <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
@@ -275,13 +279,15 @@ var _hmt = _hmt || [];
 
   <!-- After footer scripts -->
   <!-- scripts -->
-<script src="/js/app.js"></script>
+
+<script src="js/app.js"></script>
+
 
 <script>
-  var disqus_shortname = 'blog-timeicode-com';
+  var disqus_shortname = 'blog-time0x-com';
 
   
-  var disqus_url = '//blog.time0x.com/2017/03/19/基于websocket的聊天demo/';
+  var disqus_url = '2017/03/19/基于websocket的聊天demo/';
   
 
   (function(){

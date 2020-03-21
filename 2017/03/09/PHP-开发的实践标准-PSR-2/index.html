@@ -40,10 +40,12 @@
   <title>PHP 开发的实践标准:PSR-2 - Time‘blog</title>
 
 
-  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
 
   <!-- Custom CSS/Sass -->
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="css/style.css">
+
 
   
 <script type="text/javascript">
@@ -57,7 +59,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -68,7 +70,7 @@ var _hmt = _hmt || [];
     <div class="logo">
       <a href="/" rel="home">
         
-        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
         
       </a>
     </div>
@@ -80,7 +82,7 @@ var _hmt = _hmt || [];
           
           
             <li>
-              <a href="/.">
+              <a href=".">
                 
                   首页
                 
@@ -88,7 +90,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/archives">
+              <a href="archives">
                 
                   归档
                 
@@ -96,7 +98,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/about">
+              <a href="about">
                 
                   关于我
                 
@@ -165,12 +167,13 @@ var _hmt = _hmt || [];
 <h3 id="文件和代码"><a href="#文件和代码" class="headerlink" title="文件和代码"></a>文件和代码</h3><ul>
 <li><p>PHP 文件必须使用 UNIX 风格的换行符 (LF) ，并且已空行结束，必须去掉 PHP 关闭标签 ?&gt;。</p>
 <blockquote>
-<p>必须重视这个问题：<a href="https://github.com/cssmagic/blog/issues/22" rel="external nofollow noopener noreferrer" target="_blank">前辈们的教训</a></p>
+<p>必须重视这个问题：<a href="https://github.com/cssmagic/blog/issues/22" target="_blank" rel="external nofollow noopener noreferrer">前辈们的教训</a></p>
 </blockquote>
 </li>
 <li><p>每行代码不超过 80 个字符，至少不能超过 120 个字符。</p>
 </li>
-<li>每行末尾不能有空格。</li>
+<li><p>每行末尾不能有空格。</p>
+</li>
 </ul>
 <h3 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h3><ul>
 <li>PHP 的关键字都应该使用小写字母，例如 true, false, null.</li>
@@ -180,24 +183,28 @@ var _hmt = _hmt || [];
 <li>必须有一个 use 关键字表示声明</li>
 <li>use 声明必须在 namespace 之后。</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">Vendor</span>\<span class="title">Package</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">FooClass</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">BarClass</span> <span class="title">as</span> <span class="title">Bar</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">OtherVendor</span>\<span class="title">OtherPackage</span>\<span class="title">BazClass</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Vendor</span>\<span class="title">Package</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">FooClass</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">BarClass</span> <span class="title">as</span> <span class="title">Bar</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">OtherVendor</span>\<span class="title">OtherPackage</span>\<span class="title">BazClass</span>;</span><br></pre></td></tr></table></figure>
+
 <h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><ul>
 <li>这里的 class 指的是所有的类，接口，和性状。</li>
 <li>类继承和接口必须写在类的同一行</li>
 <li>花括号如下使用</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">Vendor</span>\<span class="title">Package</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">FooClass</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">BarClass</span> <span class="title">as</span> <span class="title">Bar</span>;</div><div class="line"><span class="keyword">use</span> <span class="title">OtherVendor</span>\<span class="title">OtherPackage</span>\<span class="title">BazClass</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassName</span> <span class="keyword">extends</span> <span class="title">ParentClass</span> <span class="keyword">implements</span> \<span class="title">ArrayAccess</span>, \<span class="title">Countable</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// constants, properties, methods</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Vendor</span>\<span class="title">Package</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">FooClass</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">BarClass</span> <span class="title">as</span> <span class="title">Bar</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">OtherVendor</span>\<span class="title">OtherPackage</span>\<span class="title">BazClass</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassName</span> <span class="keyword">extends</span> <span class="title">ParentClass</span> <span class="keyword">implements</span> \<span class="title">ArrayAccess</span>, \<span class="title">Countable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// constants, properties, methods</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
 <li>方法定义的括号和类一样，方法的参数，括号两边没有空格，每个参数以逗号空格结尾(最后一个除外)。</li>
 <li>必须声明可见性</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">Vendor</span>\<span class="title">Package</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassName</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">fooBarBaz</span><span class="params">($arg1, &amp;$arg2, $arg3 = [])</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// method body</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Vendor</span>\<span class="title">Package</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassName</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">fooBarBaz</span><span class="params">($arg1, &amp;$arg2, $arg3 = [])</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// method body</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h3><ul>
 <li>类中的每个属性和方法都必须声明可见性：public, protected, private。</li>
 <li>如果把类属性和方法声明为 abstract 或 final ，此限定符必须放在可见性关键词之前</li>
 <li>如果把属性和方法声明为 static ,限定符必须放在可见性关键词之后</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">namespace</span> <span class="title">Vendor</span>\<span class="title">Package</span>;</div><div class="line"></div><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassName</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $foo;</div><div class="line"></div><div class="line">    <span class="keyword">abstract</span> <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">zim</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">($iterm, $button)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// method body</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Vendor</span>\<span class="title">Package</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassName</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $foo;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">abstract</span> <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">zim</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">($iterm, $button)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// method body</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="控制结构"><a href="#控制结构" class="headerlink" title="控制结构"></a>控制结构</h3><blockquote>
 <p>控制关键字包括：if, elseif, else, switch, case, while, do, while, for, foreach, try, catch。</p>
 </blockquote>
@@ -209,13 +216,15 @@ var _hmt = _hmt || [];
 <li>该结构体必须进行一次缩进</li>
 <li>右大括号必须是在身体上的下一行</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$car = <span class="keyword">new</span> \Admin\Car;</div><div class="line">$bike = <span class="keyword">new</span> \Admin\Bike;</div><div class="line"></div><div class="line"><span class="keyword">if</span> ($car-&gt;isPrivate() === <span class="keyword">true</span>) &#123;</div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        $car-&gt;getCarImg();</div><div class="line">    &#125; <span class="keyword">while</span> ($bike-&gt;isPrivate() === <span class="keyword">true</span>);</div><div class="line"></div><div class="line">    $bike-&gt;getBikeImg;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$car = <span class="keyword">new</span> \Admin\Car;</span><br><span class="line">$bike = <span class="keyword">new</span> \Admin\Bike;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($car-&gt;isPrivate() === <span class="keyword">true</span>) &#123;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        $car-&gt;getCarImg();</span><br><span class="line">    &#125; <span class="keyword">while</span> ($bike-&gt;isPrivate() === <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">    $bike-&gt;getBikeImg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="闭包-Closures"><a href="#闭包-Closures" class="headerlink" title="闭包(Closures)"></a>闭包(Closures)</h3><ul>
 <li>闭包声明看起来像下面这样。注意括号，逗号，空格和括号的位置：</li>
 </ul>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line">$closureWithArgs = <span class="function"><span class="keyword">function</span> <span class="params">($arg1, $arg2)</span> </span>&#123;</div><div class="line">    <span class="comment">// body</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line">$closureWithArgsAndVars = <span class="function"><span class="keyword">function</span> <span class="params">(</span></span></div><div class="line">    $arg1, </div><div class="line">    $arg2</div><div class="line">) <span class="title">use</span> <span class="params">(</span></div><div class="line">    $var1,</div><div class="line">    $var2</div><div class="line">) &#123;</div><div class="line">    <span class="comment">// body</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$closureWithArgs = <span class="function"><span class="keyword">function</span> <span class="params">($arg1, $arg2)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// body</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$closureWithArgsAndVars = <span class="function"><span class="keyword">function</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    $arg1,</span></span></span><br><span class="line"><span class="function"><span class="params">    $arg2</span></span></span><br><span class="line"><span class="function"><span class="params">)</span> <span class="title">use</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    $var1,</span></span></span><br><span class="line"><span class="function"><span class="params">    $var2</span></span></span><br><span class="line"><span class="function"><span class="params">)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// body</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li>参考自：<a href="https://github.com/codeguy/modern-php" rel="external nofollow noopener noreferrer" target="_blank">《Modern PHP》</a>和 <a href="http://www.php-fig.org/" rel="external nofollow noopener noreferrer" target="_blank">php-fig.org</a></li>
+<li>参考自：<a href="https://github.com/codeguy/modern-php" target="_blank" rel="external nofollow noopener noreferrer">《Modern PHP》</a>和 <a href="http://www.php-fig.org/" target="_blank" rel="external nofollow noopener noreferrer">php-fig.org</a></li>
 </ul>
 
         </div>
@@ -236,7 +245,7 @@ var _hmt = _hmt || [];
           this.page.title = 'PHP 开发的实践标准:PSR-2';
       };
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
   </div>
   
 </section>
@@ -306,7 +315,7 @@ var _hmt = _hmt || [];
 <!-- Footer -->
 <footer class="site-info">
   <p>
-    <span>Time‘blog &copy; 2019</span>
+    <span>Time‘blog &copy; 2020</span>
     
       <span class="split">|</span>
       <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
@@ -317,13 +326,15 @@ var _hmt = _hmt || [];
 
   <!-- After footer scripts -->
   <!-- scripts -->
-<script src="/js/app.js"></script>
+
+<script src="js/app.js"></script>
+
 
 <script>
-  var disqus_shortname = 'blog-timeicode-com';
+  var disqus_shortname = 'blog-time0x-com';
 
   
-  var disqus_url = '//blog.time0x.com/2017/03/09/PHP-开发的实践标准-PSR-2/';
+  var disqus_url = '2017/03/09/PHP-开发的实践标准-PSR-2/';
   
 
   (function(){

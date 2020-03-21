@@ -40,10 +40,12 @@
   <title>通过Let&#39;s Encrypt配置SSL通配符证书 - Time‘blog</title>
 
 
-  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
 
   <!-- Custom CSS/Sass -->
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="css/style.css">
+
 
   
 <script type="text/javascript">
@@ -57,7 +59,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -68,7 +70,7 @@ var _hmt = _hmt || [];
     <div class="logo">
       <a href="/" rel="home">
         
-        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
         
       </a>
     </div>
@@ -80,7 +82,7 @@ var _hmt = _hmt || [];
           
           
             <li>
-              <a href="/.">
+              <a href=".">
                 
                   首页
                 
@@ -88,7 +90,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/archives">
+              <a href="archives">
                 
                   归档
                 
@@ -96,7 +98,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/about">
+              <a href="about">
                 
                   关于我
                 
@@ -145,31 +147,41 @@ var _hmt = _hmt || [];
         </div>
         <!-- Post Main Content -->
         <div class="entry-content">
-          <p>具体配置过程<br><a id="more"></a></p>
+          <p>具体配置过程</p>
+<a id="more"></a>
+
+
 <h1 id="安装-Certbot"><a href="#安装-Certbot" class="headerlink" title="安装 Certbot"></a>安装 Certbot</h1><ul>
-<li>安装 Certbot，官网提供了简单详细的教程：<a href="https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx" rel="external nofollow noopener noreferrer" target="_blank">certbot</a></li>
+<li>安装 Certbot，官网提供了简单详细的教程：<a href="https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx" target="_blank" rel="external nofollow noopener noreferrer">certbot</a></li>
 </ul>
 <p>比如我是 Nginx 和 Ubuntu16.04</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install software-properties-common</div><div class="line">$ sudo add-apt-repository ppa:certbot/certbot</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install python-certbot-nginx</div></pre></td></tr></table></figure>
-<h1 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ certbot --version</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install software-properties-common</span><br><span class="line">$ sudo add-apt-repository ppa:certbot/certbot</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install python-certbot-nginx</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ certbot --version</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>certbot 0.22.2</p>
 </blockquote>
-<h1 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h1><h2 id="申请证书-1"><a href="#申请证书-1" class="headerlink" title="申请证书"></a>申请证书</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo certbot certonly  <span class="_">-d</span> <span class="string">"*.time0x.com"</span> --manual --preferred-challenges dns-01  --server https://acme-v02.api.letsencrypt.org/directory</div></pre></td></tr></table></figure>
+<h1 id="申请证书"><a href="#申请证书" class="headerlink" title="申请证书"></a>申请证书</h1><h2 id="申请证书-1"><a href="#申请证书-1" class="headerlink" title="申请证书"></a>申请证书</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo certbot certonly  -d <span class="string">"*.time0x.com"</span> --manual --preferred-challenges dns-01  --server https://acme-v02.api.letsencrypt.org/directory</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>提示：先不要按回车，去配置解析，并且检查是否解析成功</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">-------------------------------------------------------------------------------</div><div class="line">Please deploy a DNS TXT record under the name</div><div class="line">_acme-challenge.time0x.com with the following value:</div><div class="line"></div><div class="line">N3mxDaoHs6j_xybQf2FImy3oALBKbjq1xbKi0rWbhxY</div><div class="line"></div><div class="line">Before continuing, verify the record is deployed.</div><div class="line">-------------------------------------------------------------------------------</div><div class="line">Press Enter to Continue</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Please deploy a DNS TXT record under the name</span><br><span class="line">_acme-challenge.time0x.com with the following value:</span><br><span class="line"></span><br><span class="line">N3mxDaoHs6j_xybQf2FImy3oALBKbjq1xbKi0rWbhxY</span><br><span class="line"></span><br><span class="line">Before continuing, verify the record is deployed.</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">Press Enter to Continue</span><br></pre></td></tr></table></figure>
+
 <h2 id="添加解析"><a href="#添加解析" class="headerlink" title="添加解析"></a>添加解析</h2><p>在服务商域名解析处添加一条 TXT 记录</p>
 <h2 id="检查解析"><a href="#检查解析" class="headerlink" title="检查解析"></a>检查解析</h2><p>检查是否配置成功</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dig  -t txt _acme-challenge.time0x.com @8.8.8.8</div></pre></td></tr></table></figure>
-<h2 id="按回车"><a href="#按回车" class="headerlink" title="按回车"></a>按回车</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">IMPORTANT NOTES:</div><div class="line"> - Congratulations! Your certificate and chain have been saved at:</div><div class="line">   /etc/letsencrypt/live/time0x.com/fullchain.pem</div><div class="line">   Your key file has been saved at:</div><div class="line">   /etc/letsencrypt/live/time0x.com/privkey.pem</div><div class="line">   Your cert will expire on 2018-09-13. To obtain a new or tweaked</div><div class="line">   version of this certificate <span class="keyword">in</span> the future, simply run certbot</div><div class="line">   again. To non-interactively renew *all* of your certificates, run</div><div class="line">   <span class="string">"certbot renew"</span></div><div class="line"> - If you like Certbot, please consider supporting our work by:</div><div class="line"></div><div class="line">   Donating to ISRG / Let<span class="string">'s Encrypt:   https://letsencrypt.org/donate</span></div><div class="line">   Donating to EFF:                    https://eff.org/donate-le</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig  -t txt _acme-challenge.time0x.com @8.8.8.8</span><br></pre></td></tr></table></figure>
+
+<h2 id="按回车"><a href="#按回车" class="headerlink" title="按回车"></a>按回车</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">IMPORTANT NOTES:</span><br><span class="line"> - Congratulations! Your certificate and chain have been saved at:</span><br><span class="line">   /etc/letsencrypt/live/time0x.com/fullchain.pem</span><br><span class="line">   Your key file has been saved at:</span><br><span class="line">   /etc/letsencrypt/live/time0x.com/privkey.pem</span><br><span class="line">   Your cert will expire on 2018-09-13. To obtain a new or tweaked</span><br><span class="line">   version of this certificate <span class="keyword">in</span> the future, simply run certbot</span><br><span class="line">   again. To non-interactively renew *all* of your certificates, run</span><br><span class="line">   <span class="string">"certbot renew"</span></span><br><span class="line"> - If you like Certbot, please consider supporting our work by:</span><br><span class="line"></span><br><span class="line">   Donating to ISRG / Let<span class="string">'s Encrypt:   https://letsencrypt.org/donate</span></span><br><span class="line"><span class="string">   Donating to EFF:                    https://eff.org/donate-le</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="配置对应的-nginx-配置文件"><a href="#配置对应的-nginx-配置文件" class="headerlink" title="配置对应的 nginx 配置文件"></a>配置对应的 nginx 配置文件</h2><blockquote>
 <p>根据申请证书成功后 IMPORTANT NOTES: 所显示的<br>证书文件：/etc/letsencrypt/live/example.com/fullchain.pem 和<br>密钥文件：/etc/letsencrypt/live/example.com/privkey.pem<br>来配置对应的 nginx 配置文件。<br>请注意，虽然是通配符证书，但是证书文件目录中不是 *.example.com，而是 example.com。</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">listen 443 http2 ssl;</div><div class="line">ssl_certificate /etc/letsencrypt/live/time0x.com/fullchain.pem;</div><div class="line">ssl_certificate_key /etc/letsencrypt/live/time0x.com/privkey.pem;</div><div class="line">ssl_trusted_certificate  /etc/letsencrypt/live/time0x.com/chain.pem;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (<span class="variable">$scheme</span> != <span class="string">"https"</span>) &#123;</div><div class="line">    <span class="built_in">return</span> 301 https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">listen 443 http2 ssl;</span><br><span class="line">ssl_certificate /etc/letsencrypt/live/time0x.com/fullchain.pem;</span><br><span class="line">ssl_certificate_key /etc/letsencrypt/live/time0x.com/privkey.pem;</span><br><span class="line">ssl_trusted_certificate  /etc/letsencrypt/live/time0x.com/chain.pem;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$scheme</span> != <span class="string">"https"</span>) &#123;</span><br><span class="line">    <span class="built_in">return</span> 301 https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h1 id="证书续期"><a href="#证书续期" class="headerlink" title="证书续期"></a>证书续期</h1><p>Let’s encrypt 的免费证书默认有效期为 90 天，到期后再执行一边以上步骤，或者 提供authentication script 需要域名服务商提供操作 DNS 的 API。</p>
-<p><a href="https://letsencrypt.org/" rel="external nofollow noopener noreferrer" target="_blank">Let’s encrypt 官网链接</a></p>
+<p><a href="https://letsencrypt.org/" target="_blank" rel="external nofollow noopener noreferrer">Let’s encrypt 官网链接</a></p>
 
         </div>
       </article>
@@ -189,7 +201,7 @@ var _hmt = _hmt || [];
           this.page.title = '通过Let&#39;s Encrypt配置SSL通配符证书';
       };
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
   </div>
   
 </section>
@@ -259,7 +271,7 @@ var _hmt = _hmt || [];
 <!-- Footer -->
 <footer class="site-info">
   <p>
-    <span>Time‘blog &copy; 2019</span>
+    <span>Time‘blog &copy; 2020</span>
     
       <span class="split">|</span>
       <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
@@ -270,13 +282,15 @@ var _hmt = _hmt || [];
 
   <!-- After footer scripts -->
   <!-- scripts -->
-<script src="/js/app.js"></script>
+
+<script src="js/app.js"></script>
+
 
 <script>
-  var disqus_shortname = 'blog-timeicode-com';
+  var disqus_shortname = 'blog-time0x-com';
 
   
-  var disqus_url = '//blog.time0x.com/2018/06/14/通过Let-s-Encrypt配置SSL通配符证书/';
+  var disqus_url = '2018/06/14/通过Let-s-Encrypt配置SSL通配符证书/';
   
 
   (function(){

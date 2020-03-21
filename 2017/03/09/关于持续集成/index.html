@@ -40,10 +40,12 @@
   <title>关于持续集成 - Time‘blog</title>
 
 
-  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
 
   <!-- Custom CSS/Sass -->
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="css/style.css">
+
 
   
 <script type="text/javascript">
@@ -57,7 +59,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -68,7 +70,7 @@ var _hmt = _hmt || [];
     <div class="logo">
       <a href="/" rel="home">
         
-        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
         
       </a>
     </div>
@@ -80,7 +82,7 @@ var _hmt = _hmt || [];
           
           
             <li>
-              <a href="/.">
+              <a href=".">
                 
                   首页
                 
@@ -88,7 +90,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/archives">
+              <a href="archives">
                 
                   归档
                 
@@ -96,7 +98,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/about">
+              <a href="about">
                 
                   关于我
                 
@@ -156,10 +158,11 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>是持续交付的下一步，指的是代码通过评审以后，自动部署到生产环境。续部署的前提是能自动化完成测试、构建、部署等步骤。</p>
 </blockquote>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">持续交付和持续部署的区别在于，项目流程的部署这一步，持续交付是手动进行的，持续部署是自动的。</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">持续交付和持续部署的区别在于，项目流程的部署这一步，持续交付是手动进行的，持续部署是自动的。</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
-<h3 id="知乎有大神这么解释"><a href="#知乎有大神这么解释" class="headerlink" title="知乎有大神这么解释"></a>知乎有大神这么<a href="https://www.zhihu.com/question/23444990" rel="external nofollow noopener noreferrer" target="_blank">解释</a></h3><ul>
+<h3 id="知乎有大神这么解释"><a href="#知乎有大神这么解释" class="headerlink" title="知乎有大神这么解释"></a>知乎有大神这么<a href="https://www.zhihu.com/question/23444990" target="_blank" rel="external nofollow noopener noreferrer">解释</a></h3><ul>
 <li><p>持续(Continuous)：不断的获取反馈，响应反馈。</p>
 </li>
 <li><p>集成(Integration)：编译，测试，打包。</p>
@@ -179,32 +182,33 @@ var _hmt = _hmt || [];
 <p>5，部署：通过了全面测试，代码就是一个可部署版本（artifact）</p>
 <p>6，回滚：如果出错，立即回滚。</p>
 <h1 id="工具，CI-需要借助这些工具："><a href="#工具，CI-需要借助这些工具：" class="headerlink" title="工具，CI 需要借助这些工具："></a>工具，CI 需要借助这些工具：</h1><h3 id="持续测试："><a href="#持续测试：" class="headerlink" title="持续测试："></a>持续测试：</h3><ul>
-<li><a href="http://sismo.sensiolabs.org/" rel="external nofollow noopener noreferrer" target="_blank">Sismo</a> - 一个持续的测试服务器库</li>
+<li><a href="http://sismo.sensiolabs.org/" target="_blank" rel="external nofollow noopener noreferrer">Sismo</a> - 一个持续的测试服务器库</li>
 </ul>
 <h3 id="开发环境："><a href="#开发环境：" class="headerlink" title="开发环境："></a>开发环境：</h3><ul>
-<li><a href="https://www.vagrantup.com/" rel="external nofollow noopener noreferrer" target="_blank">Vagrant</a> - 一个轻便的创建开发环境的工具，开发，测试，部署统一环境。</li>
+<li><a href="https://www.vagrantup.com/" target="_blank" rel="external nofollow noopener noreferrer">Vagrant</a> - 一个轻便的创建开发环境的工具，开发，测试，部署统一环境。</li>
 </ul>
 <h3 id="自动化的构建："><a href="#自动化的构建：" class="headerlink" title="自动化的构建："></a>自动化的构建：</h3><ul>
-<li><a href="https://github.com/herrera-io/php-go" rel="external nofollow noopener noreferrer" target="_blank">Go</a> - 一个简单的PHP构建工具</li>
-<li><a href="https://github.com/CHH/bob" rel="external nofollow noopener noreferrer" target="_blank">Bob</a> - 一个简单的项目自动化工具</li>
-<li><a href="http://www.phing.info/" rel="external nofollow noopener noreferrer" target="_blank">Phing</a> - 依据Apache Ant的PHP项目构建系统</li>
+<li><a href="https://github.com/herrera-io/php-go" target="_blank" rel="external nofollow noopener noreferrer">Go</a> - 一个简单的PHP构建工具</li>
+<li><a href="https://github.com/CHH/bob" target="_blank" rel="external nofollow noopener noreferrer">Bob</a> - 一个简单的项目自动化工具</li>
+<li><a href="http://www.phing.info/" target="_blank" rel="external nofollow noopener noreferrer">Phing</a> - 依据Apache Ant的PHP项目构建系统</li>
 </ul>
 <h3 id="自动部署"><a href="#自动部署" class="headerlink" title="自动部署"></a>自动部署</h3><ul>
-<li><p><a href="https://github.com/Anahkiasen/rocketeer" rel="external nofollow noopener noreferrer" target="_blank">Rocketeer</a> - PHP的快速和简单部署器</p>
+<li><p><a href="https://github.com/Anahkiasen/rocketeer" target="_blank" rel="external nofollow noopener noreferrer">Rocketeer</a> - PHP的快速和简单部署器</p>
 </li>
-<li><p><a href="https://github.com/meolu/walle-web" rel="external nofollow noopener noreferrer" target="_blank">walle-web</a> - 一个开源的web代码发布管理系统</p>
+<li><p><a href="https://github.com/meolu/walle-web" target="_blank" rel="external nofollow noopener noreferrer">walle-web</a> - 一个开源的web代码发布管理系统</p>
 </li>
-<li><a href="https://github.com/deployphp/deployer" rel="external nofollow noopener noreferrer" target="_blank">Deployer</a> - 一个部署工具，支持开箱即用的流行框架</li>
+<li><p><a href="https://github.com/deployphp/deployer" target="_blank" rel="external nofollow noopener noreferrer">Deployer</a> - 一个部署工具，支持开箱即用的流行框架</p>
+</li>
 </ul>
 <h3 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h3><ul>
-<li><a href="https://travis-ci.org/" rel="external nofollow noopener noreferrer" target="_blank">Travis CI</a> - 一个持续集成的平台</li>
-<li><a href="http://jenkins-ci.org/" rel="external nofollow noopener noreferrer" target="_blank">Jenkins</a> - PHP支持的持续集成平台</li>
-<li><a href="https://github.com/jolicode/JoliCi" rel="external nofollow noopener noreferrer" target="_blank">JoliCi</a> - PHP开发的由Docker支持的持续集成客户端</li>
-<li><a href="https://www.phptesting.org/" rel="external nofollow noopener noreferrer" target="_blank">PHPCI</a> - 一个PHP的开源持续集成平台</li>
+<li><a href="https://travis-ci.org/" target="_blank" rel="external nofollow noopener noreferrer">Travis CI</a> - 一个持续集成的平台</li>
+<li><a href="http://jenkins-ci.org/" target="_blank" rel="external nofollow noopener noreferrer">Jenkins</a> - PHP支持的持续集成平台</li>
+<li><a href="https://github.com/jolicode/JoliCi" target="_blank" rel="external nofollow noopener noreferrer">JoliCi</a> - PHP开发的由Docker支持的持续集成客户端</li>
+<li><a href="https://www.phptesting.org/" target="_blank" rel="external nofollow noopener noreferrer">PHPCI</a> - 一个PHP的开源持续集成平台</li>
 </ul>
 <p>参考:</p>
-<p><a href="http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html" rel="external nofollow noopener noreferrer" target="_blank">阮一峰-持续集成是什么</a></p>
-<p><a href="https://github.com/JingwenTian/awesome-php" rel="external nofollow noopener noreferrer" target="_blank">github:JingwenTian</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html" target="_blank" rel="external nofollow noopener noreferrer">阮一峰-持续集成是什么</a></p>
+<p><a href="https://github.com/JingwenTian/awesome-php" target="_blank" rel="external nofollow noopener noreferrer">github:JingwenTian</a></p>
 
         </div>
       </article>
@@ -224,7 +228,7 @@ var _hmt = _hmt || [];
           this.page.title = '关于持续集成';
       };
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
   </div>
   
 </section>
@@ -294,7 +298,7 @@ var _hmt = _hmt || [];
 <!-- Footer -->
 <footer class="site-info">
   <p>
-    <span>Time‘blog &copy; 2019</span>
+    <span>Time‘blog &copy; 2020</span>
     
       <span class="split">|</span>
       <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
@@ -305,13 +309,15 @@ var _hmt = _hmt || [];
 
   <!-- After footer scripts -->
   <!-- scripts -->
-<script src="/js/app.js"></script>
+
+<script src="js/app.js"></script>
+
 
 <script>
-  var disqus_shortname = 'blog-timeicode-com';
+  var disqus_shortname = 'blog-time0x-com';
 
   
-  var disqus_url = '//blog.time0x.com/2017/03/09/关于持续集成/';
+  var disqus_url = '2017/03/09/关于持续集成/';
   
 
   (function(){

@@ -40,10 +40,12 @@
   <title>VirtualBox的错误代码：E_FAIL (0x80004005) - Time‘blog</title>
 
 
-  <link rel="shortcut icon" href="http://img.timeicode.com/yuantu_favicon.png">
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
 
   <!-- Custom CSS/Sass -->
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="css/style.css">
+
 
   
 <script type="text/javascript">
@@ -57,7 +59,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -68,7 +70,7 @@ var _hmt = _hmt || [];
     <div class="logo">
       <a href="/" rel="home">
         
-        <img src="http://img.timeicode.com/yuantu_favicon.png" alt="Time‘blog" height="60">
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
         
       </a>
     </div>
@@ -80,7 +82,7 @@ var _hmt = _hmt || [];
           
           
             <li>
-              <a href="/.">
+              <a href=".">
                 
                   首页
                 
@@ -88,7 +90,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/archives">
+              <a href="archives">
                 
                   归档
                 
@@ -96,7 +98,7 @@ var _hmt = _hmt || [];
             </li>
           
             <li>
-              <a href="/about">
+              <a href="about">
                 
                   关于我
                 
@@ -148,13 +150,14 @@ var _hmt = _hmt || [];
           <p>mactype 对 VirtualBox 的影响</p>
 <a id="more"></a>
 <p>给一台 win 主机装 vbox 的时候，新建主机报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Unable to load R3 module C:\Program Files\Oracle\VirtualBox/VBoxDD.DLL (VBoxDD): GetLastError=1790 (VERR_UNRESOLVED_ERROR).</div><div class="line"></div><div class="line">返回 代码:E_FAIL (0x80004005)</div><div class="line">组件:Console</div><div class="line">界面:IConsole &#123;8ab7c520-2442-4b66-8d74-4ff1e195d2b6&#125;</div></pre></td></tr></table></figure>
-<h2 id="踩过这个坑的前辈给出很多种情况："><a href="#踩过这个坑的前辈给出很多种情况：" class="headerlink" title="踩过这个坑的前辈给出很多种情况："></a>踩过这个坑的前辈给出很多种情况：</h2><h3 id="1-由于经常强行关闭虚拟机"><a href="#1-由于经常强行关闭虚拟机" class="headerlink" title="1,由于经常强行关闭虚拟机"></a>1,由于经常强行关闭虚拟机</h3><p>解决方法是：删除虚拟机，并且重新创建，在选择虚拟磁盘的时候，我们选择“选择使用已有的虚拟硬盘文件”这时候你指定之前损坏的虚拟系统的虚拟磁盘就可以了，只要虚拟硬盘文件不丢失，不损坏，重新建立一个还是非常简单的，当然新建以后你要对虚拟电脑重新设置一下跟之前一样就可以了。我们可以来看看操作图。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Unable to load R3 module C:\Program Files\Oracle\VirtualBox&#x2F;VBoxDD.DLL (VBoxDD): GetLastError&#x3D;1790 (VERR_UNRESOLVED_ERROR).</span><br><span class="line"></span><br><span class="line">返回 代码:E_FAIL (0x80004005)</span><br><span class="line">组件:Console</span><br><span class="line">界面:IConsole &#123;8ab7c520-2442-4b66-8d74-4ff1e195d2b6&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="踩过这个坑的前辈给出很多种情况："><a href="#踩过这个坑的前辈给出很多种情况：" class="headerlink" title="踩过这个坑的前辈给出很多种情况："></a>踩过这个坑的前辈给出很多种情况：</h2><h3 id="1-由于经常强行关闭虚拟机"><a href="#1-由于经常强行关闭虚拟机" class="headerlink" title="1,由于经常强行关闭虚拟机"></a>1,由于经常强行关闭虚拟机</h3><p>解决方法是：删除虚拟机，并且重新创建，在选择虚拟磁盘的时候，我们选择“选择使用已有的虚拟硬盘文件”这时候你指定之前损坏的虚拟系统的虚拟磁盘就可以了，只要虚拟硬盘文件不丢失，不损坏，重新建立一个还是非常简单的，当然新建以后你要对虚拟电脑重新设置一下跟之前一样就可以了。我们可以来看看操作图。</p>
 <h3 id="2-由于使用-ghost-系统或者其他第三方主题，破坏了-win-主题的核心文件：uxtheme-dll"><a href="#2-由于使用-ghost-系统或者其他第三方主题，破坏了-win-主题的核心文件：uxtheme-dll" class="headerlink" title="2,由于使用 ghost 系统或者其他第三方主题，破坏了 win 主题的核心文件：uxtheme.dll"></a>2,由于使用 ghost 系统或者其他第三方主题，破坏了 win 主题的核心文件：uxtheme.dll</h3><p>解决方法：</p>
 <ol>
 <li><p>下载未破解的 win7 主题核心文件<code>themeui.dll</code>，<code>themeservice.dll</code>，<code>uxtheme.dll</code>三个文件，覆盖到 C:\windows\system32\ 文件夹下即可。</p>
 </li>
-<li><p>可以使用以下软件做测试，显示破解的，点击还原久可以：<a href="http://pan.baidu.com/s/1nu7TIBn" rel="external nofollow noopener noreferrer" target="_blank">百度盘</a>。</p>
+<li><p>可以使用以下软件做测试，显示破解的，点击还原久可以：<a href="http://pan.baidu.com/s/1nu7TIBn" target="_blank" rel="external nofollow noopener noreferrer">百度盘</a>。</p>
 </li>
 </ol>
 <h3 id="3-坑爹的是，依旧出现这个错误-，检查了之前的操作，并重启，还是无效。"><a href="#3-坑爹的是，依旧出现这个错误-，检查了之前的操作，并重启，还是无效。" class="headerlink" title="3,坑爹的是，依旧出现这个错误 ，检查了之前的操作，并重启，还是无效。"></a>3,坑爹的是，依旧出现这个错误 ，检查了之前的操作，并重启，还是无效。</h3><p>最后看到这台电脑的字体也是使用的自定义的，使用了 <strong>mactype</strong> 设置的，但是刚才已经把主题文件还原了，但还是试一试，打开 <strong>mactype</strong> 设置把 vobox 排除在外。世界清净了，这种改字体的软件和自定义主题有同一杀伤力啊！</p>
@@ -177,7 +180,7 @@ var _hmt = _hmt || [];
           this.page.title = 'VirtualBox的错误代码：E_FAIL (0x80004005)';
       };
     </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
   </div>
   
 </section>
@@ -247,7 +250,7 @@ var _hmt = _hmt || [];
 <!-- Footer -->
 <footer class="site-info">
   <p>
-    <span>Time‘blog &copy; 2019</span>
+    <span>Time‘blog &copy; 2020</span>
     
       <span class="split">|</span>
       <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
@@ -258,13 +261,15 @@ var _hmt = _hmt || [];
 
   <!-- After footer scripts -->
   <!-- scripts -->
-<script src="/js/app.js"></script>
+
+<script src="js/app.js"></script>
+
 
 <script>
-  var disqus_shortname = 'blog-timeicode-com';
+  var disqus_shortname = 'blog-time0x-com';
 
   
-  var disqus_url = '//blog.time0x.com/2017/03/12/VirtualBox的错误代码：E-FAIL-0x80004005/';
+  var disqus_url = '2017/03/12/VirtualBox的错误代码：E-FAIL-0x80004005/';
   
 
   (function(){
