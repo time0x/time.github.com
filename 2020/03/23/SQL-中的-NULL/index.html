@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="sql,NULL,数据库查询">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Time">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="SQL 中的 NULL">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="sql,NULL,数据库查询">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Time‘blog">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>SQL 中的 NULL - Time‘blog</title>
+
+
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  首页
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  归档
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  关于我
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            SQL 中的 NULL
+            
+          </h1>
+          <p class="posted-on">
+          2020-03-23
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/sql/" rel="tag">
+                  sql
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h1 id="SQL-中的-NULL"><a href="#SQL-中的-NULL" class="headerlink" title="SQL 中的 NULL"></a>SQL 中的 NULL</h1><p>原文：<a href="https://mitchum.blog/null-values-in-sql-queries/" target="_blank" rel="external nofollow noopener noreferrer">NULL Values in SQL Queries</a></p>
+<p>翻译：<a href="https://blog.csdn.net/lnotime/article/details/104847946" target="_blank" rel="external nofollow noopener noreferrer">SQL 中的 NULL</a></p>
+<p>SQL 中的 NULL 到底是怎样一个概念呢？有什么要注意的吗？这篇文章就是要把它讲清楚。</p>
+<h2 id="查询某列值为-NULL-的数据"><a href="#查询某列值为-NULL-的数据" class="headerlink" title="查询某列值为 NULL 的数据"></a>查询某列值为 NULL 的数据</h2><p>当想查询某一列值为 NULL 的数据时，下面两种哪个更好呢？</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> SOME_COLUMN = <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+<p>还是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> SOME_COLUMN <span class="keyword">IS</span>  <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<p>答案是，第二种更好。</p>
+<p>为什么呢？为什么其他的比较都不用 <strong><code>IS</code></strong> 呢？比如想知道一个字段值是不是等于1，可以用一个简单的 <code>WHERE</code> 子句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> SOME_COLUMN = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>所以到底为什么对 NULL 区别对待使用 <strong><code>IS</code></strong> 呢？</p>
+<p>因为：<strong>在 SQL 中，NULL 表示「未知」的意思</strong>，就是「未知」，不知道，不了解，未知！（原文用词：「unknown」）</p>
+<h2 id="NULL-是「未知」"><a href="#NULL-是「未知」" class="headerlink" title="NULL 是「未知」"></a>NULL 是「未知」</h2><p>在大多数数据库中，NULL 和空字符串是有区别的。</p>
+<p>但也有例外，比如在 Oracle 中，根本就不允许一个值是空字符串，Oracle 中所有的空字符串都会自动转换成 NULL。</p>
+<p>不过对于其他大多数数据库来说，NULL 和空字符串是区别对待的：</p>
+<ul>
+<li>空字符串也<strong>是一种值</strong>，只不过是<strong>空的</strong>而已。</li>
+<li>NULL <strong>是一个「未知」值</strong>。（或者说是「未知」，没有「值」的概念）</li>
+</ul>
+<p>举个例子，就好像问：美国总统西奥多·罗斯福的中间名是什么？</p>
+<ul>
+<li>一种回答可能是：我不知道西奥多·罗斯福的中间名是什么。（这种情况「中间名」字段就应该是 NULL）</li>
+<li>还有一种回答可能是：西奥多·罗斯福没有中间名，他父母没给他起中间名，我知道的事实就是西奥多·罗斯福没有中间名。（这种情况「中间名」就应该为空字符串）</li>
+</ul>
+<p>谨记 NULL 就是「<strong>未知</strong>」这个概念，就可以很容易处理一些使用 NULL 时可能遇到的麻烦。</p>
+<p>比如下面的 WHERE 子句就会得到 true，那就能查到数据（如果数据库有数据的话）:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> <span class="number">1</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>下面的子句会得到 false，永远都查不到数据：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> <span class="number">1</span> = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>而下面的 WHERE 子句会得到 NULL，因为数据库并不知道 1 和 NULL（「未知」）是什么关系，他们相等不相等，数据库不清楚，所以 WHERE 子句得到的又是 NULL（「未知」）。所以下面的查询永远也不会返回任何数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> <span class="number">1</span> = <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三元逻辑（原文为-Ternary-Logic）"><a href="#三元逻辑（原文为-Ternary-Logic）" class="headerlink" title="三元逻辑（原文为 Ternary Logic）"></a>三元逻辑（原文为 Ternary Logic）</h2><p>一个 SQL 语句中 WHERE 子句有三种不同的结果</p>
+<ul>
+<li><strong>true</strong>（会返回数据）</li>
+<li><strong>false</strong>（不会返回数据）</li>
+<li><strong>NULL</strong>（「未知」也不会返回数据）</li>
+</ul>
+<p>好了，那既然 false 和 NULL 都不会返回数据，那干嘛还要关注它们的区别呢？</p>
+<p>当遇上 NOT() 的时候就有问题了。</p>
+<p>比如下面这个语句，1 肯定等于 1，显然经过 NOT() 后就会变成 false，那就永远不会返回数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> <span class="keyword">NOT</span>(<span class="number">1</span> = <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>下面这句呢，显然 NOT() 后会得到 true，当然会返回数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> <span class="keyword">NOT</span>(<span class="number">1</span> = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>但是这句呢？</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> <span class="keyword">NOT</span>(<span class="number">1</span> = <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上面这句 <code>1 = NULL</code> 由于数据库不知道 NULL 是什么，「未知」，所以其结果是 NULL。对 NOT() 来说呢，它也不知道 NULL 是什么，该怎么处理，所以也会返回 NULL，所以 WHERE 子句得到的是 NULL，既不是 true 也不是  false 而是 NULL，所以上面这条语句永远都<strong>不会</strong>返回数据。</p>
+<p>那么好了，看下面这两条语句，虽然是相反的条件，但结果一致：都不会查询到数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> <span class="keyword">NOT</span>(<span class="number">1</span> = <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> <span class="number">1</span> = <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="NOT-IN-和-NULL"><a href="#NOT-IN-和-NULL" class="headerlink" title="NOT IN 和 NULL"></a>NOT IN 和 NULL</h2><p>NOT IN 也是非常值得注意的。</p>
+<p>比如下面这个 SQL，1 显然在后面的列表中，WHERE 就会得到 true，那么就会查询到数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> <span class="number">1</span> <span class="keyword">IN</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
+
+<p>再看下面这句，显然 1 是在数组中的，那么 NOT IN 就会得到 false，那么就不能查询到数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> <span class="number">1</span> <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
+
+<p>再看这个：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> SOME_TABLE <span class="keyword">WHERE</span> <span class="number">5</span> <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="literal">NULL</span>)</span><br></pre></td></tr></table></figure>
+
+<p>先说答案：这句语句<strong>不能</strong>查询到数据。</p>
+<p>5 在不在后面的列表中呢？数据库是不知道的，因为里面有个 NULL，谁知道 5 等不等于 NULL（「未知」），不知道，所以 <code>5 NOT IN (1, 2, 3, 4, NULL)</code> 得到的是 NULL，所以查询不到数据。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>以上，<strong>NULL 就是 NULL，是「未知」</strong>，这样一种概念的重要性就介绍完了。理解这一点，在构建复杂 SQL 时将很有用。</p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">留言</h1> -->
+
+  
+  <div id="disqus_thread">
+    <script type="text/javascript">
+    var disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = 'post-SQL-中的-NULL';
+          this.page.title = 'SQL 中的 NULL';
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2019/07/10/laravel的-message-Unauthenticated-错误/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          time blog | php | mysql | go | bitcoin
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">与我联系</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/time02" class="icon icon-github" target="_blank" rel="external nofollow noopener noreferrer">github</a>
+            
+              <a href="mailto:wjhechen@gmail.com" class="icon icon-mail" target="_blank" rel="external nofollow noopener noreferrer">mail</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">站内搜索</h1>
+        <div class="widget-text">
+          <form onsubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Time‘blog &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+<script>
+  var disqus_shortname = 'time0x';
+
+  
+  var disqus_url = 'blog.time0x.com/2020/03/23/SQL-%E4%B8%AD%E7%9A%84-NULL/';
+  
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+</body>
+
+</html>
