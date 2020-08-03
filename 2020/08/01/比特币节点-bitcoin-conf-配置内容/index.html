@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="比特币节点配置文件 bitcoin.conf 配置详解,挖矿节点必须设置参数,监听节点应对超大区块传播">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Time">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="比特币节点 bitcoin.conf 配置内容">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="比特币节点配置文件 bitcoin.conf 配置详解,挖矿节点必须设置参数,监听节点应对超大区块传播">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Time‘blog">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>比特币节点 bitcoin.conf 配置内容 - Time‘blog</title>
+
+
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  首页
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  归档
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  关于我
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            比特币节点 bitcoin.conf 配置内容
+            
+          </h1>
+          <p class="posted-on">
+          2020-08-01
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/bitcoin/" rel="tag">
+                  bitcoin
+                </a>
+              
+                <a href="/tags/bsv/" rel="tag">
+                  bsv
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>本次使用的比特币版本为 1.0.4：<a href="https://github.com/bitcoin-sv/bitcoin-sv" target="_blank" rel="external nofollow noopener noreferrer">bitcoin-sv</a></p>
+<blockquote>
+<p>文中参数都是示例，需要根据自己的情况取消注释并设置相应的值。</p>
+</blockquote>
+<h2 id="与网络相关的设置"><a href="#与网络相关的设置" class="headerlink" title="与网络相关的设置"></a>与网络相关的设置</h2><p>testnet：在测试网络而不是真实的比特币网络上运行。0=主网，1=测试网。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">testnet = 0</span><br></pre></td></tr></table></figure>
+<p>stn：在 snt 测试网络上运行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stn=1</span><br></pre></td></tr></table></figure>
+<p>regtest：私有链模式运行，0=否，1=是。</p>
+<blockquote>
+<p>例如：bitcoin-cli gererate 1000  生成1000 个区块。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">regtest = 0</span><br></pre></td></tr></table></figure>
+<p>proxy：是否使用 SOCKS5 代理。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy = 127.0.0.1：9050</span><br></pre></td></tr></table></figure>
+<p>bind：本地监听地址。使用[host]：port表示IPv6。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bind</span> = &lt;地址&gt;</span><br></pre></td></tr></table></figure>
+<p>whitebind：本地白名单监听地址。使用[host]：port表示IPv6。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whitebind = &lt;地址&gt;</span><br></pre></td></tr></table></figure>
+<p>addnode：在原有的种子节点中新增节点。<br>connect：只会连接到指定节点，<strong>不会连接到种子节点和其他节点</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">addnode = 69.164.218.197</span><br><span class="line">addnode = 10.0.0.2：8333</span><br><span class="line"></span><br><span class="line">connect = 69.164.218.197</span><br><span class="line">connect = 10.0.0.1：8333</span><br></pre></td></tr></table></figure>
+<p>listen：监听模式，不挖矿，只监听区块。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listen = 1</span><br></pre></td></tr></table></figure>
+<p>maxconnections：最大入站+出站连接数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxconnections = 数量</span><br></pre></td></tr></table></figure>
+<h2 id="JSON-RPC选项（用于控制正在运行的比特币-bitcoind进程）"><a href="#JSON-RPC选项（用于控制正在运行的比特币-bitcoind进程）" class="headerlink" title="JSON-RPC选项（用于控制正在运行的比特币/ bitcoind进程）"></a>JSON-RPC选项（用于控制正在运行的比特币/ bitcoind进程）</h2><p>server：bitcoind 是否接受 JSON-RPC 命令，0=否，1=是。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server = 1</span><br></pre></td></tr></table></figure>
+<p>rpcbind：绑定到给定地址以侦听 JSON-RP C连接。</p>
+<blockquote>
+<p>对 IPv6 使用 [host]：port 表示法。可以多次指定此选项（默认值：绑定到所有接口）.</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpcbind = &lt;地址&gt;</span><br></pre></td></tr></table></figure>
+<p>rpcuser 和 rpcpassword：设置 rpcuser 和 rpcpassword 来保护 JSON-RPC api。</p>
+<blockquote>
+<p>必须设置。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpcuser =用户名</span><br><span class="line">rpcpassword =密码</span><br></pre></td></tr></table></figure>
+<p>rpcclienttimeout：RPC 客户端超时秒数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpcclienttimeout = 30</span><br></pre></td></tr></table></figure>
+<p>rpcallowip：默认情况下，仅允许来自本地主机的RPC连接。根据需要指定 rpcallowip 以允许来自其他主机的连接，作为单个IPv4 / IPv6或带有子网规范。</p>
+<blockquote>
+<p>建议开启 RPC 访问白名单。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpcallowip=10.1.1.34/255.255.255.0</span><br><span class="line">rpcallowip=1.2.3.4/24</span><br><span class="line">rpcallowip=2001:db8:85a3:0:0:8a2e:370:7334/96</span><br></pre></td></tr></table></figure>
+<p>rpcport：侦听此 TCP 端口上的 RPC 连接。</p>
+<blockquote>
+<p>testnet 网络默认为 18332 和 18333，主网默认为 8332 和 8333.</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpcport = 8332</span><br></pre></td></tr></table></figure>
+<p>rpcconnect：bitcoin-cli 的连接地址。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpcconnect = 127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他选项"><a href="#其他选项" class="headerlink" title="其他选项"></a>其他选项</h2><p>prune：修剪保留的数据大小。</p>
+<blockquote>
+<p>例如：同步全网数据，超过10g之后，会删除旧的数据，保持10G。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prune=10000 <span class="comment"># 10G</span></span><br></pre></td></tr></table></figure>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
+<li>“创世纪升级”删除了“最大区块体积”这项默认设置，并将其定义为“必要共识参数”。</li>
+<li>可以把任意必要共识参数的值设置为“0”，可以将其定义为“无限”。如果这样配置，就没有被网络分叉的风险。但是，当网络中挖出了超大区块，您的节点可能会因内存耗尽而崩溃。如果您已遵循最佳实践并分配了较大的 Swap 交换分区，并且内存不低于最低建议值，则只有在遭受攻击时才可能出现上述情况。如果发生这种情况，解决方法是将您的参数设置为与大多数矿工相近似，然后重启节点。</li>
+</ul>
+<p>blockmaxsize：矿工打包生成的最大区块体积。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blockmaxsize=100000000 <span class="comment"># 1000 MB</span></span><br></pre></td></tr></table></figure>
+<p>excessiveblocksize：是矿工允许接受的最大区块体积。</p>
+<blockquote>
+<p>blockmaxsize 的参数值通常比 excessiveblocksize 小。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">excessiveblocksize=1000000000 <span class="comment"># 1GB</span></span><br></pre></td></tr></table></figure>
+<p>maxstackmemoryusageconsensus：定义了脚本在运算时允许使用的最大栈内存，如果脚本尝试使用超过参数定义值的内存量，将中止脚本的运行，导致脚本失败。脚本失败将导致交易无效，并且包含了这笔无效交易的区块也会成为无效区块。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxstackmemoryusageconsensus=100000000 <span class="comment"># 100MB</span></span><br></pre></td></tr></table></figure>
+<p>preload：重启会从硬盘加载最后一次状态,1 为打开，0 为关闭</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">preload=1</span><br></pre></td></tr></table></figure>
+<p>maxmempool：表明应向节点分配用于存储未确认交易的内存大小，应设置为 6GB 或更大</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxmempool=150000 <span class="comment"># 15GB</span></span><br></pre></td></tr></table></figure>
+<p>maxsigcachesize：签名缓存大小。</p>
+<blockquote>
+<p>可向节点指明可在缓存中保存多少可接受的交易，通过减少对运行中重新计算签名和脚本的昂贵调用来提高性能。建议将这些设置为 250MB 或更高。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxsigcachesize=500 <span class="comment"># 500MB</span></span><br></pre></td></tr></table></figure>
+<p>maxscriptcachesize：脚本缓存大小。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxscriptcachesize=250 <span class="comment"># 250M</span></span><br></pre></td></tr></table></figure>
+<p>maxorphantx 指定了内存中可暂存的孤交易数量。</p>
+<blockquote>
+<p>如果节点收到一条交易信息，但尚未收到这条交易的前序交易（父交易），那么节点会将本交易（子交易）暂存起来，直至发现其前序交易（父交易）或达到 20 分钟的有效期</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maxorphantx = 10000 <span class="comment"># 10G</span></span><br></pre></td></tr></table></figure>
+
+<p>参考:</p>
+<p><a href="https://github.com/bitcoin-sv/bitcoin-sv" target="_blank" rel="external nofollow noopener noreferrer">bitcoin-sv 开源地址</a></p>
+<p><a href="https://bitcoinsv.io/choosing-consensus-settings/" target="_blank" rel="external nofollow noopener noreferrer">比特币 SV 节点系统要求</a></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">留言</h1> -->
+
+  
+  <div id="disqus_thread">
+    <script type="text/javascript">
+    var disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = 'post-比特币节点-bitcoin-conf-配置内容';
+          this.page.title = '比特币节点 bitcoin.conf 配置内容';
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2020/03/23/SQL-中的-NULL/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          time blog | php | mysql | go | bitcoin
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">与我联系</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/time02" class="icon icon-github" target="_blank" rel="external nofollow noopener noreferrer">github</a>
+            
+              <a href="mailto:wjhechen@gmail.com" class="icon icon-mail" target="_blank" rel="external nofollow noopener noreferrer">mail</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">站内搜索</h1>
+        <div class="widget-text">
+          <form onsubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Time‘blog &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+<script>
+  var disqus_shortname = 'time0x';
+
+  
+  var disqus_url = 'blog.time0x.com/2020/08/01/%E6%AF%94%E7%89%B9%E5%B8%81%E8%8A%82%E7%82%B9-bitcoin-conf-%E9%85%8D%E7%BD%AE%E5%86%85%E5%AE%B9/';
+  
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+</body>
+
+</html>
