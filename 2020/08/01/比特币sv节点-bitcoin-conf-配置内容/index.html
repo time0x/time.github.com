@@ -141,9 +141,44 @@
         </div>
         <!-- Post Main Content -->
         <div class="entry-content has_line_number">
-          <p>本次使用的比特币 sv 版本为 1.0.4：<a href="https://github.com/bitcoin-sv/bitcoin-sv" target="_blank" rel="external nofollow noopener noreferrer">bitcoin-sv</a></p>
+          <p>bitcoin.conf 是比特币核心程序 <strong>bitcoind</strong> 的配置文件，可以在配置文件中指定所有命令行选项（-conf 除外），也可以在命令行上指定所有配置文件选项。命令行选项会覆盖在配置文件中设置的值。</p>
+<a id="more"></a>
+
+<p>本次使用的比特币 sv 版本为 1.0.4：<a href="https://github.com/bitcoin-sv/bitcoin-sv" target="_blank" rel="external nofollow noopener noreferrer">bitcoin-sv</a></p>
 <blockquote>
 <p>文中参数都是示例，需要根据自己的情况取消注释并设置相应的值。</p>
+</blockquote>
+<h1 id="bitcoin-conf-配置文件"><a href="#bitcoin-conf-配置文件" class="headerlink" title="bitcoin.conf 配置文件"></a>bitcoin.conf 配置文件</h1><p>bitcoin.conf 是比特币核心程序 <strong>bitcoind</strong> 的配置文件，可以在配置文件中指定所有命令行选项（-conf 除外），也可以在命令行上指定所有配置文件选项。命令行选项会覆盖在配置文件中设置的值。</p>
+<p>配置文件需要手动创建。默认情况下，<strong>bitcoind</strong> 将在 bitcoind 数据目录中查找名为“ bitcoin.conf”的文件，但可以使用 -datadir 和 -conf 命令行参数来更改数据目录和配置文件路径。</p>
+<table>
+<thead>
+<tr>
+<th>操作系统</th>
+<th>默认节点目录</th>
+<th>配置文件的默认路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Windows</code></td>
+<td>%APPDATA%\Bitcoin\</td>
+<td>C:\Users\username\AppData\Roaming\Bitcoin\bitcoin.conf</td>
+</tr>
+<tr>
+<td><code>Linux</code></td>
+<td>$HOME/.bitcoin/</td>
+<td>/home/username/.bitcoin/bitcoin.conf</td>
+</tr>
+<tr>
+<td><code>Mac OSX</code></td>
+<td>$HOME/Library/Application Support/Bitcoin/</td>
+<td>/Users/username/Library/Application Support/Bitcoin/bitcoin.conf</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>若以测试网模式运行比特币，则子文件夹 testnet3 将自动添加到数据目录。</p>
+</blockquote>
+<h1 id="设置参数"><a href="#设置参数" class="headerlink" title="设置参数"></a>设置参数</h1><blockquote>
+<p>若不设置某参数而使用默认值，则用 <strong>#</strong> 注释掉。</p>
 </blockquote>
 <h2 id="与网络相关的设置"><a href="#与网络相关的设置" class="headerlink" title="与网络相关的设置"></a>与网络相关的设置</h2><p>testnet：在测试网络而不是真实的比特币网络上运行。0=主网，1=测试网。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">testnet = 0</span><br></pre></td></tr></table></figure>
