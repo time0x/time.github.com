@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="bitcoind用户命令参数,bitcoin,bsv,参数汇总">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Time">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="比特币sv节点 bitcoind 命令行参数">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="bitcoind用户命令参数,bitcoin,bsv,参数汇总">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Time‘blog">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>比特币sv节点 bitcoind 命令行参数 - Time‘blog</title>
+
+
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  首页
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  归档
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  关于我
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            比特币sv节点 bitcoind 命令行参数
+            
+          </h1>
+          <p class="posted-on">
+          2020-08-03
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/bitcoin/" rel="tag">
+                  bitcoin
+                </a>
+              
+                <a href="/tags/bsv/" rel="tag">
+                  bsv
+                </a>
+              
+                <a href="/tags/node/" rel="tag">
+                  node
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>包含了挖掘超大区块所需的最新参数。</p>
+<a id="more"></a>
+
+<p>本次使用的比特币 sv 版本为 1.0.4：<a href="https://github.com/bitcoin-sv/bitcoin-sv" target="_blank" rel="external nofollow noopener noreferrer">bitcoin-sv</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bitcoind [options] <span class="comment"># 启动比特币SV守护进程</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 例如，指定配置文件，裁剪区块保持在10GB，后台运行</span></span><br><span class="line"></span><br><span class="line">bitcoind -conf=/xx/bitcoin.conf -daemon -prune=10000</span><br></pre></td></tr></table></figure>
+
+<p>本章大部分参数可以写在 bitcoin.conf 配置文件中，灵活使用。</p>
+<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-?</td>
+<td align="left">打印此帮助信息并退出</td>
+</tr>
+<tr>
+<td align="left">-version</td>
+<td align="left">打印版本并退出</td>
+</tr>
+<tr>
+<td align="left">-alertnotify=&lt;cmd&gt;</td>
+<td align="left">当收到相关警报或我们看到一个很长的分叉时，执行命令（cmd中由消息替换 ％s)</td>
+</tr>
+<tr>
+<td align="left">-blocknotify=&lt;cmd&gt;</td>
+<td align="left">当最佳区块发生变化时执行命令（cmd中的%s由区块哈希值代替）</td>
+</tr>
+<tr>
+<td align="left">-assumevalid=&lt;hex&gt;</td>
+<td align="left">如果此块在链中，则假定它及其祖先有效，并可能跳过其脚本验证<br>（0 表示验证所有，<br>默认值：00000000000000000013176bf8d7dfeab4e1db31dc93bc311b436e82ab226b90<br>测试网：00000000000128796ee387cf110ccb9d2f36cffaf7f73079c995377）</td>
+</tr>
+<tr>
+<td align="left">-conf=&lt;file&gt;</td>
+<td align="left">指定配置文件(默认：bitcoin.conf)</td>
+</tr>
+<tr>
+<td align="left">-daemon</td>
+<td align="left">以守护进程的形式在后台运行，并接受命令</td>
+</tr>
+<tr>
+<td align="left">-datadir=&lt;dir&gt;</td>
+<td align="left">指定数据目录</td>
+</tr>
+<tr>
+<td align="left">-dbcache=&lt;n&gt;</td>
+<td align="left">设置数据库缓存大小，单位为兆字节（4到16384，默认值：450）</td>
+</tr>
+<tr>
+<td align="left">-genesisactivationheight</td>
+<td align="left">设置块高度，在这个高度上应该激活genesis。（默认：620538）</td>
+</tr>
+<tr>
+<td align="left">-loadblock=&lt;file&gt;</td>
+<td align="left">启动时从外部  blk000?.dat 文件中导入块</td>
+</tr>
+<tr>
+<td align="left">-maxmempool=&lt;n&gt;</td>
+<td align="left">将事务内存池保持在 n MB以下（默认：1000 MB）<br>建议设置为 6 GB 或更大</td>
+</tr>
+<tr>
+<td align="left">-mempoolexpiry=&lt;n&gt;</td>
+<td align="left">不在 mempool 中保存交易超过 n 小时（默认：336，即 14 天）</td>
+</tr>
+<tr>
+<td align="left">-maxmempoolnonfinal=&lt;n&gt;</td>
+<td align="left">将非最终事务内存池保持在 n MB以下（默认：50 MB）</td>
+</tr>
+<tr>
+<td align="left">-mempoolexpirynonfinal=&lt;n&gt;</td>
+<td align="left">非最终事务在内存池中保存交易 n 小时以下（默认：672，即 28 天）</td>
+</tr>
+<tr>
+<td align="left">-persistmempool</td>
+<td align="left">是否在关机时保存 mempool，并在重启时加载（默认：1）</td>
+</tr>
+<tr>
+<td align="left">-threadsperblock=&lt;n&gt;</td>
+<td align="left">设置验证单个区块时使用的脚本验证线程数（0 到 64，0 为自动，默认：0)</td>
+</tr>
+<tr>
+<td align="left">-scriptvalidatormaxbatchsize=&lt;n&gt;</td>
+<td align="left">设置每个线程的脚本验证批处理大小(1 到 255，默认：128)</td>
+</tr>
+<tr>
+<td align="left">-maxparallelblocks=&lt;n&gt;</td>
+<td align="left">设置所有节点可并行验证的块数。如果有额外的区块到达。终止对旧块的验证。(1到100，默认值：4)</td>
+</tr>
+<tr>
+<td align="left">-maxparallelblocksperpeer=&lt;n&gt;</td>
+<td align="left">设置可以从单个 peer 并行验证的块数。如果 peer 发送另一个块，它的验证被延迟。(1 到 maxparallelblocks，默认：3)</td>
+</tr>
+<tr>
+<td align="left">-pid=&lt;file&gt;</td>
+<td align="left">指定 pid 文件(默认：bitcoind.pid)</td>
+</tr>
+<tr>
+<td align="left">-preload=&lt;n&gt;</td>
+<td align="left">如果 n 设置为 1，则区块链状态将被预加载到内存中。如果 n 为 0，则不会发生预加载。n 不允许为其他值。默认值为0。Windows 操作系统不支持此选项。</td>
+</tr>
+<tr>
+<td align="left">-prune=&lt;n&gt;</td>
+<td align="left">通过启用旧块的修剪（删除）来减少存储需求。 这允许调用 pruneblockchain RPC 删除特定的块，并且如果提供了MiB中的目标大小，则可以自动修剪旧块。 此模式与 -txindex 和 -rescan 不兼容。 警告：还原此设置需要重新下载整个区块链。 （默认值：0 =禁用修剪块，1 =允许通过 RPC 手动修剪，&gt; 550 =自动修剪块文件以使其保持在MiB中指定的目标大小以下）</td>
+</tr>
+<tr>
+<td align="left">-reindex-chainstate</td>
+<td align="left">从当前的索引块中重建链状态。</td>
+</tr>
+<tr>
+<td align="left">-reindex</td>
+<td align="left">从磁盘上的 blk*.dat 文件中重建链状态和块索引。</td>
+</tr>
+<tr>
+<td align="left">-rejectmempoolrequest</td>
+<td align="left">拒绝所有来自非白名单节点的 mempool 请求。</td>
+</tr>
+<tr>
+<td align="left">-sysperms</td>
+<td align="left">使用系统默认权限而不是 umask 的 077 创建新文件（仅对禁用的钱包功能有效）</td>
+</tr>
+<tr>
+<td align="left">-txindex</td>
+<td align="left">保持一个完整的事务索引，由 getrawtransaction rpc 调用使用(默认：0)</td>
+</tr>
+</tbody></table>
+<h1 id="连接选项"><a href="#连接选项" class="headerlink" title="连接选项"></a>连接选项</h1><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-addnode=&lt;ip&gt;</td>
+<td align="left">在原有的种子节点中新增节点</td>
+</tr>
+<tr>
+<td align="left">-connect=&lt;ip&gt;</td>
+<td align="left">只会连接到指定节点，<strong>不会连接到种子节点和其他节点</strong>。单独使用 -noconnect 或 -connect=0 来禁用自动连接</td>
+</tr>
+<tr>
+<td align="left">-banscore=&lt;n&gt;</td>
+<td align="left">断开行为非法的节点的的阈值（默认值：100）</td>
+</tr>
+<tr>
+<td align="left">-bantime=&lt;n&gt;</td>
+<td align="left">防止行为非法的节点重新连接的秒数（默认：86400）</td>
+</tr>
+<tr>
+<td align="left">-bind=&lt;addr&gt;</td>
+<td align="left">绑定到给定的节点地址并始终监听。对IPv6使用[host]:port符号</td>
+</tr>
+<tr>
+<td align="left">-blockstallingmindownloadspeed=&lt;n&gt;</td>
+<td align="left">在 IBD 期间，允许处于停滞状态的同级设备降至最低平均下载速度（KB / s）。<br>值 0 表示禁用失速检测（默认值：100Kb / s）</td>
+</tr>
+<tr>
+<td align="left">-discover</td>
+<td align="left">发现自己的 IP 地址（默认：监听时为 1，没有 -externalip 或 -proxy）</td>
+</tr>
+<tr>
+<td align="left">-dns</td>
+<td align="left">允许 -addnode、-seednode 和 -connect 进行DNS查询（默认：1）</td>
+</tr>
+<tr>
+<td align="left">-dnsseed</td>
+<td align="left">如果节点地址较少，通过 DNS 查找查询节点地址（默认：1，除非 -connect / -noconnect）</td>
+</tr>
+<tr>
+<td align="left">-externalip=&lt;ip&gt;</td>
+<td align="left">指定自己的 IP 地址</td>
+</tr>
+<tr>
+<td align="left">-forcednsseed</td>
+<td align="left">始终通过 DNS 查找来查询节点地址（默认：1）</td>
+</tr>
+<tr>
+<td align="left">-listen</td>
+<td align="left">接受来自外部的连接（默认：1，如果没有 -proxy 或 -connect / -noconnect）</td>
+</tr>
+<tr>
+<td align="left">-listenonion</td>
+<td align="left">自动创建Tor隐藏服务（默认：1）</td>
+</tr>
+<tr>
+<td align="left">-maxconnections=&lt;n&gt;</td>
+<td align="left">最多保持 n 个节点连接（默认：125）</td>
+</tr>
+<tr>
+<td align="left">-maxreceivebuffer=&lt;n&gt;</td>
+<td align="left">每个连接的最大接收缓冲区，n*1000 字节，(默认：5000)</td>
+</tr>
+<tr>
+<td align="left">-maxsendbuffer=&lt;n&gt;</td>
+<td align="left">每个连接的最大发送缓冲区，n*1000 字节，(默认：1000)</td>
+</tr>
+<tr>
+<td align="left">-factormaxsendqueuesbytes=&lt;n&gt;</td>
+<td align="left">将与  excessiveBlockSize 相乘的系数，以限制所有发送队列中的最大字节数。<br>如果超过这个大小，则不会发送与块相关的P2P消息的响应。 (默认系数： 4)</td>
+</tr>
+<tr>
+<td align="left">-maxtimeadjustment</td>
+<td align="left">允许的最大中位数 peer 的时间偏移调整。本地时间的角度可能会受到同行向前或向后移动此数量的影响。（默认值：4200秒）</td>
+</tr>
+<tr>
+<td align="left">-broadcastdelay=&lt;n&gt;</td>
+<td align="left">设置库存(inventory)广播延迟时间，单位为毫秒(min: 0, max: 50000)</td>
+</tr>
+<tr>
+<td align="left">-onion=&lt;ip:port&gt;</td>
+<td align="left">使用单独的 SOCKS5 代理，通过 Tor 隐藏服务与节点连接（默认：-proxy）</td>
+</tr>
+<tr>
+<td align="left">-onlynet=&lt;net&gt;</td>
+<td align="left">只连接到网络 net 的节点（nodes）（ipv4、ipv6 或 onion）</td>
+</tr>
+<tr>
+<td align="left">-permitbaremultisig</td>
+<td align="left">是否中继非 P2SH 多协议(默认：1)</td>
+</tr>
+<tr>
+<td align="left">-peerbloomfilters</td>
+<td align="left">是否支持使用 bloom 过滤器过滤区块和交易（默认：1）</td>
+</tr>
+<tr>
+<td align="left">-port=&lt;port&gt;</td>
+<td align="left">监听端口上的连接（默认：8333，testnet：18333）</td>
+</tr>
+<tr>
+<td align="left">-proxy=&lt;ip:port&gt;</td>
+<td align="left">通过 SOCKS5 代理连接</td>
+</tr>
+<tr>
+<td align="left">-proxyrandomize</td>
+<td align="left">随机化每个代理连接的凭证。这将启用 Tor 流隔离（默认：1）</td>
+</tr>
+<tr>
+<td align="left">-seednode=&lt;ip&gt;</td>
+<td align="left">连接到节点（node）以检索 peer 地址，并断开连接</td>
+</tr>
+<tr>
+<td align="left">-timeout=&lt;n&gt;</td>
+<td align="left">指定连接超时时间，单位为毫秒（最小值：1，默认值：5000）</td>
+</tr>
+<tr>
+<td align="left">-torcontrol=&lt;ip&gt;:&lt;port&gt;</td>
+<td align="left">如果启用了 onion 监听，要使用的 Tor 控制端口（默认：127.0.0.1:9051）</td>
+</tr>
+<tr>
+<td align="left">-torpassword=&lt;pass&gt;</td>
+<td align="left">Tor 控制端口密码（默认：空）</td>
+</tr>
+<tr>
+<td align="left">-upnp</td>
+<td align="left">使用 UPnP 映射监听端口(默认：0)</td>
+</tr>
+<tr>
+<td align="left">-whitebind=&lt;addr&gt;</td>
+<td align="left">绑定到给定的地址并将连接到该地址的 peers 列入白名单。对IPv6 使用 [host]:port 格式</td>
+</tr>
+<tr>
+<td align="left">-whitelist=&lt;IP address or network&gt;</td>
+<td align="left">从给定IP地址（例如1.2.3.4）或 CIDR 标记网络（例如1.2.3.0/24）连接的白名单对等方。 <br>列入白名单的对等方不能被 DoS 禁止，即使它们已经在内存池中，它们的事务也总是被中继，这对网关来说很有用。<br>可以多次指定</td>
+</tr>
+<tr>
+<td align="left">-whitelistforcerelay</td>
+<td align="left">即使已列入白名单的 peers 违反本地中继策略，也强制进行中继处理（默认值：1）</td>
+</tr>
+<tr>
+<td align="left">-maxuploadtarget=&lt;n&gt;</td>
+<td align="left">将出站流量控制在给定的目标范围内（以每 24 小时 MiB 为单位），0=无限制（默认值：0）</td>
+</tr>
+</tbody></table>
+<h1 id="钱包选项"><a href="#钱包选项" class="headerlink" title="钱包选项"></a>钱包选项</h1><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-disablewallet</td>
+<td align="left">不要加载钱包，禁用钱包RPC调用</td>
+</tr>
+<tr>
+<td align="left">-keypool=&lt;n&gt;</td>
+<td align="left">设置密钥池大小为 n（默认：1000）</td>
+</tr>
+<tr>
+<td align="left">-fallbackfee=&lt;amt&gt;</td>
+<td align="left">当费用估算数据不足时使用的费用率（单位：BSV/kB）（默认：0.0002）</td>
+</tr>
+<tr>
+<td align="left">-mintxfee=&lt;amt&gt;</td>
+<td align="left">小于此值的费用（单位：BSV/kB）被认为是交易创建的零费用（默认：0.00001）</td>
+</tr>
+<tr>
+<td align="left">-paytxfee=&lt;amt&gt;</td>
+<td align="left">费用（单位：BSV/kB）添加到您发送的交易中（默认：0.00）</td>
+</tr>
+<tr>
+<td align="left">-rescan</td>
+<td align="left">在启动时重新扫描区块链，查找丢失的钱包交易</td>
+</tr>
+<tr>
+<td align="left">-salvagewallet</td>
+<td align="left">试图在启动时从损坏的钱包中恢复私钥。</td>
+</tr>
+<tr>
+<td align="left">-spendzeroconfchange</td>
+<td align="left">发送交易时，花费未确认的零钱(默认：1)</td>
+</tr>
+<tr>
+<td align="left">-usehd</td>
+<td align="left">在 BIP32 之后使用分层确定性密钥生成（HD）。 仅在钱包创建/首次启动期间有效（默认值：1）</td>
+</tr>
+<tr>
+<td align="left">-upgradewallet</td>
+<td align="left">启动时将钱包升级到最新格式</td>
+</tr>
+<tr>
+<td align="left">-wallet=&lt;file&gt;</td>
+<td align="left">指定钱包文件（在数据目录内）（默认：wallet.dat）</td>
+</tr>
+<tr>
+<td align="left">-walletbroadcast</td>
+<td align="left">让钱包广播交易(默认：1)</td>
+</tr>
+<tr>
+<td align="left">-walletnotify=&lt;cmd&gt;</td>
+<td align="left">当钱包交易发生变化时执行命令（cmd 中的 %s 由 TxID 代替）</td>
+</tr>
+<tr>
+<td align="left">-zapwallettxes=&lt;mode&gt;</td>
+<td align="left">删除所有钱包交易，仅在启动时通过 -rescan 来恢复区块链的这些部分（1 =保留tx元数据，例如账户所有者和付款请求信息，2 =丢弃tx元数据）</td>
+</tr>
+</tbody></table>
+<h1 id="ZeroMQ-通知选项"><a href="#ZeroMQ-通知选项" class="headerlink" title="ZeroMQ 通知选项"></a>ZeroMQ 通知选项</h1><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-zmqpubhashblock=&lt;address&gt;</td>
+<td align="left">在地址中启用发布哈希块。</td>
+</tr>
+<tr>
+<td align="left">-zmqpubhashtx=&lt;address&gt;</td>
+<td align="left">在地址中启用发布哈希事务。</td>
+</tr>
+<tr>
+<td align="left">-zmqpubrawblock=&lt;address&gt;</td>
+<td align="left">在地址中启用发布原始块</td>
+</tr>
+<tr>
+<td align="left">-zmqpubrawtx=&lt;address&gt;</td>
+<td align="left">在地址中启用发布原始交易</td>
+</tr>
+</tbody></table>
+<h1 id="调试-测试选项"><a href="#调试-测试选项" class="headerlink" title="调试/测试选项"></a>调试/测试选项</h1><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-uacomment=&lt;cmt&gt;</td>
+<td align="left">将注释添加到用户代理字符串中</td>
+</tr>
+<tr>
+<td align="left">-debug=&lt;category&gt;</td>
+<td align="left">输出调试信息（默认值：0，提供&lt;category&gt;是可选的）。 <br>如果未提供&lt;category&gt;或&lt;category&gt; = 1，则输出所有调试信息。<br>&lt;category&gt;可以是：<br>net，tor，mempool，http，bench，zmq，db，rpc，addrman，<br>selectcoins，reindex，cmpctblock， rand，prune，proxy，<br>mempoolrej，libevent，coindb，leveldb，txnprop，txnsrc，<br>journal，txnval</td>
+</tr>
+<tr>
+<td align="left">-debugexclude=&lt;category&gt;</td>
+<td align="left">排除类别的调试信息。 可以与 -debug = 1 结合使用，以输出除一个或多个指定类别以外的所有类别的调试日志</td>
+</tr>
+<tr>
+<td align="left">-help-debug</td>
+<td align="left">显示所有调试选项（用法：–help -help-debug）</td>
+</tr>
+<tr>
+<td align="left">-debugp2pthreadstalls</td>
+<td align="left">记录暂停请求处理循环超过指定毫秒的 P2P 请求（默认值：禁用）</td>
+</tr>
+<tr>
+<td align="left">-logips</td>
+<td align="left">在调试输出中包含 IP 地址（默认：0）</td>
+</tr>
+<tr>
+<td align="left">-logtimestamps</td>
+<td align="left">在调试输出中加入时间戳（默认：1）</td>
+</tr>
+<tr>
+<td align="left">-minrelaytxfee=&lt;amt&gt;</td>
+<td align="left">小于此费用（BSV / kB）的中继，挖掘和交易创建费用为零（默认值：0.0000025）</td>
+</tr>
+<tr>
+<td align="left">-maxtxfee=&lt;amt&gt;</td>
+<td align="left">用于单个钱包交易或原始交易的最高总费用（以BSV为单位），将此值设置得太低可能会中止大笔交易（默认值：0.10）</td>
+</tr>
+<tr>
+<td align="left">-printtoconsole</td>
+<td align="left">将跟踪/调试信息发送到控制台，而不是 bitcoind.log 文件</td>
+</tr>
+<tr>
+<td align="left">-shrinkdebugfile</td>
+<td align="left">在客户端启动时收缩 bitcoind.log 文件（默认：1，当没有-debug时）</td>
+</tr>
+</tbody></table>
+<h1 id="使用测试链"><a href="#使用测试链" class="headerlink" title="使用测试链"></a>使用测试链</h1><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-testnet</td>
+<td align="left">使用测试链</td>
+</tr>
+<tr>
+<td align="left">-regtest</td>
+<td align="left">进入回归测试模式，该模式使用一条特殊的链，在该链中可以立即求解块。<br> 这旨在用于回归测试工具和应用程序开发。</td>
+</tr>
+<tr>
+<td align="left">-stn</td>
+<td align="left">使用巨块测试网络</td>
+</tr>
+</tbody></table>
+<h1 id="节点中继选项"><a href="#节点中继选项" class="headerlink" title="节点中继选项"></a>节点中继选项</h1><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-excessiveblocksize=&lt;n&gt;</td>
+<td align="left">设置可以从任何来源接受的最大块大小（以字节为单位）。 <br>这是有效的块大小硬限制，并且是必需的参数（0 =无限）。</td>
+</tr>
+<tr>
+<td align="left">-datacarrier</td>
+<td align="left">中继和挖矿数据载体交易（默认值：1）</td>
+</tr>
+<tr>
+<td align="left">-datacarriersize</td>
+<td align="left">中继和挖掘的数据载体交易中的最大数据量（默认：4294967295）</td>
+</tr>
+<tr>
+<td align="left">-maxstackmemoryusageconsensus</td>
+<td align="left">脚本在运算时允许使用的最大栈内存，如果脚本尝试使用超过参数定义值的内存量，将中止脚本的运行，导致脚本失败。脚本失败将导致交易无效，并且包含了这笔无效交易的区块也会成为无效区块。<br>建议设置为 100000000 # 100MB<br>这是一个必需的参数。（0 =无限）</td>
+</tr>
+<tr>
+<td align="left">-maxstackmemoryusagepolicy</td>
+<td align="left">设置在 Genesis 激活后，在单个事务中中继/挖掘的脚本验证所使用的最大堆栈内存使用量（默认值：100000000字节（100MB），0 =无限）<br> 必须小于或等于-maxstackmemoryusageconsensus 的值</td>
+</tr>
+<tr>
+<td align="left">-maxopsperscriptpolicy=&lt;n&gt;</td>
+<td align="left">设置 Genesis 后，为每个脚本中继/消除的非推送操作的最大数量（默认值：无限制，0 =无限制）</td>
+</tr>
+<tr>
+<td align="left">-maxtxsigopscountspolicy=&lt;n&gt;</td>
+<td align="left">设置激活 Genesis 后，在单个事务中中继/删除的签名操作的最大允许数量（默认值：无限制，0 =无限制）</td>
+</tr>
+<tr>
+<td align="left">-maxstdtxvalidationduration=&lt;n&gt;</td>
+<td align="left">设置单个标准事务验证持续时间阈值（以毫秒为单位），在此阈值之后，标准事务验证将错误终止并且不接受该事务进入内存池（最小5ms，默认值：10ms）</td>
+</tr>
+<tr>
+<td align="left">-maxnonstdtxvalidationduration=&lt;n&gt;</td>
+<td align="left">设置单个非标准事务验证持续时间阈值（以毫秒为单位），在此阈值之后，非标准事务验证将错误终止并且不接受该事务进入内存池（最小10ms，默认值：1000ms）</td>
+</tr>
+<tr>
+<td align="left">-maxtxsizepolicy=&lt;n&gt;</td>
+<td align="left">在 Genesis 激活后，设置我们中继和挖掘的最大事务大小（以字节为单位）（默认值：10000000（10M），最小值：99999，0 =无限）</td>
+</tr>
+<tr>
+<td align="left">-maxscriptsizepolicy</td>
+<td align="left">在激活 Genesis 之后中继/删除每个脚本的大小（以字节为单位） ，（默认值：10000（100KB），0 =无限）。</td>
+</tr>
+<tr>
+<td align="left">-maxscriptnumlengthpolicy=&lt;n&gt;</td>
+<td align="left">Genesis 激活后，在脚本中中继/挖掘的最大允许数字长度（默认值：250000（2.5MB），0 =无限）</td>
+</tr>
+<tr>
+<td align="left">-maxsigcachesize</td>
+<td align="left">签名缓存大小。单位为 MB。可向节点指明可在缓存中保存多少可接受的交易，通过减少对运行中重新计算签名和脚本的昂贵调用来提高性能。建议将这些设置为 250 MB 或更高。</td>
+</tr>
+<tr>
+<td align="left">-maxscriptcachesize</td>
+<td align="left">脚本缓存大小。单位为 MB。建议 250 MB</td>
+</tr>
+<tr>
+<td align="left">参数</td>
+<td align="left">意义</td>
+</tr>
+</tbody></table>
+<h1 id="块创建选项"><a href="#块创建选项" class="headerlink" title="块创建选项"></a>块创建选项</h1><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-blockmaxsize=&lt;n&gt;</td>
+<td align="left">矿工打包生成的最大区块体积（以字节为单位）。 挖出的块的大小将永远不会超过我们将接受的最大块大小（-excessiveblocksize）</td>
+</tr>
+<tr>
+<td align="left">-blockprioritypercentage=&lt;n&gt;</td>
+<td align="left">设置保留给高优先级/低费用交易的区块的最大百分比（默认：5）</td>
+</tr>
+<tr>
+<td align="left">-blockmintxfee=&lt;amt&gt;</td>
+<td align="left">设置在创建区块时包含的最低费用率（单位：BSV/kB）。(默认：0.000005)</td>
+</tr>
+<tr>
+<td align="left">-invalidateblock=&lt;hash&gt;</td>
+<td align="left">将现有块永久标记为无效，就好像它违反了共识规则（与 Invalidate-Block RPC函数相同）。 如果尚未收到指定的块标头，则从 peer 收到标头时将忽略该标头。 可以多次指定此选项</td>
+</tr>
+<tr>
+<td align="left">-banclientua=&lt;ua&gt;</td>
+<td align="left">禁止用户代理包含指定字符串（不区分大小写）的客户端。 可以多次指定此选项。</td>
+</tr>
+<tr>
+<td align="left">-blockassembler=&lt;type&gt;</td>
+<td align="left">设置用于挖掘的块汇编器的类型。 支持的选项为“LEGACY”或“JOURNALING”。 （默认值：LEGACY）</td>
+</tr>
+</tbody></table>
+<h1 id="RPC服务器选项"><a href="#RPC服务器选项" class="headerlink" title="RPC服务器选项"></a>RPC服务器选项</h1><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-server</td>
+<td align="left">bitcoind 是否接受 JSON-RPC 命令，0=否，1=是</td>
+</tr>
+<tr>
+<td align="left">-rest</td>
+<td align="left">是否接受公共 REST 请求，0=否，1=是（默认：0）</td>
+</tr>
+<tr>
+<td align="left">-rpcbind=&lt;addr&gt;</td>
+<td align="left">绑定到给定地址以侦听 JSON-RP C连接。可以指定多次（默认：绑定到所有接口）</td>
+</tr>
+<tr>
+<td align="left">-rpccookiefile=&lt;loc&gt;</td>
+<td align="left">auth cookie 的位置（默认：data dir）</td>
+</tr>
+<tr>
+<td align="left">-rpcuser=&lt;user&gt;</td>
+<td align="left">JSON-RPC 连接的用户名</td>
+</tr>
+<tr>
+<td align="left">-rpcpassword=&lt;pw&gt;</td>
+<td align="left">JSON-RPC 连接的密码</td>
+</tr>
+<tr>
+<td align="left">-rpcauth=&lt;userpw&gt;</td>
+<td align="left">JSON-RPC 连接的用户名和哈希密码。 字段&lt;userpw&gt;的格式为：&lt;USER‐NAME&gt;：&lt;SALT&gt; $ &lt;HASH&gt;。 共享/ rpcuse r中包含一个规范的 python 脚本。 然后，客户端使用 rpcuser =&lt;USERNAME&gt; / rpcpassword = &lt;PASSWORD&gt;对参数正常连接。 可以多次指定此选项</td>
+</tr>
+<tr>
+<td align="left">-rpcport=&lt;port&gt;</td>
+<td align="left">监听端口上的 JSON-RPC 连接（默认：8332，testnet：18332）</td>
+</tr>
+<tr>
+<td align="left">-rpcallowip=&lt;ip&gt;</td>
+<td align="left">默认情况下，仅允许来自本地主机的 RPC 连接。根据需要指定 rpcallowip 以允许来自其他主机的连接，作为单个 IPv4 / IPv6 或带有子网规范。</td>
+</tr>
+<tr>
+<td align="left">-magicbytes=&lt;hexcode&gt;</td>
+<td align="left">允许用户通过更改本参数来拆分测试网。 此选项仅在不同于主网的网络上工作。 默认值：0f0f0f0f</td>
+</tr>
+<tr>
+<td align="left">-rpcthreads=&lt;n&gt;</td>
+<td align="left">设置服务 RPC 调用的线程数（默认：4）</td>
+</tr>
+<tr>
+<td align="left">-rpccorsdomain=value</td>
+<td align="left">接受跨源请求的域（浏览器强制执行）</td>
+</tr>
+<tr>
+<td align="left">-invalidcsinterval=&lt;n&gt;</td>
+<td align="left">以毫秒为单位，设置从单个节点接收无效报文校验和的时间限制。<br>  (默认：500ms)</td>
+</tr>
+<tr>
+<td align="left">-invalidcsfreq=&lt;n&gt;</td>
+<td align="left">设置在给定时间段内从单个 node 收到的无效校验和的数量限制<br>  (默认：100)</td>
+</tr>
+</tbody></table>
+<h1 id="孤块-TXNS-选项"><a href="#孤块-TXNS-选项" class="headerlink" title="孤块 TXNS 选项"></a>孤块 TXNS 选项</h1><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-blockreconstructionextratxn=&lt;n&gt;</td>
+<td align="left">额外的事务要保留在内存中，以便进行紧凑的块重构（默认：100）</td>
+</tr>
+<tr>
+<td align="left">-maxorphantxsize=&lt;n&gt;</td>
+<td align="left">在内存中最多保留 n  MB的不可连接事务（默认：100 MB）</td>
+</tr>
+<tr>
+<td align="left">-maxcollectedoutpoints=&lt;n&gt;</td>
+<td align="left">在内存中最多保留 n 个收集的输出点（默认：300000）</td>
+</tr>
+<tr>
+<td align="left">-maxorphantx</td>
+<td align="left">指定了内存中可暂存的孤交易数量，建议 10000。<br>如果节点收到一条交易信息，但尚未收到这条交易的前序交易（父交易），那么节点会将本交易（子交易）暂存起来，直至发现其前序交易（父交易）或达到 20 分钟的有效期</td>
+</tr>
+</tbody></table>
+<h1 id="Txn验证程序选项"><a href="#Txn验证程序选项" class="headerlink" title="Txn验证程序选项"></a>Txn验证程序选项</h1><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-numstdtxvalidationthreads=&lt;n&gt;</td>
+<td align="left">设置用于验证标准 txns 的高优先级线程的数量（动态计算，默认：9）</td>
+</tr>
+<tr>
+<td align="left">-numnonstdtxvalidationthreads=&lt;n&gt;</td>
+<td align="left">设置用于验证非标准 txns 的低优先级线程的数量（动态计算，默认：3）</td>
+</tr>
+<tr>
+<td align="left">-maxstdtxnsperthreadratio=&lt;n&gt;</td>
+<td align="left">设置每个高优先级线程的标准 txns 的最大比率（默认值：1000）</td>
+</tr>
+<tr>
+<td align="left">-maxnonstdtxnsperthreadratio=&lt;n&gt;</td>
+<td align="left">设置每个低优先级线程的非标准 txns 的最大比率（默认值：1000）</td>
+</tr>
+<tr>
+<td align="left">-txnvalidationasynchrunfreq=&lt;n&gt;</td>
+<td align="left">在异步模式下设置运行频率（默认值：100ms）</td>
+</tr>
+<tr>
+<td align="left">-maxtxnvalidatorasynctasksrunduration=&lt;n&gt;</td>
+<td align="left">设置单次运行异步任务的最大验证时间（默认：10000ms）</td>
+</tr>
+<tr>
+<td align="left">-maxcoinsviewcachesize=&lt;n&gt;</td>
+<td align="left">设置硬币缓存中可接受的交易输入的最大累积大小（默认值：0，无限制）</td>
+</tr>
+<tr>
+<td align="left">-txnvalidationqueuesmaxmemory=&lt;n&gt;</td>
+<td align="left">设置事务队列的最大内存使用量，单位为 MB（默认：2048 ）</td>
+</tr>
+<tr>
+<td align="left">-maxpubkeyspermultisigpolicy=&lt;n&gt;</td>
+<td align="left">在激活 Genesis 后，设置在单个 CHECKMULTISIG（VERIFY）操作中中继/挖掘的最大允许公共密钥数量（默认值：0，0 =无限制）</td>
+</tr>
+<tr>
+<td align="left">-maxgenesisgracefulperiod=&lt;n&gt;</td>
+<td align="left">设置 Genesis 宽限期的最大允许块数（默认值：72），其中在调用节点尚未达到创世高的情况下，不会因违反创世规则而禁止节点。 设置为 0 将禁用 Genesis 宽限期。</td>
+</tr>
+</tbody></table>
+<pre><code>Copyright (C) 2009-2020 The Bitcoin Association</code></pre>
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">留言</h1> -->
+
+  
+  <div id="disqus_thread">
+    <script type="text/javascript">
+    var disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = 'post-比特币sv节点-bitcoind-命令行参数';
+          this.page.title = '比特币sv节点 bitcoind 命令行参数';
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2020/08/02/比特币sv节点-文件说明/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          time blog | php | mysql | go | bitcoin
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">与我联系</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/time02" class="icon icon-github" target="_blank" rel="external nofollow noopener noreferrer">github</a>
+            
+              <a href="mailto:wjhechen@gmail.com" class="icon icon-mail" target="_blank" rel="external nofollow noopener noreferrer">mail</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">站内搜索</h1>
+        <div class="widget-text">
+          <form onsubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Time‘blog &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+<script>
+  var disqus_shortname = 'time0x';
+
+  
+  var disqus_url = 'blog.time0x.com/2020/08/03/%E6%AF%94%E7%89%B9%E5%B8%81sv%E8%8A%82%E7%82%B9-bitcoind-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%8F%82%E6%95%B0/';
+  
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+</body>
+
+</html>
