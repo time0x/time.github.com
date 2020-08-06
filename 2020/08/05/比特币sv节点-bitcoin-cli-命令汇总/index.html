@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+  <meta name="description" content="bitcoin-cli 用户命令参数,bitcoin,bsv,参数汇总">
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="Time">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="比特币sv节点 bitcoin-cli 命令汇总">
+  
+  <!--Open Graph Description-->
+  
+      <meta property="og:description" content="bitcoin-cli 用户命令参数,bitcoin,bsv,参数汇总">
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Time‘blog">
+  <!--Type page-->
+  
+      <meta property="og:type" content="article">
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>比特币sv节点 bitcoin-cli 命令汇总 - Time‘blog</title>
+
+
+  <link rel="shortcut icon" href="/images/yuantu_favicon.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="/images/yuantu_favicon.png" alt="Time‘blog" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  首页
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  归档
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/about">
+                
+                  关于我
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            比特币sv节点 bitcoin-cli 命令汇总
+            
+          </h1>
+          <p class="posted-on">
+          2020-08-05
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/bitcoin/" rel="tag">
+                  bitcoin
+                </a>
+              
+                <a href="/tags/bsv/" rel="tag">
+                  bsv
+                </a>
+              
+                <a href="/tags/node/" rel="tag">
+                  node
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>本次使用的比特币 sv 版本为 1.0.4：<a href="https://github.com/bitcoin-sv/bitcoin-sv" target="_blank" rel="external nofollow noopener noreferrer">bitcoin-sv</a></p>
+<h1 id="1-查看所有命令"><a href="#1-查看所有命令" class="headerlink" title="1. 查看所有命令"></a>1. 查看所有命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitcoin-cli <span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="2-查看命令的详细参数和返回值类型"><a href="#2-查看命令的详细参数和返回值类型" class="headerlink" title="2. 查看命令的详细参数和返回值类型"></a>2. 查看命令的详细参数和返回值类型</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitcoin-cli <span class="built_in">help</span> xxx</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-所有参数"><a href="#3-所有参数" class="headerlink" title="3. 所有参数"></a>3. 所有参数</h1><h2 id="区块链部分"><a href="#区块链部分" class="headerlink" title="区块链部分"></a>区块链部分</h2><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">checkjournal</td>
+<td align="left">强制检查内存池和日志(journal)帐一致性。</td>
+</tr>
+<tr>
+<td align="left">rebuildjournal</td>
+<td align="left">强制重建日志 使其与内存池保持一致。</td>
+</tr>
+<tr>
+<td align="left">getbestblockhash</td>
+<td align="left">与区块链浏览器（例如 <a href="https://whatsonchain.com）" target="_blank" rel="external nofollow noopener noreferrer">https://whatsonchain.com）</a> 进行比较，确保您的节点是最新的。</td>
+</tr>
+<tr>
+<td align="left">getblock</td>
+<td align="left">通过 区块hash 得到对应的详情，包括此区块中包含的 tx id</td>
+</tr>
+<tr>
+<td align="left">getblockbyheight</td>
+<td align="left">通过 区块高度 得到对应的详情</td>
+</tr>
+<tr>
+<td align="left">getblockchaininfo</td>
+<td align="left">得到区块链信息概览</td>
+</tr>
+<tr>
+<td align="left">getblockcount</td>
+<td align="left">得到区块高度</td>
+</tr>
+<tr>
+<td align="left">getblockhash</td>
+<td align="left">通过高度得到对应的区块hash</td>
+</tr>
+<tr>
+<td align="left">getblockheader</td>
+<td align="left">通过 区块hash 得到对应的详情，不包括此区块中包含的 tx id</td>
+</tr>
+<tr>
+<td align="left">getblockstats</td>
+<td align="left">计算给定区块hash的统计信息，各种费用，各种大小。所有金额均以BSV为单位。</td>
+</tr>
+<tr>
+<td align="left">getblockstatsbyheight</td>
+<td align="left">和 getblockstats 区别是通过 高度来获取</td>
+</tr>
+<tr>
+<td align="left">getchaintips</td>
+<td align="left">查找所有当前活动的链头(chain heads)，用来监视区块链分叉情况。</td>
+</tr>
+<tr>
+<td align="left">getchaintxstats</td>
+<td align="left">获取某个高度下 tx 的情况</td>
+</tr>
+<tr>
+<td align="left">getdifficulty</td>
+<td align="left">获取当前难度</td>
+</tr>
+<tr>
+<td align="left">getmempoolancestors</td>
+<td align="left">如果txid在内存池中，则返回所有内存中祖先。</td>
+</tr>
+<tr>
+<td align="left">getmempooldescendants</td>
+<td align="left">如果txid在内存池中，则返回所有内存中后代。</td>
+</tr>
+<tr>
+<td align="left">getmempoolentry</td>
+<td align="left">返回给定事务的内存池数据</td>
+</tr>
+<tr>
+<td align="left">getmempoolinfo</td>
+<td align="left">获取当前内存池信息</td>
+</tr>
+<tr>
+<td align="left">getrawmempool</td>
+<td align="left">列出内存池中的所有事务ID</td>
+</tr>
+<tr>
+<td align="left">getrawnonfinalmempool</td>
+<td align="left">与 getrawmempool 工作方式一样，但从非最终内存池返回详细信息</td>
+</tr>
+<tr>
+<td align="left">gettxout</td>
+<td align="left">返回有关未使用的事务输出的详细信息。</td>
+</tr>
+<tr>
+<td align="left">gettxoutproof</td>
+<td align="left">返回十六进制编码的证明，即”txid”已包含在一个块中。</td>
+</tr>
+<tr>
+<td align="left">gettxoutsetinfo</td>
+<td align="left">返回有关未使用的事务输出集的统计信息。</td>
+</tr>
+<tr>
+<td align="left">preciousblock</td>
+<td align="left">将一个块视为先于其他相同工作的块接收。后期的 preciousblock 调用可以覆盖前期的效果。重启时不保留 preciousblock 的效果。</td>
+</tr>
+<tr>
+<td align="left">pruneblockchain</td>
+<td align="left">删除特定的块。节点未处于修剪模式，无法修剪块。</td>
+</tr>
+<tr>
+<td align="left">verifychain</td>
+<td align="left">以在运行时验证链数据库</td>
+</tr>
+<tr>
+<td align="left">verifytxoutproof</td>
+<td align="left">验证证明指向区块中的事务，返回其提交的事务。如果该块不在我们的最佳链上，抛出一个RPC错误</td>
+</tr>
+</tbody></table>
+<h2 id="控制部分"><a href="#控制部分" class="headerlink" title="控制部分"></a>控制部分</h2><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">getinfo</td>
+<td align="left">获取当前区块链的基本信息</td>
+</tr>
+<tr>
+<td align="left">getmemoryinfo</td>
+<td align="left">获取内存使用信息</td>
+</tr>
+<tr>
+<td align="left">help</td>
+<td align="left">帮助</td>
+</tr>
+<tr>
+<td align="left">stop</td>
+<td align="left">关闭当前服务</td>
+</tr>
+<tr>
+<td align="left">uptime</td>
+<td align="left">服务器的总正常运行时间。</td>
+</tr>
+</tbody></table>
+<h2 id="生成部分"><a href="#生成部分" class="headerlink" title="生成部分"></a>生成部分</h2><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">generatetoaddress</td>
+<td align="left">在RPC调用返回之前，立即向指定地址挖掘区块。</td>
+</tr>
+</tbody></table>
+<h2 id="挖矿部分"><a href="#挖矿部分" class="headerlink" title="挖矿部分"></a>挖矿部分</h2><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">getblocktemplate</td>
+<td align="left">它返回构建一个工作块所需的数据。</td>
+</tr>
+<tr>
+<td align="left">getminingcandidate</td>
+<td align="left">返回 Mining-Candidate 协议数据。</td>
+</tr>
+<tr>
+<td align="left">getmininginfo</td>
+<td align="left">返回采矿的相关信息。</td>
+</tr>
+<tr>
+<td align="left">getnetworkhashps</td>
+<td align="left">返回基于最后n个块的每秒估计的网络哈希值。</td>
+</tr>
+<tr>
+<td align="left">prioritisetransaction</td>
+<td align="left">以较高（或较低）的优先级接受交易进入区块。</td>
+</tr>
+<tr>
+<td align="left">submitblock</td>
+<td align="left">尝试向网络提交新块。</td>
+</tr>
+<tr>
+<td align="left">submitminingsolution</td>
+<td align="left">试图向网络提交一个新的区块。</td>
+</tr>
+<tr>
+<td align="left">verifyblockcandidate</td>
+<td align="left">在没有算力的情况下，测试块模板的有效性。</td>
+</tr>
+</tbody></table>
+<h2 id="网络部分"><a href="#网络部分" class="headerlink" title="网络部分"></a>网络部分</h2><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">addnode</td>
+<td align="left">试图从addnode列表中添加或删除一个节点。</td>
+</tr>
+<tr>
+<td align="left">clearbanned</td>
+<td align="left">清除所有被禁止的IP。</td>
+</tr>
+<tr>
+<td align="left">disconnectnode</td>
+<td align="left">立即断开与指定对等节点的连接。</td>
+</tr>
+<tr>
+<td align="left">getaddednodeinfo</td>
+<td align="left">返回给定的添加节点或所有添加节点的信息。</td>
+</tr>
+<tr>
+<td align="left">getconnectioncount</td>
+<td align="left">返回与其他节点的连接数。</td>
+</tr>
+<tr>
+<td align="left">getexcessiveblock</td>
+<td align="left">获得矿工允许接受的最大区块体积。</td>
+</tr>
+<tr>
+<td align="left">getnettotals</td>
+<td align="left">返回有关网络流量的信息，包括输入字节、输出字节和当前时间。</td>
+</tr>
+<tr>
+<td align="left">getnetworkinfo</td>
+<td align="left">返回 P2P 网络各种状态的信息</td>
+</tr>
+<tr>
+<td align="left">getpeerinfo</td>
+<td align="left">返回每个连接的网络节点的数据。</td>
+</tr>
+<tr>
+<td align="left">listbanned</td>
+<td align="left">列出所有被禁止的IP/子网。</td>
+</tr>
+<tr>
+<td align="left">ping</td>
+<td align="left">向所有其他节点发送ping，以测量ping时间。结果显示在getpeerinfo命令的返回中，Ping命令与所有其他命令一起在队列中处理，所以它测量的是处理积压，而不仅仅是网络ping。</td>
+</tr>
+<tr>
+<td align="left">setban</td>
+<td align="left">从禁止列表中添加或删除一个IP/子网</td>
+</tr>
+<tr>
+<td align="left">setblockmaxsize</td>
+<td align="left">设置生成块的最大体积。</td>
+</tr>
+<tr>
+<td align="left">setexcessiveblock</td>
+<td align="left">设置矿工允许接受的最大区块体积。</td>
+</tr>
+<tr>
+<td align="left">setnetworkactive</td>
+<td align="left">禁用/启用所有p2p网络活动。</td>
+</tr>
+<tr>
+<td align="left">settxnpropagationfreq</td>
+<td align="left">设置交易传播器运行的频率（单位：毫秒）。</td>
+</tr>
+</tbody></table>
+<h2 id="原始交易部分"><a href="#原始交易部分" class="headerlink" title="原始交易部分"></a>原始交易部分</h2><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">createrawtransaction</td>
+<td align="left">创建一个事务，花费给定的输入并创建新的输出。</td>
+</tr>
+<tr>
+<td align="left">decoderawtransaction</td>
+<td align="left">返回一个 JSON 对象，表示序列化的、十六进制编码的交易。</td>
+</tr>
+<tr>
+<td align="left">decodescript</td>
+<td align="left">解码一个十六进制编码的脚本。</td>
+</tr>
+<tr>
+<td align="left">getrawtransaction</td>
+<td align="left">返回 tx 的原始的交易数据</td>
+</tr>
+<tr>
+<td align="left">sendrawtransaction</td>
+<td align="left">向本地节点和网络提交原始事务（序列化的、十六进制编码的）。</td>
+</tr>
+<tr>
+<td align="left">signrawtransaction</td>
+<td align="left">原始交易的符号输入（序列化，十六进制编码）。</td>
+</tr>
+</tbody></table>
+<h2 id="工具部分"><a href="#工具部分" class="headerlink" title="工具部分"></a>工具部分</h2><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">createmultisig</td>
+<td align="left">创建一个多签名地址，需要m个密钥的n个签名。它返回一个包含地址和redeemScript的json对象。</td>
+</tr>
+<tr>
+<td align="left">signmessagewithprivkey</td>
+<td align="left">用地址的私钥来签署信息。</td>
+</tr>
+<tr>
+<td align="left">validateaddress</td>
+<td align="left">返回给定比特币地址的信息。</td>
+</tr>
+<tr>
+<td align="left">verifymessage</td>
+<td align="left">验证已签署的信息</td>
+</tr>
+</tbody></table>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">留言</h1> -->
+
+  
+  <div id="disqus_thread">
+    <script type="text/javascript">
+    var disqus_config = function () {
+          this.page.url = window.location.href;
+          this.page.identifier = 'post-比特币sv节点-bitcoin-cli-命令汇总';
+          this.page.title = '比特币sv节点 bitcoin-cli 命令汇总';
+      };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2020/08/03/比特币sv节点-bitcoind-命令行参数/" rel="prev">下一页 <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          time blog | php | mysql | go | bitcoin
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">与我联系</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/time02" class="icon icon-github" target="_blank" rel="external nofollow noopener noreferrer">github</a>
+            
+              <a href="mailto:wjhechen@gmail.com" class="icon icon-mail" target="_blank" rel="external nofollow noopener noreferrer">mail</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">站内搜索</h1>
+        <div class="widget-text">
+          <form onsubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Time‘blog &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="external nofollow noopener noreferrer">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+<script>
+  var disqus_shortname = 'time0x';
+
+  
+  var disqus_url = 'blog.time0x.com/2020/08/05/%E6%AF%94%E7%89%B9%E5%B8%81sv%E8%8A%82%E7%82%B9-bitcoin-cli-%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/';
+  
+
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+
+
+</body>
+
+</html>
